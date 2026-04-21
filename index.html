@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vogue Style Layout</title>
+<title>Vogue Layout</title>
 
 <style>
 body {
@@ -15,81 +15,25 @@ body {
 .container {
     width: 90%;
     margin: auto;
+    text-align: center;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-
-.logo {
+h1 {
     font-size: 40px;
     letter-spacing: 5px;
-    font-weight: bold;
 }
 
-.hero {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-.hero img {
+.main-image {
     width: 100%;
-    height: auto;
-}
-
-.starring {
-    background: #6b3f3f;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 10px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    text-align: center;
-}
-
-.card img {
-    width: 100%;
-}
-
-.highlight {
-    background: #c79a7a;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.red {
-    background: red;
-    color: white;
-}
-
-.black {
-    background: black;
-    color: white;
+    max-width: 1000px;
+    margin: 20px auto;
+    display: block;
 }
 
 .footer {
     margin-top: 40px;
     padding: 40px;
     background: #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 button {
@@ -108,83 +52,16 @@ button {
 
 <div class="container">
 
-<header>
-    <div class="logo">VOGUE</div>
-    <div>Magazine</div>
-</header>
+<h1>VOGUE MAGAZINE</h1>
 
-<section class="hero">
-    <div>
-        <img src="model1.jpg" alt="Doja Cat">
-        <div class="starring">
-            <h1>STARRING</h1>
-            <h2>DOJA CAT</h2>
-        </div>
-    </div>
+<!-- YOUR IMAGE INSERTED HERE -->
+<img src="VOUGE MAGAZINE.png" alt="Vogue Layout" class="main-image">
 
-    <div>
-        <img src="model2.jpg" alt="Side Image">
-    </div>
-</section>
-
-<section class="grid">
-    <div class="card">
-        <img src="model3.jpg">
-    </div>
-
-    <div class="card">
-        <p><b>CONTROL ISSUES</b><br>
-        Doja’s genre-blending album has reinvented glamour.</p>
-    </div>
-
-    <div class="card">
-        <img src="model4.jpg">
-    </div>
-</section>
-
-<section class="highlight">
-    <p><b>SHAPE SHIFT</b><br>
-    Mugler bodysuit. Manolo Blahnik shoes.</p>
-</section>
-
-<section class="grid">
-    <div class="card">
-        <img src="model5.jpg">
-    </div>
-
-    <div class="card">
-        <img src="model6.jpg">
-    </div>
-
-    <div class="card">
-        <p><b>CREAM OF THE CROP</b><br>
-        Doja reflects on her career and growth.</p>
-    </div>
-</section>
-
-<section class="grid">
-    <div class="card">
-        <img src="model7.jpg">
-    </div>
-
-    <div class="card black">
-        <p>“It’s made me feel safer,” she says about fashion.</p>
-    </div>
-
-    <div class="card red">
-        <p>PAINT THE TOWN RED</p>
-    </div>
-</section>
-
-<section class="footer">
-    <div>
-        <h2>THE APRIL ISSUE IS HERE</h2>
-        <p>Featuring Doja Cat</p>
-        <button>GET NOW</button>
-    </div>
-
-    <img src="magazine.jpg" width="200">
-</section>
+<div class="footer">
+    <h2>THE APRIL ISSUE IS HERE</h2>
+    <p>Featuring Doja Cat</p>
+    <button>GET NOW</button>
+</div>
 
 </div>
 
