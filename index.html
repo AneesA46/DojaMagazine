@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AN-INN-SA | Bespoke Luxury & Avant-Garde Comfort</title>
-    <!-- High-end modern fonts: Space Grotesk + Inter for clean, formal edge with swag -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>An-Inn-Sa | Active Theory Motion · Unseen Studio Physics</title>
+    <!-- Google Fonts: Expressive & Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- GSAP + ScrollTrigger + MotionPathPlugin for active theory physics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -15,364 +20,310 @@
         }
 
         body {
-            background-color: #0A0A0A;
-            background-image: radial-gradient(rgba(255, 215, 175, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background: #F9F5EC;
             font-family: 'Inter', sans-serif;
-            color: #E8E2D5;
-            scroll-behavior: smooth;
+            color: #2C2823;
+            overflow-x: hidden;
         }
 
-        /* premium glassmorphism + edgy dark-luxury palette */
-        .glass-panel {
-            background: rgba(15, 15, 15, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(210, 170, 110, 0.25);
-            border-radius: 32px;
-        }
-
+        /* active theory style — kinetic, bold yet refined */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 48px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* navigation — sharp, minimal, metallic vibe */
+        /* floating physics particles canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* navigation with spring motion */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px 0 20px;
+            padding: 32px 0 28px;
             flex-wrap: wrap;
-            border-bottom: 1px solid rgba(200, 170, 120, 0.3);
-            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
         }
         .logo h1 {
-            font-family: 'Space Grotesk', monospace;
-            font-weight: 600;
-            font-size: 1.8rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #F5E1C0, #C8A86B);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            letter-spacing: -1px;
+            background: linear-gradient(125deg, #B87C4E, #E8B07D);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
         .logo p {
             font-size: 0.7rem;
-            letter-spacing: 3px;
-            color: #A88E66;
+            letter-spacing: 4px;
+            color: #B5926C;
         }
         .nav-links a {
             margin-left: 42px;
             text-decoration: none;
-            font-weight: 500;
-            color: #D4C6B2;
-            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6F5A41;
             transition: 0.2s;
-            letter-spacing: 0.3px;
+            font-size: 0.9rem;
+            position: relative;
         }
-        .nav-links a:hover { color: #E6C894; border-bottom: 1px solid #C8A86B; padding-bottom: 4px;}
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D9A066;
+            transition: width 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* Hero Section — runway ready */
+        /* Hero section with kinetic typography */
         .hero {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 60px;
-            padding: 60px 0 40px;
+            padding: 60px 0 70px;
         }
         .hero-text h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.2rem;
-            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
             line-height: 1.1;
-            background: linear-gradient(125deg, #FFFFFF, #E1C699);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #B47C48;
+            letter-spacing: -2px;
+        }
+        .motion-word {
+            display: inline-block;
         }
         .tagline {
             font-size: 1.1rem;
-            border-left: 3px solid #C7A15E;
+            border-left: 4px solid #E1BB8B;
             padding-left: 24px;
             margin: 28px 0 24px;
-            color: #BCAC8F;
+            color: #8E7658;
             font-weight: 400;
         }
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
         .btn {
-            padding: 14px 34px;
-            border-radius: 60px;
-            font-weight: 600;
-            transition: all 0.25s;
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             text-decoration: none;
-            font-size: 0.85rem;
             letter-spacing: 0.5px;
         }
         .btn-primary {
-            background: #C7A15E;
-            color: #0A0A0A;
-            border: none;
+            background: #C4925F;
+            color: white;
+            box-shadow: 0 8px 20px rgba(180, 110, 50, 0.2);
         }
-        .btn-primary:hover { background: #E2BB7B; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(199,161,94,0.3);}
+        .btn-primary:hover { background: #AD7948; transform: translateY(-4px); }
         .btn-outline {
-            border: 1.5px solid #C7A15E;
-            color: #E2CCA8;
+            border: 2px solid #C4925F;
+            color: #B47A48;
             background: transparent;
         }
-        .btn-outline:hover { background: rgba(199,161,94,0.1); transform: translateY(-2px);}
-        .hero-image img {
-            width: 100%;
-            border-radius: 32px;
-            filter: grayscale(15%) contrast(1.05);
-            box-shadow: 0 30px 40px -15px rgba(0,0,0,0.5);
-            border: 1px solid rgba(200,170,100,0.3);
+        .btn-outline:hover { background: #FFF3E6; transform: translateY(-4px); }
+        .hero-image {
+            flex: 1;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.15);
         }
+        .hero-image img { width: 100%; display: block; }
 
-        /* Section headings */
+        /* Section titles with motion */
         .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.4rem;
-            font-weight: 600;
-            margin: 80px 0 15px;
-            letter-spacing: -0.3px;
-            color: #EDD6AF;
             text-align: center;
-        }
-        .section-sub {
-            text-align: center;
-            color: #9F927C;
-            max-width: 650px;
-            margin: 0 auto 48px;
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 100px 0 20px;
+            color: #A27648;
+            letter-spacing: -1px;
         }
 
-        /* Rooms Cards — sleek, premium */
+        /* Cards with parallax / hover physics */
         .cards-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 45px;
             justify-content: center;
-            margin: 40px 0;
+            margin: 50px 0;
         }
         .room-card {
-            background: #131110;
-            border-radius: 28px;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid #2F2A22;
             flex: 1;
-            min-width: 290px;
+            min-width: 300px;
+            background: white;
+            border-radius: 36px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            border: 1px solid #F0E3D2;
         }
-        .room-card:hover { transform: translateY(-8px); border-color: #C7A15E; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);}
-        .room-card img { width: 100%; height: 260px; object-fit: cover; filter: brightness(0.9);}
+        .room-card:hover {
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 30px 45px -12px rgba(0,0,0,0.15);
+        }
+        .room-card img { width: 100%; height: 300px; object-fit: cover; }
         .room-info { padding: 28px; }
-        .room-info h3 { font-size: 1.8rem; font-weight: 500; color: #DDC194;}
-        .room-info p { color: #B4A586; margin: 12px 0 20px; line-height: 1.5;}
-        .inquire-link { color: #DAB777; font-weight: 600; text-decoration: none; display: inline-flex; gap: 8px; letter-spacing: 0.3px;}
-        .inquire-link:hover { gap: 12px;}
+        .room-info h3 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #BC8856; }
 
-        /* Menu styling */
-        .menu-grid {
+        /* Menu & dining with fluid reveal */
+        .menu-showcase {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
-            background: #0D0C0A;
-            border-radius: 48px;
-            padding: 36px;
-            margin: 30px 0;
-            border: 1px solid #2C2620;
+            gap: 40px;
+            margin: 40px 0;
         }
-        .menu-category { flex: 1; }
-        .menu-category h4 { font-size: 1.7rem; font-weight: 500; border-left: 4px solid #C7A15E; padding-left: 18px; margin-bottom: 28px; font-family: 'Space Grotesk';}
-        .menu-item { display: flex; justify-content: space-between; border-bottom: 1px solid #26201A; padding: 14px 0; font-weight: 400;}
-        .price { color: #E1BC7C; font-weight: 600;}
+        .menu-col {
+            flex: 1;
+            background: rgba(255, 252, 245, 0.9);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 32px;
+            border: 1px solid #F0E2D0;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #EDDECC;
+            padding: 14px 0;
+            font-weight: 500;
+        }
+        .price { color: #C4915F; font-weight: 700; }
 
-        /* PROFESSIONAL GAME SECTION — minimalist, elegant memory with ranking vibe */
-        .game-lounge {
-            background: #0E0D0B;
-            border-radius: 48px;
-            padding: 48px 36px;
-            margin: 70px 0;
-            border: 1px solid #2E2820;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+        /* game section with interactive physics */
+        .game-lab {
+            background: #FFF9F0;
+            border-radius: 60px;
+            padding: 50px 40px;
+            margin: 80px 0;
+            border: 1px solid #EFE2CF;
+            position: relative;
         }
-        .game-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        .game-header h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #EDCFA2;
-        }
-        .game-header p {
-            color: #A29178;
-            font-size: 0.9rem;
-        }
-        .memory-board {
+        .game-board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+            gap: 20px;
             max-width: 700px;
-            margin: 20px auto;
+            margin: 30px auto;
         }
-        .card {
-            background: #1F1C17;
-            aspect-ratio: 1 / 1;
-            border-radius: 20px;
+        .game-card {
+            background: #FEF1E2;
+            aspect-ratio: 1;
+            border-radius: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid #3C352A;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+            border: 1px solid #E5D2BD;
         }
-        .card.flipped {
-            background: #2D2620;
-            border-color: #C8A15E;
-            transform: scale(0.98);
-        }
-        .card.matched {
-            background: #27311D;
-            border-color: #8FAD6B;
-            cursor: default;
-            opacity: 0.7;
-        }
-        .card i {
-            font-size: 2.4rem;
-            color: #DFBC85;
-        }
+        .game-card i { font-size: 2.4rem; color: #BE8654; }
         .game-stats {
             display: flex;
             justify-content: center;
             gap: 48px;
-            margin: 28px 0 20px;
-            font-weight: 500;
-            font-size: 1rem;
-            background: #191613;
-            padding: 12px 24px;
-            border-radius: 60px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 20px 0;
+            font-weight: 600;
         }
         .reset-game {
-            background: #C7A15E;
+            background: #CAA06E;
             border: none;
             padding: 12px 32px;
             border-radius: 40px;
             font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            color: #0A0A0A;
+            color: white;
             cursor: pointer;
-            transition: 0.2s;
             display: block;
-            margin: 15px auto 0;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-        .reset-game:hover { background: #E2BC7A; transform: scale(0.97);}
-        .game-message {
-            text-align: center;
-            font-weight: 500;
-            margin-top: 18px;
-            color: #E6C07B;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 680px) {
-            .memory-board { gap: 12px; }
-            .card i { font-size: 1.5rem; }
-            .container { padding: 0 24px; }
-            .hero-text h2 { font-size: 2.7rem; }
+            margin: 10px auto;
         }
 
         .footer {
-            background: #050504;
-            padding: 50px 0 32px;
-            margin-top: 70px;
-            border-top: 1px solid #2B241C;
+            background: #E7DBCB;
+            padding: 45px 0;
             text-align: center;
+            border-radius: 48px 48px 0 0;
+            margin-top: 60px;
         }
-        .contact-card {
-            background: #11100E;
-            border-radius: 40px;
-            padding: 40px 36px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #423A2E;
-            margin: 50px 0;
+        @media (max-width: 800px) {
+            .container { padding: 0 24px; }
+            .hero-text h2 { font-size: 2.8rem; }
         }
-        .social i {
-            font-size: 1.6rem;
-            margin-right: 20px;
-            color: #BBA06E;
-            transition: 0.2s;
-        }
-        .social i:hover { color: #EFD097; transform: translateY(-3px);}
     </style>
 </head>
 <body>
 
+<canvas id="particle-canvas"></canvas>
+
 <div class="container">
-    <!-- Navigation -->
     <div class="navbar">
         <div class="logo">
-            <h1>✦ AN·INN·SA ✦</h1>
-            <p>AVANT-GARDE HOSPITALITY</p>
+            <h1>◈ AN·INN·SA ◈</h1>
+            <p>KINETIC HOSPITALITY</p>
         </div>
         <div class="nav-links">
             <a href="#rooms">SUITES</a>
             <a href="#dining">DINING</a>
             <a href="#menu">MENU</a>
-            <a href="#game-lux">THE GAME</a>
+            <a href="#game">THE GAME</a>
             <a href="#contact">ACCESS</a>
         </div>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
         <div class="hero-text">
-            <h2>YOU CAME<br>TO THE RIGHT PLACE</h2>
-            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — where comfort meets culture & avant-garde calmness.</div>
+            <h2>
+                <span class="motion-word">YOU</span> <span class="motion-word">CAME</span><br>
+                <span class="motion-word">TO</span> <span class="motion-word">THE</span> <span class="motion-word">RIGHT</span> <span class="motion-word">PLACE</span>
+            </h2>
+            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — active theory meets soulful calm. Where motion physics embrace stillness.</div>
             <div class="btn-group">
                 <a href="#" class="btn btn-primary">⟡ RESERVE NOW ⟡</a>
-                <a href="#rooms" class="btn btn-outline">EXPLORE ROOMS & SUITES</a>
+                <a href="#rooms" class="btn btn-outline">EXPLORE SUITES</a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="https://placehold.co/900x600/1A1714/e2c694?text=AN-INN-SA+LOUNGE" alt="An-Inn-Sa Modern Lobby">
+            <img src="https://placehold.co/900x600/F8EEDF/C88F58?text=An-Inn-Sa+Kinetic+Lobby" alt="Kinetic lobby">
         </div>
     </div>
 
-    <!-- ROOMS SECTION: USING YOUR suites.png FOR THE SIGNATURE SUITE CARD -->
+    <!-- ROOMS with suites.png integrated -->
     <div id="rooms">
         <h2 class="section-title">SIGNATURE SANCTUARIES</h2>
         <div class="cards-grid">
-            <!-- SIGNATURE SUITE CARD with suites.png -->
             <div class="room-card">
-                <img src="suites.png" alt="Signature Suite at An-Inn-Sa" style="object-fit: cover; width:100%;">
+                <img src="suites.png" alt="Signature Suite">
                 <div class="room-info">
                     <h3>Signature Suite</h3>
-                    <p>Expansive natural light, lounge area, plush bedding and a sophisticated blend of luxury & comfort. Effortlessly special.</p>
-                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
+                    <p>Expansive light, lounge area, plush bedding — an elegantly designed retreat where comfort meets avant-garde calm.</p>
+                    <a href="#" class="inquire-link" style="color:#C28A55; font-weight:600; text-decoration:none;">INQUIRE →</a>
                 </div>
             </div>
-            <!-- DELUXE ROOM CARD (placeholder maintains high-end aesthetic) -->
             <div class="room-card">
-                <img src="https://placehold.co/700x500/29231E/c8a86b?text=Deluxe+Room+Elegance" alt="Deluxe Room">
+                <img src="https://placehold.co/700x500/EADDCB/c6905a?text=Deluxe+Room" alt="Deluxe Room">
                 <div class="room-info">
                     <h3>Deluxe Room</h3>
-                    <p>Minimalist elegance, calming atmosphere, modern amenities for productivity and peaceful rest. Cozy & refined.</p>
-                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
+                    <p>Soft bedding, modern amenities, minimalist elegance. The perfect balance between rest and productivity.</p>
+                    <a href="#" class="inquire-link" style="color:#C28A55; font-weight:600; text-decoration:none;">INQUIRE →</a>
                 </div>
             </div>
         </div>
@@ -381,106 +332,95 @@
     <!-- Dining -->
     <div id="dining">
         <h2 class="section-title">INNSA LOUNGE & GRILL</h2>
-        <div class="section-sub">Where Great Taste Meets Great Moments. A curated blend of local soul and international flair.</div>
-        <div class="glass-panel" style="padding: 28px; text-align: center; margin-bottom: 28px;">
-            <p><i class="fas fa-leaf"></i> Fresh ingredients · light bites or full feasts · Breakfast, lunch, dinner. Casual, business, solo — always welcoming.</p>
+        <div class="tagline" style="text-align:center; border-left:none; margin-bottom:30px;">Where Great Taste Meets Great Moments — local & international fusion.</div>
+        <div style="background:#FFF5EA; border-radius:48px; padding:30px; margin:20px 0;">
+            <p style="text-align:center;"><i class="fas fa-leaf"></i> Fresh ingredients · Light bites & full meals · Breakfast, lunch, dinner. Casual, business, solo — always welcoming.</p>
         </div>
     </div>
 
     <!-- Menu -->
     <div id="menu">
         <h2 class="section-title">THE CULINARY ARK</h2>
-        <div class="menu-grid">
-            <div class="menu-category">
-                <h4>APPETIZERS</h4>
+        <div class="menu-showcase">
+            <div class="menu-col">
+                <h3 style="font-family:'Syne';">APPETIZERS</h3>
                 <div class="menu-item"><span>Chicken or Vegetable Soup</span><span class="price">$22</span></div>
                 <div class="menu-item"><span>Crispy Samosas</span><span class="price">$24</span></div>
                 <div class="menu-item"><span>French Fries</span><span class="price">$19</span></div>
                 <div class="menu-item"><span>Chicken Wings</span><span class="price">$20</span></div>
-                <h4 style="margin-top: 30px;">MAINS</h4>
+                <h3 style="margin-top:28px;">MAINS</h3>
                 <div class="menu-item"><span>Nyama Choma</span><span class="price">$58</span></div>
                 <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span class="price">$42</span></div>
                 <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span class="price">$48</span></div>
                 <div class="menu-item"><span>Creamy Pasta</span><span class="price">$38</span></div>
             </div>
-            <div class="menu-category">
-                <h4>DESSERTS</h4>
+            <div class="menu-col">
+                <h3 style="font-family:'Syne';">DESSERTS</h3>
                 <div class="menu-item"><span>Vanilla Ice Cream</span><span class="price">$18</span></div>
                 <div class="menu-item"><span>Brownies with Ice Cream</span><span class="price">$17 slice / $100 whole</span></div>
                 <div class="menu-item"><span>Tiramisu</span><span class="price">$18 slice / $120 whole</span></div>
                 <div class="menu-item"><span>Chocolate Cake</span><span class="price">$20</span></div>
-                <h4 style="margin-top: 30px;">DRINKS</h4>
+                <h3 style="margin-top:28px;">DRINKS</h3>
                 <div class="menu-item"><span>Orange Juice</span><span class="price">$10</span></div>
-                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span class="price">$10</span></div>
+                <div class="menu-item"><span>Coffee (Hot/Iced)</span><span class="price">$10</span></div>
                 <div class="menu-item"><span>Mojitos</span><span class="price">$15</span></div>
                 <div class="menu-item"><span>Soda</span><span class="price">$8</span></div>
             </div>
         </div>
     </div>
 
-    <!-- PROFESSIONAL GAME — MEMORY MATCH ASPEN ROYALE (ASAP ROCKY SWAG + LUXURY) -->
-    <div id="game-lux" class="game-lounge">
-        <div class="game-header">
-            <h3><i class="fas fa-crown"></i> THE MEMORY CODEX · FLIP & MATCH</h3>
-            <p>Test your focus with our high-end icon memory game. Match pairs, gain aura. <span style="color:#E2BC7A;">— swag edition —</span></p>
-        </div>
-        <div class="memory-board" id="memoryBoard"></div>
+    <!-- GAME SECTION with active theory / unseen studio physics (interactive + motion) -->
+    <div id="game" class="game-lab">
+        <h3 style="font-family:'Syne'; text-align:center; font-size:2.2rem;">⚡ UNSEEN STUDIO · MEMORY CODEX ⚡</h3>
+        <p style="text-align:center; margin-bottom:20px;">Physics-based matching — fluid, responsive, with kinetic energy.</p>
+        <div class="game-board" id="memoryBoard"></div>
         <div class="game-stats">
-            <span><i class="fas fa-hand-sparkles"></i> MOVES: <span id="moveCount">0</span></span>
-            <span><i class="fas fa-gem"></i> PAIRS: <span id="matchCount">0</span> / <span id="totalPairs">8</span></span>
+            <span><i class="fas fa-bolt"></i> MOVES: <span id="moveCount">0</span></span>
+            <span><i class="fas fa-crown"></i> PAIRS: <span id="matchCount">0</span> / <span id="totalPairs">8</span></span>
         </div>
-        <button class="reset-game" id="resetGameBtn"><i class="fas fa-sync-alt"></i> NEW GAME</button>
-        <div id="gameMessage" class="game-message"></div>
+        <button class="reset-game" id="resetGameBtn"><i class="fas fa-sync-alt"></i> RESET PHYSICS</button>
+        <div id="gameMessage" style="text-align:center; margin-top:16px; font-weight:500; color:#C0834B;"></div>
     </div>
 
-    <!-- Contact -->
-    <div id="contact" class="contact-card">
+    <div id="contact" style="background:#F2E8DC; border-radius:48px; padding:42px 36px; margin:50px 0; display:flex; flex-wrap:wrap; justify-content:space-between;">
         <div>
-            <h3 style="font-family: 'Space Grotesk'; font-size: 1.8rem;">STAY WITH US</h3>
-            <p style="margin-top: 12px;"><i class="fas fa-phone-alt"></i> Tel: 676767676767</p>
+            <h3 style="font-family:'Syne'; font-size:1.8rem;">STAY WITH US</h3>
+            <p><i class="fas fa-phone-alt"></i> Tel: 676767676767</p>
             <p><i class="fas fa-envelope"></i> wasilwaa@maxwellsda.org</p>
-            <div class="social" style="margin-top: 22px;">
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-tripadvisor"></i>
+            <div style="margin-top:20px;">
+                <i class="fab fa-instagram" style="font-size:1.6rem; margin-right:20px;"></i>
+                <i class="fab fa-twitter" style="font-size:1.6rem; margin-right:20px;"></i>
             </div>
         </div>
-        <div>
-            <img src="https://placehold.co/280x110/1F1B16/e1bc75?text=AN-INN-SA" style="border-radius: 28px;">
-            <p style="margin-top: 10px; font-size: 12px; letter-spacing: 2px;">GETSOCIAL · @ANINNSA</p>
-        </div>
+        <div><img src="https://placehold.co/240x110/E7D7C2/c48a58?text=AN-INN-SA" style="border-radius:28px;"></div>
     </div>
 </div>
-
 <div class="footer">
-    <div class="container">
-        <p>© 2025 AN-INN-SA — BESPOKE COMFORT, CULTURE & CALMNESS. AVANT-GARDE SPIRIT.</p>
-    </div>
+    <p>© 2025 AN-INN-SA — ACTIVE THEORY MOTION · UNSEEN STUDIO PHYSICS</p>
 </div>
 
 <script>
-    // ========== PROFESSIONAL MEMORY GAME (HIGH-END, SMOOTH) ==========
-    const ICON_SET = [
-        "fa-crown", "fa-champagne-glasses", "fa-mountain-sun", "fa-moon",
-        "fa-feather", "fa-hand-peace", "fa-gem", "fa-fire"
-    ];
-    let gameCardsArray = [...ICON_SET, ...ICON_SET];
-    let shuffled = [];
-    let cardData = [];
-    let firstCard = null, secondCard = null;
-    let lock = false;
-    let moves = 0, matchedPairs = 0;
-    const totalPairs = ICON_SET.length;
+    // ========== UNSEEN STUDIO PHYSICS + ACTIVE THEORY MEMORY GAME ==========
+    // Fluid animations with gsap for card interactions, dynamic motion physics
+    const iconSet = ["fa-crown", "fa-champagne-glasses", "fa-moon", "fa-feather", "fa-tree", "fa-mug-hot", "fa-utensils", "fa-spa"];
+    let gameCardsArr = [...iconSet, ...iconSet];
+    let shuffledCards = [];
+    let cardObjects = [];
+    let firstPick = null, secondPick = null;
+    let lockBoard = false;
+    let movesCount = 0;
+    let matchedPairs = 0;
+    const totalPairsCount = iconSet.length;
 
-    const boardEl = document.getElementById("memoryBoard");
-    const moveCountSpan = document.getElementById("moveCount");
-    const matchCountSpan = document.getElementById("matchCount");
+    const board = document.getElementById("memoryBoard");
+    const movesSpan = document.getElementById("moveCount");
+    const matchesSpan = document.getElementById("matchCount");
     const totalPairsSpan = document.getElementById("totalPairs");
-    const gameMessageSpan = document.getElementById("gameMessage");
+    const msgDiv = document.getElementById("gameMessage");
 
-    totalPairsSpan.innerText = totalPairs;
+    totalPairsSpan.innerText = totalPairsCount;
 
-    function shuffleArray(arr) {
+    function shuffle(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -489,57 +429,55 @@
     }
 
     function initGame() {
-        shuffled = shuffleArray([...gameCardsArray]);
-        boardEl.innerHTML = "";
-        cardData = [];
-        firstCard = null;
-        secondCard = null;
-        lock = false;
-        moves = 0;
+        shuffledCards = shuffle([...gameCardsArr]);
+        board.innerHTML = "";
+        cardObjects = [];
+        firstPick = secondPick = null;
+        lockBoard = false;
+        movesCount = 0;
         matchedPairs = 0;
-        moveCountSpan.innerText = moves;
-        matchCountSpan.innerText = matchedPairs;
-        gameMessageSpan.innerText = "";
+        movesSpan.innerText = movesCount;
+        matchesSpan.innerText = matchedPairs;
+        msgDiv.innerText = "";
 
-        shuffled.forEach((icon, idx) => {
+        shuffledCards.forEach((icon, idx) => {
             const cardDiv = document.createElement("div");
-            cardDiv.classList.add("card");
+            cardDiv.classList.add("game-card");
             cardDiv.setAttribute("data-idx", idx);
-            cardDiv.setAttribute("data-icon", icon);
-            cardDiv.setAttribute("data-matched", "false");
-
-            const iconElement = document.createElement("i");
-            iconElement.classList.add("fas", icon);
-            iconElement.style.display = "none";
-            const backElement = document.createElement("i");
-            backElement.classList.add("fas", "fa-question");
-            backElement.style.color = "#AB8E60";
-            backElement.style.fontSize = "2rem";
-            cardDiv.appendChild(backElement);
-            cardDiv.appendChild(iconElement);
-
-            cardDiv.addEventListener("click", () => handleCardClick(cardDiv, idx, icon, iconElement, backElement));
-            boardEl.appendChild(cardDiv);
-            cardData.push({ div: cardDiv, icon, matched: false, iconElem: iconElement, backElem: backElement });
+            const iconEl = document.createElement("i");
+            iconEl.classList.add("fas", icon);
+            iconEl.style.display = "none";
+            const backEl = document.createElement("i");
+            backEl.classList.add("fas", "fa-question-circle");
+            backEl.style.color = "#CDAA7A";
+            backEl.style.fontSize = "2rem";
+            cardDiv.appendChild(backEl);
+            cardDiv.appendChild(iconEl);
+            cardDiv.addEventListener("click", () => onCardClick(cardDiv, idx, icon, iconEl, backEl));
+            board.appendChild(cardDiv);
+            cardObjects.push({ div: cardDiv, icon, matched: false, iconElem: iconEl, backElem: backEl });
         });
+        // active theory entrance animation: all cards have a subtle physics pop
+        gsap.fromTo(".game-card", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, stagger: 0.03, ease: "back.out(0.6)" });
     }
 
-    function handleCardClick(cardDiv, idx, icon, iconElem, backElem) {
-        if (lock) return;
-        if (cardData[idx].matched) return;
-        if (firstCard && firstCard.idx === idx) return; // same card
-        if (firstCard && secondCard) return;
+    function onCardClick(cardDiv, idx, icon, iconElem, backElem) {
+        if (lockBoard) return;
+        if (cardObjects[idx].matched) return;
+        if (firstPick && firstPick.idx === idx) return;
+        if (firstPick && secondPick) return;
 
-        // flip current
+        // PHYSICS-BASED FLIP (active theory motion)
+        gsap.to(cardDiv, { scale: 0.97, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.out" });
         flipCard(cardDiv, iconElem, backElem);
 
-        if (!firstCard) {
-            firstCard = { idx, icon, div: cardDiv, iconElem, backElem };
-        } else if (!secondCard) {
-            secondCard = { idx, icon, div: cardDiv, iconElem, backElem };
-            moves++;
-            moveCountSpan.innerText = moves;
-            checkMatch();
+        if (!firstPick) {
+            firstPick = { idx, icon, div: cardDiv, iconElem, backElem };
+        } else if (!secondPick) {
+            secondPick = { idx, icon, div: cardDiv, iconElem, backElem };
+            movesCount++;
+            movesSpan.innerText = movesCount;
+            checkMatchWithPhysics();
         }
     }
 
@@ -547,6 +485,7 @@
         backElem.style.display = "none";
         iconElem.style.display = "block";
         card.classList.add("flipped");
+        gsap.fromTo(iconElem, { rotate: -15, scale: 0.8 }, { rotate: 0, scale: 1, duration: 0.25, ease: "elastic.out(1, 0.5)" });
     }
 
     function unflipCard(card, iconElem, backElem) {
@@ -555,47 +494,145 @@
         card.classList.remove("flipped");
     }
 
-    function checkMatch() {
-        if (firstCard.icon === secondCard.icon) {
-            // matched
-            cardData[firstCard.idx].matched = true;
-            cardData[secondCard.idx].matched = true;
-            firstCard.div.classList.add("matched");
-            secondCard.div.classList.add("matched");
+    function checkMatchWithPhysics() {
+        if (firstPick.icon === secondPick.icon) {
+            // match success — smooth physics celebration
+            cardObjects[firstPick.idx].matched = true;
+            cardObjects[secondPick.idx].matched = true;
+            firstPick.div.classList.add("matched");
+            secondPick.div.classList.add("matched");
+            gsap.to([firstPick.div, secondPick.div], { duration: 0.3, boxShadow: "0 0 0px 3px #E1BB8B", scale: 1.02, yoyo: true, repeat: 1 });
             matchedPairs++;
-            matchCountSpan.innerText = matchedPairs;
+            matchesSpan.innerText = matchedPairs;
             resetTurn();
-
-            if (matchedPairs === totalPairs) {
-                gameMessageSpan.innerHTML = "🏆 VICTORY! YOU'VE MASTERED THE CODEX. ULTRA SWAG UNLOCKED. 🏆";
-                gameMessageSpan.style.color = "#F3D48F";
+            if (matchedPairs === totalPairsCount) {
+                msgDiv.innerHTML = "🏆 KINETIC MASTERY — YOU'VE UNLOCKED THE CODEX! 🏆";
+                msgDiv.style.color = "#C48046";
+                confettiEffect();
             } else {
-                gameMessageSpan.innerHTML = "✦ MATCH FOUND · ELITE MEMORY ✦";
-                setTimeout(() => { if (gameMessageSpan.innerHTML.includes("MATCH FOUND")) gameMessageSpan.innerHTML = ""; }, 1000);
+                msgDiv.innerHTML = "✦ MATCH +1 · ACTIVE THEORY FLOW ✦";
+                setTimeout(() => { if (msgDiv.innerHTML.includes("ACTIVE")) msgDiv.innerHTML = ""; }, 1000);
             }
         } else {
-            lock = true;
-            gameMessageSpan.innerHTML = "✧ NOT A MATCH · TRY AGAIN ✧";
+            lockBoard = true;
+            msgDiv.innerHTML = "✧ MISMATCH — PHYSICS RESET IN 0.7s ✧";
+            gsap.to([firstPick.div, secondPick.div], { duration: 0.2, x: 6, repeat: 2, yoyo: true, ease: "power1" });
             setTimeout(() => {
-                unflipCard(firstCard.div, firstCard.iconElem, firstCard.backElem);
-                unflipCard(secondCard.div, secondCard.iconElem, secondCard.backElem);
+                unflipCard(firstPick.div, firstPick.iconElem, firstPick.backElem);
+                unflipCard(secondPick.div, secondPick.iconElem, secondPick.backElem);
                 resetTurn();
-                lock = false;
-                gameMessageSpan.innerHTML = "";
-            }, 750);
+                lockBoard = false;
+                msgDiv.innerHTML = "";
+            }, 700);
         }
     }
 
     function resetTurn() {
-        firstCard = null;
-        secondCard = null;
+        firstPick = null;
+        secondPick = null;
     }
 
-    document.getElementById("resetGameBtn").addEventListener("click", () => {
-        initGame();
+    function confettiEffect() {
+        // lightweight confetti simulation
+        for (let i = 0; i < 50; i++) {
+            const conf = document.createElement("div");
+            conf.style.position = "fixed";
+            conf.style.width = "8px";
+            conf.style.height = "8px";
+            conf.style.background = `hsl(${Math.random() * 40 + 30}, 70%, 60%)`;
+            conf.style.left = Math.random() * window.innerWidth + "px";
+            conf.style.top = "-10px";
+            conf.style.pointerEvents = "none";
+            conf.style.borderRadius = "50%";
+            conf.style.zIndex = "999";
+            document.body.appendChild(conf);
+            gsap.to(conf, { y: window.innerHeight + 100, rotation: 360, duration: 1.2 + Math.random() * 1, ease: "power2.out", onComplete: () => conf.remove() });
+        }
+    }
+
+    document.getElementById("resetGameBtn").addEventListener("click", () => initGame());
+    initGame();
+
+    // === ACTIVE THEORY / UNSEEN STUDIO PARTICLE BACKGROUND (physics field) ===
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let mouseX = 0, mouseY = 0;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class FlowParticle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.8;
+            this.vy = (Math.random() - 0.5) * 0.8;
+            this.size = Math.random() * 2 + 1.5;
+            this.alpha = Math.random() * 0.3 + 0.1;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            // mouse influence (kinetic field)
+            const dx = mouseX - this.x;
+            const dy = mouseY - this.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 120) {
+                const angle = Math.atan2(dy, dx);
+                const force = (120 - dist) / 120 * 0.8;
+                this.vx -= Math.cos(angle) * force * 0.2;
+                this.vy -= Math.sin(angle) * force * 0.2;
+            }
+            // boundaries with soft bounce
+            if (this.x < 0 || this.x > canvas.width) { this.vx *= -0.9; this.x = Math.min(Math.max(this.x, 0), canvas.width); }
+            if (this.y < 0 || this.y > canvas.height) { this.vy *= -0.9; this.y = Math.min(Math.max(this.y, 0), canvas.height); }
+            this.vx *= 0.99;
+            this.vy *= 0.99;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(190, 130, 80, ${this.alpha})`;
+            ctx.fill();
+        }
+    }
+    for (let i = 0; i < 80; i++) particles.push(new FlowParticle());
+
+    function animateParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of particles) {
+            p.update();
+            p.draw();
+        }
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
 
-    initGame();
+    // GSAP ScrollTrigger for active theory scroll physics — reveals elements dynamically
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray(".room-card, .menu-col, .hero-text, .game-lab").forEach((el) => {
+        gsap.fromTo(el, 
+            { y: 60, opacity: 0, scale: 0.96 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" } }
+        );
+    });
+    // Motion text effect on hero
+    gsap.fromTo(".motion-word", 
+        { y: 40, opacity: 0, rotateX: -20 },
+        { y: 0, opacity: 1, rotateX: 0, duration: 0.6, stagger: 0.08, ease: "back.out(1.2)", delay: 0.2 }
+    );
+    gsap.fromTo(".tagline, .btn-group", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, delay: 0.5 });
 </script>
 </body>
 </html>
