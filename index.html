@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa ✨ Stay & Play | Memory Game</title>
-    <!-- Google Fonts: Fresh & Playful -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
+    <title>AN-INN-SA | Bespoke Luxury & Avant-Garde Comfort</title>
+    <!-- High-end modern fonts: Space Grotesk + Inter for clean, formal edge with swag -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -16,140 +15,143 @@
         }
 
         body {
-            background: linear-gradient(145deg, #FEF7E6 0%, #FFF3E0 100%);
+            background-color: #0A0A0A;
+            background-image: radial-gradient(rgba(255, 215, 175, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
             font-family: 'Inter', sans-serif;
-            color: #3A2C1F;
-            overflow-x: hidden;
+            color: #E8E2D5;
+            scroll-behavior: smooth;
         }
 
-        /* animated background blobs (fun) */
-        .blob-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 214, 165, 0.4) 0%, rgba(255, 184, 108, 0.15) 100%);
-            border-radius: 60%;
-            filter: blur(70px);
-            animation: floatBlob 20s infinite alternate ease-in-out;
-        }
-        .blob2 {
-            width: 700px;
-            height: 700px;
-            bottom: -150px;
-            right: -150px;
-            background: radial-gradient(circle, rgba(210, 180, 140, 0.3) 0%, rgba(200, 160, 110, 0.1) 100%);
-            animation: floatBlob2 25s infinite alternate;
-        }
-        @keyframes floatBlob {
-            0% { transform: translate(0, 0) scale(1);}
-            100% { transform: translate(70px, -50px) scale(1.15);}
-        }
-        @keyframes floatBlob2 {
-            0% { transform: translate(0, 0);}
-            100% { transform: translate(-90px, 70px) rotate(5deg);}
+        /* premium glassmorphism + edgy dark-luxury palette */
+        .glass-panel {
+            background: rgba(15, 15, 15, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(210, 170, 110, 0.25);
+            border-radius: 32px;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 28px;
-            position: relative;
-            z-index: 2;
+            padding: 0 48px;
         }
 
-        /* playful navigation */
+        /* navigation — sharp, minimal, metallic vibe */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 24px 0 20px;
             flex-wrap: wrap;
-            background: rgba(255, 248, 235, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 80px;
-            margin: 20px 0 30px;
-            padding: 12px 32px;
-            border: 1px solid #FFE5C4;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(200, 170, 120, 0.3);
+            margin-bottom: 20px;
         }
         .logo h1 {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 800;
-            font-size: 2rem;
-            background: linear-gradient(135deg, #B87C4E, #E4A46B);
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #F5E1C0, #C8A86B);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        .nav-links a {
-            margin-left: 28px;
-            text-decoration: none;
-            font-weight: 600;
-            color: #7D5D42;
-            transition: all 0.2s;
+        .logo p {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #A88E66;
         }
-        .nav-links a:hover { color: #C28554; transform: translateY(-2px); display: inline-block;}
+        .nav-links a {
+            margin-left: 42px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #D4C6B2;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .nav-links a:hover { color: #E6C894; border-bottom: 1px solid #C8A86B; padding-bottom: 4px;}
 
-        /* Hero */
+        /* Hero Section — runway ready */
         .hero {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 40px;
-            padding: 30px 0 30px;
+            gap: 60px;
+            padding: 60px 0 40px;
         }
         .hero-text h2 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            color: #A5713F;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(125deg, #FFFFFF, #E1C699);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .tagline {
-            font-size: 1.2rem;
-            border-left: 5px solid #F4B885;
-            padding-left: 20px;
-            margin: 20px 0;
-            color: #6A4E2E;
+            font-size: 1.1rem;
+            border-left: 3px solid #C7A15E;
+            padding-left: 24px;
+            margin: 28px 0 24px;
+            color: #BCAC8F;
+            font-weight: 400;
+        }
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: 700;
-            transition: 0.2s;
+            padding: 14px 34px;
+            border-radius: 60px;
+            font-weight: 600;
+            transition: all 0.25s;
             text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
         }
-        .btn-primary { background: #D9995E; color: white; box-shadow: 0 6px 14px rgba(185, 118, 56, 0.25);}
-        .btn-primary:hover { background: #BD7B46; transform: scale(1.02);}
-        .btn-outline { border: 2px solid #D9995E; color: #B46F3A; background: white;}
-        .btn-outline:hover { background: #D9995E10; transform: translateY(-2px);}
-        .hero-image img { width: 100%; border-radius: 48px; box-shadow: 0 25px 35px -12px rgba(0,0,0,0.1);}
+        .btn-primary {
+            background: #C7A15E;
+            color: #0A0A0A;
+            border: none;
+        }
+        .btn-primary:hover { background: #E2BB7B; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(199,161,94,0.3);}
+        .btn-outline {
+            border: 1.5px solid #C7A15E;
+            color: #E2CCA8;
+            background: transparent;
+        }
+        .btn-outline:hover { background: rgba(199,161,94,0.1); transform: translateY(-2px);}
+        .hero-image img {
+            width: 100%;
+            border-radius: 32px;
+            filter: grayscale(15%) contrast(1.05);
+            box-shadow: 0 30px 40px -15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(200,170,100,0.3);
+        }
 
-        /* Section Titles */
+        /* Section headings */
         .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            margin: 80px 0 15px;
+            letter-spacing: -0.3px;
+            color: #EDD6AF;
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 60px 0 15px;
-            color: #9B6D42;
         }
         .section-sub {
             text-align: center;
+            color: #9F927C;
             max-width: 650px;
-            margin: 0 auto 40px;
-            color: #735F48;
+            margin: 0 auto 48px;
         }
 
-        /* room cards */
+        /* Rooms Cards — sleek, premium */
         .cards-grid {
             display: flex;
             flex-wrap: wrap;
@@ -158,321 +160,323 @@
             margin: 40px 0;
         }
         .room-card {
-            flex: 1;
-            min-width: 280px;
-            background: white;
-            border-radius: 40px;
+            background: #131110;
+            border-radius: 28px;
             overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid #2F2A22;
+            flex: 1;
+            min-width: 290px;
         }
-        .room-card:hover { transform: translateY(-8px); box-shadow: 0 25px 40px rgba(0,0,0,0.12);}
-        .room-card img { width: 100%; height: 260px; object-fit: cover; }
-        .room-info { padding: 24px; }
-        .room-info h3 { font-size: 1.8rem; color: #B9814E; }
-        .inquire-link { font-weight: 700; color: #BB7946; text-decoration: none; display: inline-flex; gap: 8px;}
+        .room-card:hover { transform: translateY(-8px); border-color: #C7A15E; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);}
+        .room-card img { width: 100%; height: 260px; object-fit: cover; filter: brightness(0.9);}
+        .room-info { padding: 28px; }
+        .room-info h3 { font-size: 1.8rem; font-weight: 500; color: #DDC194;}
+        .room-info p { color: #B4A586; margin: 12px 0 20px; line-height: 1.5;}
+        .inquire-link { color: #DAB777; font-weight: 600; text-decoration: none; display: inline-flex; gap: 8px; letter-spacing: 0.3px;}
+        .inquire-link:hover { gap: 12px;}
 
-        /* GAME SECTION — FUN & INTERACTIVE */
-        .game-section {
-            background: rgba(249, 238, 221, 0.7);
-            border-radius: 60px;
-            padding: 40px 30px;
-            margin: 50px 0;
-            backdrop-filter: blur(4px);
-            border: 1px solid #FFE2BF;
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.05);
+        /* Menu styling */
+        .menu-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background: #0D0C0A;
+            border-radius: 48px;
+            padding: 36px;
+            margin: 30px 0;
+            border: 1px solid #2C2620;
+        }
+        .menu-category { flex: 1; }
+        .menu-category h4 { font-size: 1.7rem; font-weight: 500; border-left: 4px solid #C7A15E; padding-left: 18px; margin-bottom: 28px; font-family: 'Space Grotesk';}
+        .menu-item { display: flex; justify-content: space-between; border-bottom: 1px solid #26201A; padding: 14px 0; font-weight: 400;}
+        .price { color: #E1BC7C; font-weight: 600;}
+
+        /* PROFESSIONAL GAME SECTION — minimalist, elegant memory with ranking vibe */
+        .game-lounge {
+            background: #0E0D0B;
+            border-radius: 48px;
+            padding: 48px 36px;
+            margin: 70px 0;
+            border: 1px solid #2E2820;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.4);
         }
         .game-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 32px;
         }
         .game-header h3 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #B56F3C;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #EDCFA2;
         }
         .game-header p {
-            font-size: 1rem;
-            color: #7D623C;
+            color: #A29178;
+            font-size: 0.9rem;
         }
         .memory-board {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 18px;
-            max-width: 650px;
+            max-width: 700px;
             margin: 20px auto;
         }
         .card {
-            background: linear-gradient(145deg, #F5E5D3, #FCEAD8);
+            background: #1F1C17;
             aspect-ratio: 1 / 1;
-            border-radius: 24px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.4rem;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 10px 15px -5px rgba(0,0,0,0.1);
-            transform-style: preserve-3d;
-            position: relative;
+            border: 1px solid #3C352A;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.3);
         }
         .card.flipped {
-            background: white;
-            background: linear-gradient(145deg, #FFFAF0, #FFF2E2);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #2D2620;
+            border-color: #C8A15E;
             transform: scale(0.98);
-            cursor: default;
         }
         .card.matched {
-            background: #D4E2C6;
-            opacity: 0.65;
+            background: #27311D;
+            border-color: #8FAD6B;
             cursor: default;
-            filter: grayscale(0.1);
-            transform: scale(0.96);
+            opacity: 0.7;
         }
         .card i {
-            font-size: 2.6rem;
-            color: #B97844;
-        }
-        .card .card-icon {
-            display: block;
-        }
-        .card .card-back {
-            display: none;
-        }
-        .card.flipped i, .card.matched i {
-            color: #A06736;
+            font-size: 2.4rem;
+            color: #DFBC85;
         }
         .game-stats {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin: 22px 0 20px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            gap: 48px;
+            margin: 28px 0 20px;
+            font-weight: 500;
+            font-size: 1rem;
+            background: #191613;
+            padding: 12px 24px;
+            border-radius: 60px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
         .reset-game {
-            background: #D9995E;
+            background: #C7A15E;
             border: none;
-            color: white;
-            padding: 12px 30px;
+            padding: 12px 32px;
             border-radius: 40px;
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: #0A0A0A;
             cursor: pointer;
             transition: 0.2s;
-            display: inline-block;
-            margin-top: 10px;
+            display: block;
+            margin: 15px auto 0;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
-        .reset-game:hover {
-            background: #B66B37;
-            transform: scale(0.96);
-        }
+        .reset-game:hover { background: #E2BC7A; transform: scale(0.97);}
         .game-message {
             text-align: center;
-            font-weight: 700;
-            margin-top: 15px;
-            font-size: 1.1rem;
-            color: #9B6A3C;
+            font-weight: 500;
+            margin-top: 18px;
+            color: #E6C07B;
+            font-size: 0.9rem;
         }
-        @media (max-width: 650px) {
-            .memory-board {
-                gap: 12px;
-            }
-            .card i { font-size: 1.7rem;}
+        @media (max-width: 680px) {
+            .memory-board { gap: 12px; }
+            .card i { font-size: 1.5rem; }
+            .container { padding: 0 24px; }
+            .hero-text h2 { font-size: 2.7rem; }
         }
 
-        /* menu + restaurant styling */
-        .menu-showcase {
+        .footer {
+            background: #050504;
+            padding: 50px 0 32px;
+            margin-top: 70px;
+            border-top: 1px solid #2B241C;
+            text-align: center;
+        }
+        .contact-card {
+            background: #11100E;
+            border-radius: 40px;
+            padding: 40px 36px;
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
-            margin: 30px 0;
-        }
-        .menu-col {
-            flex: 1;
-            background: rgba(255,250,240,0.8);
-            border-radius: 40px;
-            padding: 25px;
-        }
-        .menu-item {
-            display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #EDDCCB;
-            padding: 12px 0;
+            align-items: center;
+            border: 1px solid #423A2E;
+            margin: 50px 0;
         }
-        .footer {
-            background: #2F2A21;
-            color: #F2E5D4;
-            padding: 40px 0;
-            margin-top: 60px;
-            border-radius: 48px 48px 0 0;
+        .social i {
+            font-size: 1.6rem;
+            margin-right: 20px;
+            color: #BBA06E;
+            transition: 0.2s;
         }
-        .footer a { color: #EBCB9E; text-decoration: none;}
-        .social i { font-size: 1.8rem; margin: 0 10px; transition: 0.2s;}
-        .social i:hover { color: #F3BC85; transform: translateY(-4px);}
+        .social i:hover { color: #EFD097; transform: translateY(-3px);}
     </style>
 </head>
 <body>
-<div class="blob-bg">
-    <div class="blob" style="top: -100px; left: -100px;"></div>
-    <div class="blob blob2"></div>
-</div>
 
 <div class="container">
-    <!-- navbar -->
+    <!-- Navigation -->
     <div class="navbar">
-        <div class="logo"><h1>🏨 AN-INN-SA ✨</h1></div>
+        <div class="logo">
+            <h1>✦ AN·INN·SA ✦</h1>
+            <p>AVANT-GARDE HOSPITALITY</p>
+        </div>
         <div class="nav-links">
-            <a href="#rooms">Rooms</a>
-            <a href="#dining">Dining</a>
-            <a href="#menu">Menu</a>
-            <a href="#gameplay">Game</a>
-            <a href="#contact">Contact</a>
+            <a href="#rooms">SUITES</a>
+            <a href="#dining">DINING</a>
+            <a href="#menu">MENU</a>
+            <a href="#game-lux">THE GAME</a>
+            <a href="#contact">ACCESS</a>
         </div>
     </div>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <div class="hero">
         <div class="hero-text">
-            <h2>You came<br>to the right place</h2>
-            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — modern comfort & playful spirit</div>
+            <h2>YOU CAME<br>TO THE RIGHT PLACE</h2>
+            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — where comfort meets culture & avant-garde calmness.</div>
             <div class="btn-group">
-                <a href="#" class="btn btn-primary">BOOK NOW 🧘</a>
-                <a href="#rooms" class="btn btn-outline">EXPLORE ROOMS</a>
+                <a href="#" class="btn btn-primary">⟡ RESERVE NOW ⟡</a>
+                <a href="#rooms" class="btn btn-outline">EXPLORE ROOMS & SUITES</a>
             </div>
         </div>
         <div class="hero-image">
-            <img src="https://placehold.co/800x500/f8eedf/c28754?text=An-Inn-Sa+Welcoming+Lobby" alt="An-Inn-Sa Lobby">
+            <img src="https://placehold.co/900x600/1A1714/e2c694?text=AN-INN-SA+LOUNGE" alt="An-Inn-Sa Modern Lobby">
         </div>
     </div>
 
-    <!-- Rooms Section -->
+    <!-- Rooms -->
     <div id="rooms">
-        <h2 class="section-title">✨ Elegant Sanctuaries ✨</h2>
+        <h2 class="section-title">SIGNATURE SANCTUARIES</h2>
         <div class="cards-grid">
             <div class="room-card">
-                <img src="https://placehold.co/600x450/eadbc8/bb7a45?text=Signature+Suite" alt="Signature Suite">
+                <img src="https://placehold.co/700x500/231F1A/cbae77?text=Signature+Suite" alt="Signature Suite">
                 <div class="room-info">
                     <h3>Signature Suite</h3>
-                    <p>Spacious lounge area, natural light & plush bedding — a seamless blend of luxury and comfort.</p>
-                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-arrow-right"></i></a>
+                    <p>Expansive natural light, lounge area, plush bedding and a sophisticated blend of luxury & comfort. Effortlessly special.</p>
+                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
             <div class="room-card">
-                <img src="https://placehold.co/600x450/e1d3c2/b97c4a?text=Deluxe+Room" alt="Deluxe Room">
+                <img src="https://placehold.co/700x500/29231E/c8a86b?text=Deluxe+Room" alt="Deluxe Room">
                 <div class="room-info">
                     <h3>Deluxe Room</h3>
-                    <p>Style & serenity: soft bedding, modern amenities, calming atmosphere for rest & productivity.</p>
-                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-arrow-right"></i></a>
+                    <p>Minimalist elegance, calming atmosphere, modern amenities for productivity and peaceful rest. Cozy & refined.</p>
+                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Dining intro -->
+    <!-- Dining -->
     <div id="dining">
-        <h2 class="section-title">🍽️ A Perfect Bite, Morning to Night</h2>
-        <div class="section-sub">InnSa Lounge & Grill — Where Great Taste Meets Great Moments.</div>
-        <div style="background: #FDF6EC; border-radius: 48px; padding: 30px; margin-bottom: 20px;">
-            <p style="text-align: center; font-size: 1.1rem;"><i class="fas fa-utensils"></i> Mix of local & international dishes · Fresh quality ingredients · Breakfast, lunch & dinner · Casual or business, solo or family moments.</p>
+        <h2 class="section-title">INNSA LOUNGE & GRILL</h2>
+        <div class="section-sub">Where Great Taste Meets Great Moments. A curated blend of local soul and international flair.</div>
+        <div class="glass-panel" style="padding: 28px; text-align: center; margin-bottom: 28px;">
+            <p><i class="fas fa-leaf"></i> Fresh ingredients · light bites or full feasts · Breakfast, lunch, dinner. Casual, business, solo — always welcoming.</p>
         </div>
     </div>
 
-    <!-- full menu -->
+    <!-- Menu -->
     <div id="menu">
-        <h2 class="section-title">Our Signature Menu</h2>
-        <div class="menu-showcase">
-            <div class="menu-col">
-                <h3><i class="fas fa-seedling"></i> Appetizers</h3>
-                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div>
-                <div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div>
-                <div class="menu-item"><span>French Fries</span><span>$19</span></div>
-                <div class="menu-item"><span>Chicken Wings</span><span>$20</span></div>
-                <h3 style="margin-top: 28px;"><i class="fas fa-fire"></i> Mains</h3>
-                <div class="menu-item"><span>Nyama Choma</span><span>$58</span></div>
-                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div>
-                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div>
-                <div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div>
+        <h2 class="section-title">THE CULINARY ARK</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h4>APPETIZERS</h4>
+                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span class="price">$22</span></div>
+                <div class="menu-item"><span>Crispy Samosas</span><span class="price">$24</span></div>
+                <div class="menu-item"><span>French Fries</span><span class="price">$19</span></div>
+                <div class="menu-item"><span>Chicken Wings</span><span class="price">$20</span></div>
+                <h4 style="margin-top: 30px;">MAINS</h4>
+                <div class="menu-item"><span>Nyama Choma</span><span class="price">$58</span></div>
+                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span class="price">$42</span></div>
+                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span class="price">$48</span></div>
+                <div class="menu-item"><span>Creamy Pasta</span><span class="price">$38</span></div>
             </div>
-            <div class="menu-col">
-                <h3><i class="fas fa-cake"></i> Desserts</h3>
-                <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
-                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
-                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
-                <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
-                <h3 style="margin-top: 28px;"><i class="fas fa-mug-hot"></i> Drinks</h3>
-                <div class="menu-item"><span>Orange Juice</span><span>$10</span></div>
-                <div class="menu-item"><span>Coffee (Hot/Iced)</span><span>$10</span></div>
-                <div class="menu-item"><span>Mojitos</span><span>$15</span></div>
-                <div class="menu-item"><span>Soda</span><span>$8</span></div>
+            <div class="menu-category">
+                <h4>DESSERTS</h4>
+                <div class="menu-item"><span>Vanilla Ice Cream</span><span class="price">$18</span></div>
+                <div class="menu-item"><span>Brownies with Ice Cream</span><span class="price">$17 slice / $100 whole</span></div>
+                <div class="menu-item"><span>Tiramisu</span><span class="price">$18 slice / $120 whole</span></div>
+                <div class="menu-item"><span>Chocolate Cake</span><span class="price">$20</span></div>
+                <h4 style="margin-top: 30px;">DRINKS</h4>
+                <div class="menu-item"><span>Orange Juice</span><span class="price">$10</span></div>
+                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span class="price">$10</span></div>
+                <div class="menu-item"><span>Mojitos</span><span class="price">$15</span></div>
+                <div class="menu-item"><span>Soda</span><span class="price">$8</span></div>
             </div>
-        </div>
-        <div style="display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
-            <img src="https://placehold.co/180x120/e6cfb2/b88244?text=Nyama+Choma" style="border-radius: 28px;">
-            <img src="https://placehold.co/180x120/f2e2cd/b47a44?text=Pasta" style="border-radius: 28px;">
-            <img src="https://placehold.co/180x120/f5e5d1/b2783f?text=Tiramisu" style="border-radius: 28px;">
         </div>
     </div>
 
-    <!-- 🎮 MEMORY MATCH GAME - FUN ADDITION -->
-    <div id="gameplay" class="game-section">
+    <!-- PROFESSIONAL GAME — MEMORY MATCH ASPEN ROYALE (ASAP ROCKY SWAG + LUXURY) -->
+    <div id="game-lux" class="game-lounge">
         <div class="game-header">
-            <h3><i class="fas fa-gamepad"></i> An-Inn-Sa Memory Match <i class="fas fa-heart" style="color:#E8A364;"></i></h3>
-            <p>Flip cards & match the pair — test your memory! Fun for everyone, inspired by our cozy retreat.</p>
+            <h3><i class="fas fa-crown"></i> THE MEMORY CODEX · FLIP & MATCH</h3>
+            <p>Test your focus with our high-end icon memory game. Match pairs, gain aura. <span style="color:#E2BC7A;">— swag edition —</span></p>
         </div>
         <div class="memory-board" id="memoryBoard"></div>
         <div class="game-stats">
-            <span>⭐ Moves: <span id="moveCount">0</span></span>
-            <span>🎯 Matches: <span id="matchCount">0</span></span>
+            <span><i class="fas fa-hand-sparkles"></i> MOVES: <span id="moveCount">0</span></span>
+            <span><i class="fas fa-gem"></i> PAIRS: <span id="matchCount">0</span> / <span id="totalPairs">8</span></span>
         </div>
-        <div style="text-align: center;">
-            <button class="reset-game" id="resetGameBtn"><i class="fas fa-undo-alt"></i> New Game</button>
-        </div>
+        <button class="reset-game" id="resetGameBtn"><i class="fas fa-sync-alt"></i> NEW GAME</button>
         <div id="gameMessage" class="game-message"></div>
     </div>
 
-    <!-- Contact section -->
-    <div id="contact" style="background: #FEF2E2; border-radius: 52px; padding: 38px 30px; margin: 40px 0;">
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 25px;">
-            <div>
-                <h3 style="font-size: 2rem;">📞 Stay with us</h3>
-                <p><i class="fas fa-phone-alt"></i> Tel: 676767676767</p>
-                <p><i class="fas fa-envelope"></i> wasilwaa@maxwellsda.org</p>
-                <div class="social" style="margin-top: 20px;">
-                    <i class="fab fa-instagram"></i> <i class="fab fa-facebook"></i> <i class="fab fa-twitter"></i>
-                </div>
+    <!-- Contact -->
+    <div id="contact" class="contact-card">
+        <div>
+            <h3 style="font-family: 'Space Grotesk'; font-size: 1.8rem;">STAY WITH US</h3>
+            <p style="margin-top: 12px;"><i class="fas fa-phone-alt"></i> Tel: 676767676767</p>
+            <p><i class="fas fa-envelope"></i> wasilwaa@maxwellsda.org</p>
+            <div class="social" style="margin-top: 22px;">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-tripadvisor"></i>
             </div>
-            <div><img src="https://placehold.co/260x100/e5d5c0/b67d48?text=AN-INN-SA" style="border-radius: 30px;"></div>
+        </div>
+        <div>
+            <img src="https://placehold.co/280x110/1F1B16/e1bc75?text=AN-INN-SA" style="border-radius: 28px;">
+            <p style="margin-top: 10px; font-size: 12px; letter-spacing: 2px;">GETSOCIAL · @ANINNSA</p>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-        <span>© 2025 An-Inn-Sa — Comfort, Culture & Playful Moments</span>
-        <span>✨ your peaceful escape with a twist of joy ✨</span>
+    <div class="container">
+        <p>© 2025 AN-INN-SA — BESPOKE COMFORT, CULTURE & CALMNESS. AVANT-GARDE SPIRIT.</p>
     </div>
 </div>
 
 <script>
-    // ------ MEMORY GAME (FUN, COLORFUL, AN-INN-SA THEMED ICONS) ------
-    const iconList = [
-        "fa-mug-hot", "fa-cake-candles", "fa-umbrella-beach", "fa-tree",
-        "fa-bed", "fa-utensils", "fa-spa", "fa-cocktail"
+    // ========== PROFESSIONAL MEMORY GAME (HIGH-END, SMOOTH) ==========
+    const ICON_SET = [
+        "fa-crown", "fa-champagne-glasses", "fa-mountain-sun", "fa-moon",
+        "fa-feather", "fa-hand-peace", "fa-gem", "fa-fire"
     ];
-    // duplicate to make pairs
-    let gameCards = [...iconList, ...iconList];
-    let shuffledCards = [];
-    let cardElements = [];
+    let gameCardsArray = [...ICON_SET, ...ICON_SET];
+    let shuffled = [];
+    let cardData = [];
     let firstCard = null, secondCard = null;
-    let lockBoard = false;
-    let moves = 0;
-    let matches = 0;
-    let moveCountSpan = document.getElementById("moveCount");
-    let matchCountSpan = document.getElementById("matchCount");
-    let gameMessageDiv = document.getElementById("gameMessage");
-    let board = document.getElementById("memoryBoard");
+    let lock = false;
+    let moves = 0, matchedPairs = 0;
+    const totalPairs = ICON_SET.length;
+
+    const boardEl = document.getElementById("memoryBoard");
+    const moveCountSpan = document.getElementById("moveCount");
+    const matchCountSpan = document.getElementById("matchCount");
+    const totalPairsSpan = document.getElementById("totalPairs");
+    const gameMessageSpan = document.getElementById("gameMessage");
+
+    totalPairsSpan.innerText = totalPairs;
 
     function shuffleArray(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
@@ -483,52 +487,54 @@
     }
 
     function initGame() {
-        shuffledCards = shuffleArray([...gameCards]);
-        board.innerHTML = "";
-        cardElements = [];
+        shuffled = shuffleArray([...gameCardsArray]);
+        boardEl.innerHTML = "";
+        cardData = [];
         firstCard = null;
         secondCard = null;
-        lockBoard = false;
+        lock = false;
         moves = 0;
-        matches = 0;
+        matchedPairs = 0;
         moveCountSpan.innerText = moves;
-        matchCountSpan.innerText = matches;
-        gameMessageDiv.innerText = "";
-        shuffledCards.forEach((iconName, index) => {
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.dataset.icon = iconName;
-            card.dataset.index = index;
-            card.dataset.matched = "false";
-            // inner: show question mark or back initially? we show icon on flip.
-            const iconElem = document.createElement("i");
-            iconElem.classList.add("fas", iconName);
-            iconElem.style.display = "none";
-            const backElem = document.createElement("i");
-            backElem.classList.add("fas", "fa-question-circle");
-            backElem.style.fontSize = "2.6rem";
-            backElem.style.color = "#D9A87C";
-            card.appendChild(backElem);
-            card.appendChild(iconElem);
-            card.addEventListener("click", () => onCardClick(card, index, iconName, iconElem, backElem));
-            cardElements.push({ card, iconElem, backElem, iconName, matched: false });
-            board.appendChild(card);
+        matchCountSpan.innerText = matchedPairs;
+        gameMessageSpan.innerText = "";
+
+        shuffled.forEach((icon, idx) => {
+            const cardDiv = document.createElement("div");
+            cardDiv.classList.add("card");
+            cardDiv.setAttribute("data-idx", idx);
+            cardDiv.setAttribute("data-icon", icon);
+            cardDiv.setAttribute("data-matched", "false");
+
+            const iconElement = document.createElement("i");
+            iconElement.classList.add("fas", icon);
+            iconElement.style.display = "none";
+            const backElement = document.createElement("i");
+            backElement.classList.add("fas", "fa-question");
+            backElement.style.color = "#AB8E60";
+            backElement.style.fontSize = "2rem";
+            cardDiv.appendChild(backElement);
+            cardDiv.appendChild(iconElement);
+
+            cardDiv.addEventListener("click", () => handleCardClick(cardDiv, idx, icon, iconElement, backElement));
+            boardEl.appendChild(cardDiv);
+            cardData.push({ div: cardDiv, icon, matched: false, iconElem: iconElement, backElem: backElement });
         });
     }
 
-    function onCardClick(cardElem, idx, iconName, iconElem, backElem) {
-        if (lockBoard) return;
-        if (cardElements[idx].matched) return;
+    function handleCardClick(cardDiv, idx, icon, iconElem, backElem) {
+        if (lock) return;
+        if (cardData[idx].matched) return;
+        if (firstCard && firstCard.idx === idx) return; // same card
         if (firstCard && secondCard) return;
-        // if same card clicked twice
-        if (firstCard && firstCard.index === idx) return;
 
-        // flip current card
-        flipCard(cardElem, iconElem, backElem);
+        // flip current
+        flipCard(cardDiv, iconElem, backElem);
+
         if (!firstCard) {
-            firstCard = { index: idx, icon: iconName, elem: cardElem, iconElem, backElem };
+            firstCard = { idx, icon, div: cardDiv, iconElem, backElem };
         } else if (!secondCard) {
-            secondCard = { index: idx, icon: iconName, elem: cardElem, iconElem, backElem };
+            secondCard = { idx, icon, div: cardDiv, iconElem, backElem };
             moves++;
             moveCountSpan.innerText = moves;
             checkMatch();
@@ -536,7 +542,6 @@
     }
 
     function flipCard(card, iconElem, backElem) {
-        // hide back icon, show actual icon
         backElem.style.display = "none";
         iconElem.style.display = "block";
         card.classList.add("flipped");
@@ -551,39 +556,37 @@
     function checkMatch() {
         if (firstCard.icon === secondCard.icon) {
             // matched
-            cardElements[firstCard.index].matched = true;
-            cardElements[secondCard.index].matched = true;
-            firstCard.elem.classList.add("matched");
-            secondCard.elem.classList.add("matched");
-            matches++;
-            matchCountSpan.innerText = matches;
+            cardData[firstCard.idx].matched = true;
+            cardData[secondCard.idx].matched = true;
+            firstCard.div.classList.add("matched");
+            secondCard.div.classList.add("matched");
+            matchedPairs++;
+            matchCountSpan.innerText = matchedPairs;
             resetTurn();
-            if (matches === iconList.length) {
-                gameMessageDiv.innerHTML = "🎉 PERFECT! You've mastered the memory stay! 🎉 Book your relaxing getaway now! 🎉";
-                gameMessageDiv.style.fontWeight = "bold";
-                gameMessageDiv.style.fontSize = "1.2rem";
-                gameMessageDiv.style.color = "#C2824A";
+
+            if (matchedPairs === totalPairs) {
+                gameMessageSpan.innerHTML = "🏆 VICTORY! YOU'VE MASTERED THE CODEX. ULTRA SWAG UNLOCKED. 🏆";
+                gameMessageSpan.style.color = "#F3D48F";
             } else {
-                gameMessageDiv.innerHTML = "✨ Nice match! Keep going ✨";
-                setTimeout(() => { if(gameMessageDiv.innerHTML.includes("Nice match")) gameMessageDiv.innerHTML = ""; }, 1200);
+                gameMessageSpan.innerHTML = "✦ MATCH FOUND · ELITE MEMORY ✦";
+                setTimeout(() => { if (gameMessageSpan.innerHTML.includes("MATCH FOUND")) gameMessageSpan.innerHTML = ""; }, 1000);
             }
         } else {
-            lockBoard = true;
-            gameMessageDiv.innerHTML = "😅 Not a match, try again!";
+            lock = true;
+            gameMessageSpan.innerHTML = "✧ NOT A MATCH · TRY AGAIN ✧";
             setTimeout(() => {
-                unflipCard(firstCard.elem, firstCard.iconElem, firstCard.backElem);
-                unflipCard(secondCard.elem, secondCard.iconElem, secondCard.backElem);
+                unflipCard(firstCard.div, firstCard.iconElem, firstCard.backElem);
+                unflipCard(secondCard.div, secondCard.iconElem, secondCard.backElem);
                 resetTurn();
-                gameMessageDiv.innerHTML = "";
-                lockBoard = false;
-            }, 800);
+                lock = false;
+                gameMessageSpan.innerHTML = "";
+            }, 750);
         }
     }
 
     function resetTurn() {
         firstCard = null;
         secondCard = null;
-        lockBoard = false;
     }
 
     document.getElementById("resetGameBtn").addEventListener("click", () => {
