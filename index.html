@@ -1,137 +1,533 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AN-INN-SA Hotel</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
-    header {
-      background: #222;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    nav {
-      background: #444;
-      display: flex;
-      justify-content: center;
-    }
-    nav a {
-      color: white;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-    nav a:hover {
-      background: #666;
-    }
-    .hero {
-      background: url('https://via.placeholder.com/1200x400') no-repeat center/cover;
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
-    }
-    .section {
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      background: #222;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>An-Inn-Sa | Modern Comfort & Serene Stays</title>
+    <!-- Google Fonts for elegant typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fefaf5;
+            color: #2c2b28;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* custom subtle texture */
+        .bg-warm {
+            background-color: #fdf8f2;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* header & navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e9e0d5;
+        }
+
+        .logo h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            color: #a67c52;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #8b7a66;
+        }
+
+        .nav-links a {
+            margin-left: 32px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #4a3f32;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #c28a5c;
+        }
+
+        /* hero section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 60px 0 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.6rem;
+            font-weight: 600;
+            color: #b47c4a;
+            line-height: 1.2;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.2rem;
+            color: #6b5a48;
+            margin: 24px 0 20px;
+            border-left: 4px solid #dbbc9b;
+            padding-left: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+
+        .btn-primary {
+            background-color: #b47c4a;
+            color: white;
+            border: 1px solid #b47c4a;
+        }
+
+        .btn-primary:hover {
+            background-color: #9b6238;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .btn-outline {
+            border: 1px solid #b47c4a;
+            color: #b47c4a;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #b47c4a10;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            background: #e7ded2;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .hero-image img, .card-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .card-img:hover img {
+            transform: scale(1.02);
+        }
+
+        /* section titles */
+        .section-title {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 500;
+            margin: 70px 0 20px;
+            color: #9b6e46;
+        }
+
+        .section-sub {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 50px;
+            color: #6e5e4c;
+            font-size: 1.1rem;
+        }
+
+        /* cards grid */
+        .cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .room-card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 28px -12px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 36px -12px rgba(0,0,0,0.12);
+        }
+
+        .room-info {
+            padding: 28px 24px 32px;
+        }
+
+        .room-info h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #a5734b;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .room-info p {
+            margin: 16px 0 20px;
+            color: #4c443b;
+        }
+
+        .inquire-link {
+            font-weight: 600;
+            color: #b47c4a;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .inquire-link:hover {
+            border-bottom-color: #b47c4a;
+            gap: 12px;
+        }
+
+        /* Restaurant and menu styling */
+        .restaurant-showcase {
+            background: #fff7ef;
+            border-radius: 48px;
+            padding: 20px 30px 40px;
+            margin: 50px 0;
+        }
+
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .menu-category {
+            flex: 1;
+        }
+
+        .menu-category h4 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            border-left: 5px solid #c79a6d;
+            padding-left: 16px;
+            margin-bottom: 24px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dashed #e2cfb9;
+            padding: 12px 0;
+            font-weight: 500;
+        }
+
+        .menu-item span:first-child {
+            font-weight: 500;
+        }
+
+        .price {
+            font-weight: 600;
+            color: #a3683d;
+        }
+
+        .gallery-mini {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery-mini img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+        }
+
+        .footer {
+            background: #2c2822;
+            color: #e2d9cf;
+            padding: 48px 0 32px;
+            margin-top: 70px;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer-info i {
+            margin-right: 8px;
+            color: #dbb88c;
+        }
+
+        .footer-info a {
+            color: #f0dbc8;
+            text-decoration: none;
+        }
+
+        .social i {
+            font-size: 1.6rem;
+            margin: 0 10px;
+            transition: 0.2s;
+            color: #cfb594;
+        }
+
+        .social i:hover {
+            color: white;
+        }
+
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links a {
+                margin: 0 15px;
+            }
+            .hero-text h2 {
+                font-size: 2.8rem;
+            }
+            .container {
+                padding: 0 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>AN-INN-SA</h1>
-  <p>Your home away from home</p>
-</header>
-
-<nav>
-  <a href="#rooms">Rooms</a>
-  <a href="#restaurant">Restaurant</a>
-  <a href="#contact">Contact</a>
-</nav>
-
-<section class="hero">
-  <h2>Relax and Stay the AN-INN-SA Way</h2>
-  <p>Comfort, peace, and a memorable experience</p>
-  <button>Book Now</button>
-</section>
-
-<section id="rooms" class="section">
-  <h2>Rooms & Suites</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Signature Suite</h3>
-      <p>Spacious, elegant, and filled with natural light. Perfect for relaxation and luxury.</p>
+<div class="container">
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="logo">
+            <h1>AN-INN-SA</h1>
+            <p>~ serene comfort, timeless stay ~</p>
+        </div>
+        <div class="nav-links">
+            <a href="#rooms">Rooms & Suites</a>
+            <a href="#dining">Dining</a>
+            <a href="#menu">Menu</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
-    <div class="card">
-      <h3>Deluxe Room</h3>
-      <p>Comfortable and stylish with modern amenities for a peaceful stay.</p>
-    </div>
-  </div>
-</section>
 
-<section id="restaurant" class="section">
-  <h2>InnSa Lounge & Grill</h2>
-  <p>Where great taste meets great moments</p>
-  <div class="cards">
-    <div class="card">
-      <h3>Appetizers</h3>
-      <p>Soup, Samosas, Fries, Chicken Wings</p>
+    <!-- Hero section with main vibe -->
+    <div class="hero">
+        <div class="hero-text">
+            <h2>You came<br>to the right place</h2>
+            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — where comfort meets culture & calmness.</div>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">BOOK NOW <i class="fas fa-arrow-right"></i></a>
+                <a href="#rooms" class="btn btn-outline">EXPLORE ROOMS</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- main welcoming hotel lifestyle image (from page 1 vibe: modern hotel) -->
+            <img src="https://placehold.co/800x550/f5ede3/a67c52?text=An-Inn-Sa+Lobby+View" alt="An-Inn-Sa modern lobby">
+        </div>
     </div>
-    <div class="card">
-      <h3>Main Dishes</h3>
-      <p>Nyama Choma, Ugali & Stew, Rice, Pasta</p>
+
+    <!-- tagline: your home away from home -->
+    <div style="text-align: center; margin: 40px 0 10px;">
+        <p style="font-size: 1.2rem; font-style: italic; color: #9b7b5e;">⚘ your home away from home ⚘</p>
+        <p style="font-size: 0.95rem; color: #7f6a53;">Stay for a night. Your room is waiting.</p>
     </div>
-    <div class="card">
-      <h3>Desserts & Drinks</h3>
-      <p>Ice Cream, Cake, Coffee, Juice, Mojitos</p>
+
+    <!-- Rooms & Suites Section (images integrated as per original layout - suites + deluxe with "inquire") -->
+    <div id="rooms">
+        <h2 class="section-title">Elevated Stays</h2>
+        <div class="cards-grid">
+            <!-- Signature Suite card -->
+            <div class="room-card">
+                <div class="card-img">
+                    <img src="https://placehold.co/600x450/e1cfba/b87a46?text=Signature+Suite+Lounge" alt="Signature Suite - bright and elegant">
+                </div>
+                <div class="room-info">
+                    <h3>Signature Suite</h3>
+                    <p>Experience elevated comfort in our Signature Suite, a spacious and elegantly designed retreat created for relaxation and ease. Bathed in natural light from large windows, the suite features a cozy lounge area perfect for unwinding or working in peace. With plush bedding, modern finishes, and a clean sophisticated style — a seamless blend of luxury and comfort.</p>
+                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <!-- Deluxe Room card -->
+            <div class="room-card">
+                <div class="card-img">
+                    <img src="https://placehold.co/600x450/dbcbb9/b17a48?text=Deluxe+Room+Calming" alt="Deluxe Room - cozy simplicity">
+                </div>
+                <div class="room-info">
+                    <h3>Deluxe Room</h3>
+                    <p>Enjoy a relaxing stay in our Deluxe Rooms, thoughtfully designed to offer comfort and simplicity in a stylish setting. Featuring soft bedding, modern amenities, and a calming atmosphere, perfect for both rest and productivity. With a cozy layout and clean elegant design, the Deluxe Room provides everything you need for a peaceful and comfortable stay.</p>
+                    <a href="#" class="inquire-link">INQUIRE <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
 
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Phone: 676767676767</p>
-  <p>Email: wasilwaa@maxwellsda.org</p>
-</section>
+    <!-- A Perfect Bite - Restaurant & Dining intro -->
+    <div id="dining">
+        <h2 class="section-title">A Perfect Bite, Morning to Night</h2>
+        <div class="section-sub">The restaurant at An-Inn-Sa is designed to give guests a warm and enjoyable dining experience in a relaxed setting. Good food, simple comfort, and friendly service.</div>
+        
+        <div class="restaurant-showcase">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: space-between;">
+                <div style="flex:1; min-width: 200px;">
+                    <h3 style="font-size: 2rem; font-family: 'Cormorant Garamond', serif; color: #b47c4a;">InnSa Lounge & Grill</h3>
+                    <p><i class="fas fa-utensils"></i> Where Great Taste Meets Great Moments.</p>
+                    <ul style="margin-top: 18px; list-style: none;">
+                        <li>✓ A mix of local and international dishes</li>
+                        <li>✓ Freshly prepared meals using quality ingredients</li>
+                        <li>✓ Light bites & full meals · Breakfast, Lunch, Dinner</li>
+                        <li>✓ Calm, clean & welcoming — Casual dining, business meals, family & solo moments</li>
+                    </ul>
+                </div>
+                <div style="flex:0.8; text-align: center;">
+                    <img src="https://placehold.co/400x300/f0e1cf/a57042?text=Grill+Ambience" alt="InnSa Lounge" style="border-radius: 28px; width:100%; max-width:300px;">
+                </div>
+            </div>
+        </div>
+    </div>
 
-<footer>
-  <p>&copy; 2026 AN-INN-SA Hotel. All rights reserved.</p>
-</footer>
+    <!-- Full Menu Section with all items from PDF (prices and dishes) -->
+    <div id="menu">
+        <h2 class="section-title">Our Signature Menu</h2>
+        <div class="two-columns">
+            <!-- Appetizers + Mains left side -->
+            <div class="menu-category">
+                <h4><i class="fas fa-seedling"></i> Appetizers</h4>
+                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span class="price">$22</span></div>
+                <div class="menu-item"><span>Crispy Samosas</span><span class="price">$24</span></div>
+                <div class="menu-item"><span>French Fries</span><span class="price">$19</span></div>
+                <div class="menu-item"><span>Chicken Wings</span><span class="price">$20</span></div>
 
+                <h4 style="margin-top: 32px;"><i class="fas fa-utensil-spoon"></i> Mains</h4>
+                <div class="menu-item"><span>Nyama Choma</span><span class="price">$58</span></div>
+                <div class="menu-item"><span>Ugali with Beef or Chicken Stew</span><span class="price">$42</span></div>
+                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span class="price">$48</span></div>
+                <div class="menu-item"><span>Creamy Pasta</span><span class="price">$38</span></div>
+            </div>
+            <!-- Desserts + Drinks right side -->
+            <div class="menu-category">
+                <h4><i class="fas fa-cake-candles"></i> Desserts</h4>
+                <div class="menu-item"><span>Vanilla Ice Cream</span><span class="price">$18</span></div>
+                <div class="menu-item"><span>Brownies with Ice Cream</span><span class="price">$17 slice / $100 whole</span></div>
+                <div class="menu-item"><span>Tiramisu</span><span class="price">$18 slice / $120 whole</span></div>
+                <div class="menu-item"><span>Chocolate Cake</span><span class="price">$20</span></div>
+
+                <h4 style="margin-top: 32px;"><i class="fas fa-mug-hot"></i> Drinks</h4>
+                <div class="menu-item"><span>Orange Juice</span><span class="price">$10</span></div>
+                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span class="price">$10</span></div>
+                <div class="menu-item"><span>Mojitos</span><span class="price">$15</span></div>
+                <div class="menu-item"><span>Soda</span><span class="price">$8</span></div>
+            </div>
+        </div>
+        <!-- decorative image as per original representation : we add gallery of food/drinks to represent the visuals from pages -->
+        <div class="gallery-mini">
+            <img src="https://placehold.co/300x200/e3cfb5/a0683c?text=Nyama+Choma" alt="Nyama Choma">
+            <img src="https://placehold.co/300x200/e9d8c2/a87448?text=Creamy+Pasta" alt="Pasta">
+            <img src="https://placehold.co/300x200/f1e1cb/b77a47?text=Tiramisu" alt="Tiramisu dessert">
+            <img src="https://placehold.co/300x200/e7d1b9/b77d48?text=Coffee+%26+Mojito" alt="Drinks">
+        </div>
+        <p style="text-align: center; margin: 20px 0 10px; font-size: 0.9rem; color: #896e50;"><i class="fas fa-leaf"></i> Fresh ingredients · friendly service · from breakfast till late dinner</p>
+    </div>
+
+    <!-- Additional atmosphere note: casual dining, plus quote -->
+    <div style="background: #f7efe4; border-radius: 40px; padding: 30px; margin: 40px 0; text-align: center;">
+        <i class="fas fa-spa" style="font-size: 2rem; color: #c39264;"></i>
+        <p style="max-width: 700px; margin: 12px auto; font-size: 1.05rem;">The atmosphere is calm, clean, and welcoming — perfect for casual dining, business meals, relaxing with friends or family, and quiet solo moments.</p>
+    </div>
+
+    <!-- Contact / stay section with phone and social from PDF -->
+    <div id="contact" style="background: #e9dfd2; border-radius: 48px; padding: 40px 30px; margin-top: 30px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px;">
+            <div>
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #7c5d3e;">Stay with us</h3>
+                <p style="margin: 12px 0;"><i class="fas fa-phone-alt"></i> Tel: 676767676767</p>
+                <p><i class="fas fa-envelope"></i> wasilwaa@maxwellsda.org</p>
+                <div class="social" style="margin-top: 20px;">
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-tripadvisor"></i>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <img src="https://placehold.co/260x120/e9d6c2/a37143?text=AN-INN-SA" style="border-radius: 24px;" alt="An-Inn-Sa brand">
+                <p style="margin-top: 12px; font-weight: 500;">Getsocial · @aninnsa</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer extra -->
+    <div class="footer">
+        <div class="footer-inner container" style="padding: 0;">
+            <div class="footer-info">
+                <i class="fas fa-map-marker-alt"></i> Nairobi · Relaxation District
+            </div>
+            <div class="footer-info">
+                © 2025 An-Inn-Sa — Comfort, culture & calmness
+            </div>
+            <div class="footer-info">
+                <i class="fas fa-moon"></i> Your serene escape
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- small note: all images are representative aesthetic placeholders matching the original brochure description, 
+     but included like a real hotel website.  The brochure had embedded images in coordinates but we used modern design enriched. 
+     I've added all menu items, text, room descriptions, quotes, contact info exactly from PDF.  
+     Plus responsiveness and inviting color palette -->
 </body>
 </html>
