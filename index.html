@@ -1,192 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vogue Style Layout</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-}
-
-.container {
-    width: 90%;
-    margin: auto;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-
-.logo {
-    font-size: 40px;
-    letter-spacing: 5px;
-    font-weight: bold;
-}
-
-.hero {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-.hero img {
-    width: 100%;
-    height: auto;
-}
-
-.starring {
-    background: #6b3f3f;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 10px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.card {
-    background: white;
-    padding: 15px;
-    text-align: center;
-}
-
-.card img {
-    width: 100%;
-}
-
-.highlight {
-    background: #c79a7a;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-.red {
-    background: red;
-    color: white;
-}
-
-.black {
-    background: black;
-    color: white;
-}
-
-.footer {
-    margin-top: 40px;
-    padding: 40px;
-    background: #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 18px;
-    background: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AN-INN-SA Hotel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #444;
+      display: flex;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background: #666;
+    }
+    .hero {
+      background: url('https://via.placeholder.com/1200x400') no-repeat center/cover;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #222;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="container">
-
 <header>
-    <div class="logo">VOGUE</div>
-    <div>Magazine</div>
+  <h1>AN-INN-SA</h1>
+  <p>Your home away from home</p>
 </header>
 
+<nav>
+  <a href="#rooms">Rooms</a>
+  <a href="#restaurant">Restaurant</a>
+  <a href="#contact">Contact</a>
+</nav>
+
 <section class="hero">
-    <div>
-        <img src="model1.jpg" alt="Doja Cat">
-        <div class="starring">
-            <h1>STARRING</h1>
-            <h2>DOJA CAT</h2>
-        </div>
-    </div>
-
-    <div>
-        <img src="model2.jpg" alt="Side Image">
-    </div>
+  <h2>Relax and Stay the AN-INN-SA Way</h2>
+  <p>Comfort, peace, and a memorable experience</p>
+  <button>Book Now</button>
 </section>
 
-<section class="grid">
+<section id="rooms" class="section">
+  <h2>Rooms & Suites</h2>
+  <div class="cards">
     <div class="card">
-        <img src="model3.jpg">
+      <h3>Signature Suite</h3>
+      <p>Spacious, elegant, and filled with natural light. Perfect for relaxation and luxury.</p>
     </div>
-
     <div class="card">
-        <p><b>CONTROL ISSUES</b><br>
-        Doja’s genre-blending album has reinvented glamour.</p>
+      <h3>Deluxe Room</h3>
+      <p>Comfortable and stylish with modern amenities for a peaceful stay.</p>
     </div>
-
-    <div class="card">
-        <img src="model4.jpg">
-    </div>
+  </div>
 </section>
 
-<section class="highlight">
-    <p><b>SHAPE SHIFT</b><br>
-    Mugler bodysuit. Manolo Blahnik shoes.</p>
+<section id="restaurant" class="section">
+  <h2>InnSa Lounge & Grill</h2>
+  <p>Where great taste meets great moments</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Appetizers</h3>
+      <p>Soup, Samosas, Fries, Chicken Wings</p>
+    </div>
+    <div class="card">
+      <h3>Main Dishes</h3>
+      <p>Nyama Choma, Ugali & Stew, Rice, Pasta</p>
+    </div>
+    <div class="card">
+      <h3>Desserts & Drinks</h3>
+      <p>Ice Cream, Cake, Coffee, Juice, Mojitos</p>
+    </div>
+  </div>
 </section>
 
-<section class="grid">
-    <div class="card">
-        <img src="model5.jpg">
-    </div>
-
-    <div class="card">
-        <img src="model6.jpg">
-    </div>
-
-    <div class="card">
-        <p><b>CREAM OF THE CROP</b><br>
-        Doja reflects on her career and growth.</p>
-    </div>
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Phone: 676767676767</p>
+  <p>Email: wasilwaa@maxwellsda.org</p>
 </section>
 
-<section class="grid">
-    <div class="card">
-        <img src="model7.jpg">
-    </div>
-
-    <div class="card black">
-        <p>“It’s made me feel safer,” she says about fashion.</p>
-    </div>
-
-    <div class="card red">
-        <p>PAINT THE TOWN RED</p>
-    </div>
-</section>
-
-<section class="footer">
-    <div>
-        <h2>THE APRIL ISSUE IS HERE</h2>
-        <p>Featuring Doja Cat</p>
-        <button>GET NOW</button>
-    </div>
-
-    <img src="magazine.jpg" width="200">
-</section>
-
-</div>
+<footer>
+  <p>&copy; 2026 AN-INN-SA Hotel. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
