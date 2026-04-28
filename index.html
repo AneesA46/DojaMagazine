@@ -290,7 +290,7 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        /* enhanced stars atmosphere section */
+        /* stars atmosphere section */
         .emotion-section {
             background: #030303;
             position: relative;
@@ -325,36 +325,70 @@
             position: relative;
         }
 
-        /* popup notification */
-        .toast-notification {
+        /* FORMAL TOP NOTIFICATION (elegant, top-of-screen banner) */
+        .top-notification {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px);
-            border-left: 4px solid #c7a05b;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            background: rgba(20, 18, 16, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(199, 160, 91, 0.5);
+            border-radius: 12px;
             padding: 1rem 2rem;
-            border-radius: 8px;
-            color: #e8e6e1;
-            font-family: 'Inter', sans-serif;
-            z-index: 1000;
-            transform: translateX(120%);
+            min-width: 280px;
+            max-width: 480px;
+            width: max-content;
+            z-index: 2000;
             transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(199,160,91,0.2);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
         }
-        .toast-notification.show {
-            transform: translateX(0);
+        .top-notification.show {
+            transform: translateX(-50%) translateY(0);
         }
-        .toast-title {
+        .notification-title {
             font-weight: 600;
             color: #c7a05b;
-            margin-bottom: 5px;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .notification-message {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #f0ede8;
+            line-height: 1.4;
+        }
+        .notification-detail {
+            font-size: 0.75rem;
+            color: #b9b3a5;
+            margin-top: 8px;
+            border-top: 1px solid rgba(199,160,91,0.2);
+            padding-top: 6px;
         }
 
-        /* Cursor trailing effect (subtle motion shapes) */
+        .cta-section {
+            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
+        }
+        footer {
+            background: #020202;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(199,160,91,0.2);
+        }
+        @media (max-width: 700px) {
+            .section-inner { padding: 3rem 5%; }
+            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
+            .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
+            .notification-message { font-size: 0.8rem; }
+        }
+
+        /* Cursor motion elements */
         .cursor-trail {
             position: fixed;
             width: 32px;
@@ -380,28 +414,11 @@
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
-
-        .cta-section {
-            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
-        }
-        footer {
-            background: #020202;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(199,160,91,0.2);
-        }
-        @media (max-width: 700px) {
-            .section-inner { padding: 3rem 5%; }
-            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
-            .toast-notification { bottom: 20px; right: 20px; left: 20px; transform: translateY(120%); text-align: center; }
-            .toast-notification.show { transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
 
-<!-- Cursor motion elements (subtle trail) -->
+<!-- Cursor motion elements -->
 <div class="cursor-trail" id="cursorTrail"></div>
 <div class="cursor-trail-dot" id="cursorDot"></div>
 
@@ -515,7 +532,7 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: stars atmosphere + dreamlike -->
+<!-- Emotional Highlight Section: stars atmosphere -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
@@ -532,7 +549,7 @@
     </div>
 </section>
 
-<!-- Call to Action + Booking popup integration -->
+<!-- Call to Action + FORMAL TOP NOTIFICATION -->
 <section id="booking" class="cta-section" style="padding: 6rem 5%; text-align: center;">
     <div class="reveal-block">
         <h2 class="giant-text" style="font-size: clamp(2.8rem, 8vw, 5rem);">Book your escape</h2>
@@ -550,59 +567,61 @@
     <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Images for cinematic storytelling</p>
 </footer>
 
-<!-- Toast Notification (popup) -->
-<div id="bookingToast" class="toast-notification">
-    <div class="toast-title">✦ Reservation Confirmed ✦</div>
-    <div>Your escape to An-Inn-Sa awaits. A confirmation email has been sent to your inbox. We look forward to welcoming you.</div>
+<!-- Formal Top Notification Banner -->
+<div id="formalNotification" class="top-notification">
+    <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
+    <div class="notification-message">Your escape to serenity has been secured.</div>
+    <div class="notification-detail">A confirmation e-mail with your itinerary will arrive shortly. We await your arrival.</div>
 </div>
 
 <script>
-    // === 1. RESERVE BUTTON POPUP NOTIFICATION ===
+    // === 1. RESERVE BUTTON - FORMAL TOP NOTIFICATION ===
     const reserveBtn = document.getElementById('reserveButton');
-    const toast = document.getElementById('bookingToast');
+    const notification = document.getElementById('formalNotification');
     
-    function showBookingPopup() {
-        toast.classList.add('show');
+    function showFormalNotification() {
+        notification.classList.add('show');
+        // Auto-hide after 5 seconds
         setTimeout(() => {
-            toast.classList.remove('show');
-        }, 4500);
+            notification.classList.remove('show');
+        }, 5000);
     }
     
     if (reserveBtn) {
         reserveBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            showBookingPopup();
+            showFormalNotification();
         });
     }
     
-    // Also if any nav-book link points to booking, we can add popup on that click as well.
+    // Also handle nav-book link: scrolls and shows notification after scroll
     const navBookLink = document.querySelector('.nav-book');
     if (navBookLink) {
         navBookLink.addEventListener('click', (e) => {
             e.preventDefault();
             const bookingSection = document.getElementById('booking');
-            if (bookingSection) bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // slight delay to show popup after scroll, but intuitive
-            setTimeout(() => {
-                showBookingPopup();
-            }, 600);
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    showFormalNotification();
+                }, 700);
+            } else {
+                showFormalNotification();
+            }
         });
     }
 
-    // === 2. CURSOR MOTION: subtle trail + glow effect ===
+    // === 2. CURSOR MOTION: subtle trail + interactive effect ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
-    let dotX = 0, dotY = 0;
     
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        // direct dot follow (fast)
         dot.style.left = mouseX + 'px';
         dot.style.top = mouseY + 'px';
-        // smoothly animate the larger glow trail
     });
     
     function animateTrail() {
@@ -610,7 +629,6 @@
         trailY += (mouseY - trailY) * 0.12;
         trail.style.left = trailX + 'px';
         trail.style.top = trailY + 'px';
-        // subtle size variation based on movement speed
         let dx = mouseX - trailX;
         let dy = mouseY - trailY;
         let dist = Math.sqrt(dx*dx + dy*dy);
@@ -622,9 +640,8 @@
     }
     animateTrail();
     
-    // micro-interaction: hover on buttons or cards add extra cursor effect
-    const interactiveElements = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
-    interactiveElements.forEach(el => {
+    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
+    interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
             trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
             trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.5) 0%, rgba(199,160,91,0) 70%)';
@@ -641,7 +658,7 @@
         });
     });
     
-    // === 3. STARS ATMOSPHERE (canvas animation on emotional section) ===
+    // === 3. STARS ATMOSPHERE (enhanced cinematic stars) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -660,15 +677,14 @@
         
         function initStars() {
             stars = [];
-            const starCount = Math.floor((width * height) / 3500);
+            const starCount = Math.floor((width * height) / 3800);
             for (let i = 0; i < starCount; i++) {
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 2.2 + 0.8,
+                    radius: Math.random() * 2.4 + 0.6,
                     alpha: Math.random() * 0.6 + 0.2,
-                    twinkleSpeed: 0.005 + Math.random() * 0.02,
-                    twinkleDir: Math.random() > 0.5 ? 1 : -1,
+                    twinkleSpeed: 0.005 + Math.random() * 0.025,
                 });
             }
         }
@@ -678,31 +694,26 @@
             if (!ctx) return;
             ctx.clearRect(0, 0, width, height);
             for (let s of stars) {
-                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 15) * 0.15;
-                twinkle = Math.min(0.9, Math.max(0.2, twinkle));
+                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
+                twinkle = Math.min(0.9, Math.max(0.15, twinkle));
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 240, 200, ${twinkle * 0.7})`;
+                ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
                 ctx.fill();
             }
-            time += 0.02;
+            time += 0.018;
             requestAnimationFrame(drawStars);
         }
         
-        window.addEventListener('resize', () => {
-            resizeStars();
-        });
+        window.addEventListener('resize', () => { resizeStars(); });
         resizeStars();
         drawStars();
         
-        // reinit on scroll if needed but fine.
         const emotionSection = document.querySelector('.emotion-section');
         if (emotionSection) {
             const observerStars = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        resizeStars();
-                    }
+                    if (entry.isIntersecting) resizeStars();
                 });
             }, { threshold: 0.1 });
             observerStars.observe(emotionSection);
@@ -721,7 +732,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax for hero background
+    // Parallax effects
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
