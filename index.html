@@ -40,6 +40,19 @@
             will-change: transform;
         }
 
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            z-index: 0;
+            transform: translateY(0);
+            will-change: transform;
+            pointer-events: none;
+        }
+
         .section-inner {
             position: relative;
             z-index: 2;
@@ -235,7 +248,7 @@
             transition: 0.2s;
         }
 
-        /* hero section with custom cursor tracking for text */
+        /* hero section */
         .hero {
             height: 100vh;
             position: relative;
@@ -270,21 +283,7 @@
             left: 5%;
             z-index: 2;
             animation: fadeSlideUp 1.8s ease-out;
-            transform: translate3d(0, 0, 0);
-            transition: transform 0.08s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            will-change: transform;
         }
-        
-        /* individual text layers for cursor-attraction motion */
-        .hero-motion-line {
-            display: block;
-            transition: transform 0.12s cubic-bezier(0.15, 0.85, 0.3, 1.05);
-            will-change: transform;
-        }
-        
-        .hero-motion-line:nth-child(1) { transition-duration: 0.1s; }
-        .hero-motion-line:nth-child(2) { transition-duration: 0.13s; }
-        .hero-motion-line:nth-child(3) { transition-duration: 0.16s; }
 
         @keyframes fadeSlideUp {
             0% { opacity: 0; transform: translateY(40px);}
@@ -326,13 +325,13 @@
             position: relative;
         }
 
-        /* FORMAL TOP NOTIFICATION */
+        /* FORMAL TOP NOTIFICATION (elegant, top-of-screen banner) */
         .top-notification {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-120%);
-            background: rgba(20, 18, 16, 0.96);
+            background: rgba(20, 18, 16, 0.95);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(199, 160, 91, 0.5);
             border-radius: 12px;
@@ -386,6 +385,7 @@
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
+            .notification-message { font-size: 0.8rem; }
         }
 
         /* Cursor motion elements */
@@ -427,14 +427,14 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section with cursor-attracted motion text -->
+<!-- Hero Section -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
-    <div class="hero-text" id="heroTextContainer">
-        <p class="quote-line hero-motion-line" style="margin-bottom: 0.5rem;" data-motion-strength="0.12">You came to the right place</p>
-        <h1 class="giant-text hero-motion-line" style="font-weight: 300;" data-motion-strength="0.18">An-Inn-Sa</h1>
-        <p class="hero-motion-line" style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;" data-motion-strength="0.08">where stillness speaks</p>
+    <div class="hero-text">
+        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
+        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
     </div>
 </section>
 
@@ -575,51 +575,13 @@
 </div>
 
 <script>
-    // === SMOOTH CURSOR-ATTRACTED TEXT MOTION on HERO ===
-    const heroContainer = document.getElementById('heroTextContainer');
-    const heroLines = document.querySelectorAll('.hero-motion-line');
-    
-    if (heroContainer && heroLines.length) {
-        // store original positions relative to container
-        let mouseX = 0, mouseY = 0;
-        let targetX = 0, targetY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            // get normalized cursor position relative to viewport center (for subtle movement)
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            // range -1 to 1, where center is 0,0
-            let normX = (e.clientX / vw) * 2 - 1;
-            let normY = (e.clientY / vh) * 2 - 1;
-            // clamp and apply with max offset of 35px for strongest text
-            targetX = normX * 28;
-            targetY = normY * 18;
-            
-            // apply separately to each line with different strengths for parallax feel
-            heroLines.forEach((line, idx) => {
-                const strengthAttr = line.getAttribute('data-motion-strength');
-                let strength = strengthAttr ? parseFloat(strengthAttr) : 0.12;
-                // strength multiplier: max movement ~26px
-                let moveX = targetX * strength;
-                let moveY = targetY * strength * 0.7; // less vertical movement for elegance
-                line.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-            });
-        });
-        
-        // subtle reset if cursor leaves window? optional, but we keep last known.
-        document.addEventListener('mouseleave', () => {
-            heroLines.forEach(line => {
-                line.style.transform = `translate3d(0px, 0px, 0px)`;
-            });
-        });
-    }
-    
-    // === RESERVE BUTTON - FORMAL TOP NOTIFICATION ===
+    // === 1. RESERVE BUTTON - FORMAL TOP NOTIFICATION ===
     const reserveBtn = document.getElementById('reserveButton');
     const notification = document.getElementById('formalNotification');
     
     function showFormalNotification() {
         notification.classList.add('show');
+        // Auto-hide after 5 seconds
         setTimeout(() => {
             notification.classList.remove('show');
         }, 5000);
@@ -632,6 +594,7 @@
         });
     }
     
+    // Also handle nav-book link: scrolls and shows notification after scroll
     const navBookLink = document.querySelector('.nav-book');
     if (navBookLink) {
         navBookLink.addEventListener('click', (e) => {
@@ -648,26 +611,26 @@
         });
     }
 
-    // === CURSOR TRAIL + DOT ===
+    // === 2. CURSOR MOTION: subtle trail + interactive effect ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
-    let mouseCurX = 0, mouseCurY = 0;
+    let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
     
     document.addEventListener('mousemove', (e) => {
-        mouseCurX = e.clientX;
-        mouseCurY = e.clientY;
-        dot.style.left = mouseCurX + 'px';
-        dot.style.top = mouseCurY + 'px';
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
     });
     
     function animateTrail() {
-        trailX += (mouseCurX - trailX) * 0.12;
-        trailY += (mouseCurY - trailY) * 0.12;
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
         trail.style.left = trailX + 'px';
         trail.style.top = trailY + 'px';
-        let dx = mouseCurX - trailX;
-        let dy = mouseCurY - trailY;
+        let dx = mouseX - trailX;
+        let dy = mouseY - trailY;
         let dist = Math.sqrt(dx*dx + dy*dy);
         let size = Math.min(48, 28 + dist * 0.4);
         trail.style.width = size + 'px';
@@ -695,7 +658,7 @@
         });
     });
     
-    // === STARS CANVAS ===
+    // === 3. STARS ATMOSPHERE (enhanced cinematic stars) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -757,7 +720,7 @@
         }
     }
     
-    // Reveal animations
+    // Intersection Observer for reveal animations
     const revealElements = document.querySelectorAll('.reveal-block');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -769,7 +732,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax & scroll effects
+    // Parallax effects
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
@@ -782,7 +745,7 @@
         }
     });
     
-    // horizontal scroll drag
+    // horizontal scroll grab effect
     const scrollContainer = document.querySelector('.horizontal-scroll');
     if(scrollContainer) {
         let isDown = false;
@@ -804,4 +767,8 @@
             const walk = (x - startX) * 1.2;
             scrollContainer.scrollLeft = scrollLeft - walk;
         });
-        scrollContainer.style.cursor = 'g
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
