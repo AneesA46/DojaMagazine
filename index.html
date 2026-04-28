@@ -6,7 +6,6 @@
     <title>An-Inn-Sa — Arrive in Stillness</title>
     <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-    <!-- Smooth scroll behavior & basic reset -->
     <style>
         * {
             margin: 0;
@@ -20,9 +19,10 @@
             color: #e8e6e1;
             overflow-x: hidden;
             line-height: 1.4;
+            cursor: default;
         }
 
-        /* Cinematic scrollbar (thin, minimal) */
+        /* Cinematic scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -34,14 +34,12 @@
             border-radius: 8px;
         }
 
-        /* container for sections */
         section {
             position: relative;
             width: 100%;
             will-change: transform;
         }
 
-        /* global parallax base */
         .parallax-bg {
             position: absolute;
             top: 0;
@@ -61,7 +59,7 @@
             padding: 6rem 5%;
         }
 
-        /* typography large */
+        /* typography */
         .giant-text {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 400;
@@ -77,7 +75,7 @@
             letter-spacing: -0.01em;
         }
 
-        /* button minimal */
+        /* buttons */
         .btn-gold {
             display: inline-block;
             background: transparent;
@@ -101,7 +99,6 @@
             transform: scale(1.02);
         }
 
-        /* Pulsing booking button (glow effect) */
         .booking-button {
             background: #c7a05b;
             color: #0a0a0a;
@@ -113,6 +110,7 @@
             transition: box-shadow 0.3s ease, transform 0.2s ease;
             box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
             animation: softPulse 2.2s infinite;
+            cursor: pointer;
         }
 
         @keyframes softPulse {
@@ -128,7 +126,7 @@
             box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
         }
 
-        /* horizontal scroll (rooms & spaces) */
+        /* horizontal scroll rooms */
         .horizontal-scroll {
             display: flex;
             overflow-x: auto;
@@ -181,7 +179,7 @@
             border-left: 3px solid #c7a05b;
         }
 
-        /* layered reveal sections */
+        /* reveal animation */
         .reveal-block {
             opacity: 0;
             transform: translateY(40px);
@@ -193,15 +191,7 @@
             transform: translateY(0);
         }
 
-        /* image zoom interactive */
-        .zoom-img {
-            transition: transform 0.5s ease-out;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* menu grid (simple elegant) */
+        /* menu grid */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -225,7 +215,7 @@
             padding: 0.6rem 0;
         }
 
-        /* header nav minimal */
+        /* navigation */
         nav {
             position: fixed;
             top: 0;
@@ -258,7 +248,7 @@
             transition: 0.2s;
         }
 
-        /* Fullscreen hero with slow zoom */
+        /* hero section */
         .hero {
             height: 100vh;
             position: relative;
@@ -300,18 +290,97 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        .hero-text h1 {
-            font-size: clamp(2.8rem, 12vw, 6rem);
-            font-weight: 400;
+        /* enhanced stars atmosphere section */
+        .emotion-section {
+            background: #030303;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .stars-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        .dream-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            filter: brightness(0.5) blur(1px);
+            transform: scale(1.02);
+            z-index: 0;
+        }
+        .emotion-section .section-inner {
+            z-index: 3;
+            position: relative;
         }
 
-        /* sections background tints */
-        .intro-section, .emotion-section {
-            background: #050505;
+        /* popup notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            border-left: 4px solid #c7a05b;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            color: #e8e6e1;
+            font-family: 'Inter', sans-serif;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
-        .dining-section {
-            background: #0e0c0a;
+        .toast-notification.show {
+            transform: translateX(0);
         }
+        .toast-title {
+            font-weight: 600;
+            color: #c7a05b;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        /* Cursor trailing effect (subtle motion shapes) */
+        .cursor-trail {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(199,160,91,0.3) 0%, rgba(199,160,91,0) 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, opacity 0.3s;
+            will-change: left, top;
+        }
+        .cursor-trail-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #c7a05b;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            filter: blur(1px);
+            opacity: 0.6;
+            transform: translate(-50%, -50%);
+            transition: 0.05s linear;
+        }
+
         .cta-section {
             background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
         }
@@ -322,24 +391,27 @@
             font-size: 0.8rem;
             border-top: 1px solid rgba(199,160,91,0.2);
         }
-
-        /* Responsive */
         @media (max-width: 700px) {
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
+            .toast-notification { bottom: 20px; right: 20px; left: 20px; transform: translateY(120%); text-align: center; }
+            .toast-notification.show { transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
+<!-- Cursor motion elements (subtle trail) -->
+<div class="cursor-trail" id="cursorTrail"></div>
+<div class="cursor-trail-dot" id="cursorDot"></div>
 
 <nav>
     <div class="logo">AN-INN-SA</div>
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- 1. Hero Section (Fullscreen cinematic, slow zoom) -->
+<!-- Hero Section -->
 <section class="hero">
-    <!-- Using a high-quality atmospheric video-like placeholder image - but we'll use a looping abstract cinematic clip? Instead, use a stunning static image with slow zoom (since video might add complexity but matches mood) -->
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
@@ -349,7 +421,7 @@
     </div>
 </section>
 
-<!-- 2. Immersive Introduction: Large typography, scroll fade motion -->
+<!-- Immersive Introduction -->
 <section class="intro-section">
     <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
@@ -364,7 +436,7 @@
     </div>
 </section>
 
-<!-- 3. Rooms & Spaces (Horizontal Scroll, big visuals, zoom on hover) -->
+<!-- Rooms & Spaces Horizontal Scroll -->
 <section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
@@ -373,7 +445,6 @@
         </div>
     </div>
     <div class="horizontal-scroll">
-        <!-- Suite Card (image placeholder: high-end hotel vibe) -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
             <div class="room-caption">
@@ -382,16 +453,14 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Deluxe Room Card -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
                 <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500;">INQUIRE →</a>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- extra visual suite for cinematic flow -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Suite">
             <div class="room-caption">
@@ -403,7 +472,7 @@
     </div>
 </section>
 
-<!-- 4. Amenities / Experience (Dining + Menu from brochure) ambient layered animations -->
+<!-- Dining & Amenities -->
 <section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
@@ -446,9 +515,10 @@
     </div>
 </section>
 
-<!-- 5. Emotional Highlight Section (dreamlike atmosphere) -->
-<section class="emotion-section" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-    <img src="https://images.pexels.com/photos/2340970/pexels-photo-2340970.jpeg?auto=compress&cs=tinysrgb&w=1600" style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; transform: scale(1.02); filter: brightness(0.7);" alt="stars atmosphere">
+<!-- Emotional Highlight Section: stars atmosphere + dreamlike -->
+<section class="emotion-section">
+    <canvas id="starsCanvas" class="stars-canvas"></canvas>
+    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
@@ -462,12 +532,12 @@
     </div>
 </section>
 
-<!-- 6. Call to Action (Booking) with pulsing button and subtle background shift -->
+<!-- Call to Action + Booking popup integration -->
 <section id="booking" class="cta-section" style="padding: 6rem 5%; text-align: center;">
     <div class="reveal-block">
         <h2 class="giant-text" style="font-size: clamp(2.8rem, 8vw, 5rem);">Book your escape</h2>
         <p style="margin: 1rem 0 2.8rem 0; font-size: 1.2rem; font-weight: 300;">Reserve your stay — your room is waiting.</p>
-        <a href="#" class="btn-gold booking-button" style="text-decoration: none;">RESERVE NOW →</a>
+        <button id="reserveButton" class="btn-gold booking-button" style="text-decoration: none; border: none; cursor: pointer;">RESERVE NOW →</button>
         <div style="margin-top: 3rem;">
             <p style="font-size: 0.9rem;">Tel: +676 7676 76767 &nbsp;|&nbsp; wasilwaa@maxwellsda.org</p>
             <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
@@ -480,9 +550,166 @@
     <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Images for cinematic storytelling</p>
 </footer>
 
-<!-- Intersection Observer for fade + slide-up reveals and parallax simple background particles -->
+<!-- Toast Notification (popup) -->
+<div id="bookingToast" class="toast-notification">
+    <div class="toast-title">✦ Reservation Confirmed ✦</div>
+    <div>Your escape to An-Inn-Sa awaits. A confirmation email has been sent to your inbox. We look forward to welcoming you.</div>
+</div>
+
 <script>
-    // reveal elements on scroll
+    // === 1. RESERVE BUTTON POPUP NOTIFICATION ===
+    const reserveBtn = document.getElementById('reserveButton');
+    const toast = document.getElementById('bookingToast');
+    
+    function showBookingPopup() {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 4500);
+    }
+    
+    if (reserveBtn) {
+        reserveBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showBookingPopup();
+        });
+    }
+    
+    // Also if any nav-book link points to booking, we can add popup on that click as well.
+    const navBookLink = document.querySelector('.nav-book');
+    if (navBookLink) {
+        navBookLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const bookingSection = document.getElementById('booking');
+            if (bookingSection) bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // slight delay to show popup after scroll, but intuitive
+            setTimeout(() => {
+                showBookingPopup();
+            }, 600);
+        });
+    }
+
+    // === 2. CURSOR MOTION: subtle trail + glow effect ===
+    const trail = document.getElementById('cursorTrail');
+    const dot = document.getElementById('cursorDot');
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+    let dotX = 0, dotY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // direct dot follow (fast)
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+        // smoothly animate the larger glow trail
+    });
+    
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
+        trail.style.left = trailX + 'px';
+        trail.style.top = trailY + 'px';
+        // subtle size variation based on movement speed
+        let dx = mouseX - trailX;
+        let dy = mouseY - trailY;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        let size = Math.min(48, 28 + dist * 0.4);
+        trail.style.width = size + 'px';
+        trail.style.height = size + 'px';
+        trail.style.opacity = 0.5 + Math.min(0.3, dist * 0.01);
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+    
+    // micro-interaction: hover on buttons or cards add extra cursor effect
+    const interactiveElements = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.5) 0%, rgba(199,160,91,0) 70%)';
+            dot.style.background = '#e0b87a';
+            dot.style.width = '10px';
+            dot.style.height = '10px';
+        });
+        el.addEventListener('mouseleave', () => {
+            trail.style.transform = 'translate(-50%, -50%) scale(1)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.3) 0%, rgba(199,160,91,0) 70%)';
+            dot.style.background = '#c7a05b';
+            dot.style.width = '6px';
+            dot.style.height = '6px';
+        });
+    });
+    
+    // === 3. STARS ATMOSPHERE (canvas animation on emotional section) ===
+    const canvas = document.getElementById('starsCanvas');
+    if (canvas) {
+        let ctx = canvas.getContext('2d');
+        let stars = [];
+        let width, height;
+        
+        function resizeStars() {
+            const section = canvas.parentElement;
+            const rect = section.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            canvas.width = width;
+            canvas.height = height;
+            initStars();
+        }
+        
+        function initStars() {
+            stars = [];
+            const starCount = Math.floor((width * height) / 3500);
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2.2 + 0.8,
+                    alpha: Math.random() * 0.6 + 0.2,
+                    twinkleSpeed: 0.005 + Math.random() * 0.02,
+                    twinkleDir: Math.random() > 0.5 ? 1 : -1,
+                });
+            }
+        }
+        
+        let time = 0;
+        function drawStars() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let s of stars) {
+                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 15) * 0.15;
+                twinkle = Math.min(0.9, Math.max(0.2, twinkle));
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 240, 200, ${twinkle * 0.7})`;
+                ctx.fill();
+            }
+            time += 0.02;
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeStars();
+        });
+        resizeStars();
+        drawStars();
+        
+        // reinit on scroll if needed but fine.
+        const emotionSection = document.querySelector('.emotion-section');
+        if (emotionSection) {
+            const observerStars = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        resizeStars();
+                    }
+                });
+            }, { threshold: 0.1 });
+            observerStars.observe(emotionSection);
+        }
+    }
+    
+    // Intersection Observer for reveal animations
     const revealElements = document.querySelectorAll('.reveal-block');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -493,38 +720,25 @@
         });
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
-
-    // Parallax effect for hero background and emotional section (optional)
+    
+    // Parallax for hero background
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
             let scrollY = window.scrollY;
-            let rate = scrollY * 0.3;
-            heroBg.style.transform = `scale(${1 + scrollY * 0.0004}) translateY(${rate * 0.05}px)`;
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
         }
-        // subtle parallax for emotion section background
-        const emotionBg = document.querySelector('.emotion-section img');
-        if (emotionBg) {
-            let scrolled = window.scrollY;
-            emotionBg.style.transform = `translateY(${scrolled * 0.1}px) scale(1.02)`;
+        const dreamBg = document.querySelector('.dream-bg');
+        if (dreamBg && window.scrollY > 100) {
+            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
         }
     });
-
-    // optional smooth scroll for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-
-    // horizontal scroll for rooms can be slightly dragged, but auto snap works. add cursor grabbing
+    
+    // horizontal scroll grab effect
     const scrollContainer = document.querySelector('.horizontal-scroll');
     if(scrollContainer) {
         let isDown = false;
-        let startX;
-        let scrollLeft;
+        let startX, scrollLeft;
         scrollContainer.addEventListener('mousedown', (e) => {
             isDown = true;
             scrollContainer.style.cursor = 'grabbing';
@@ -544,13 +758,6 @@
         });
         scrollContainer.style.cursor = 'grab';
     }
-
-    // tiny cinematic effect: show room card titles with more elegance
-    // also small auto glow cta (already animated)
-    console.log('Cinematic scroll journey ready — An-Inn-Sa');
 </script>
-
-<!-- optional ambient sound note: muted by default; removed to keep user-friendly 
-     but to match optional, we could embed but not auto play - respecting UX -->
 </body>
 </html>
