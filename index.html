@@ -3,465 +3,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa | kinetic luxury · unseen motion</title>
-    <!-- Google Fonts: Bold, Minimal, Expressive -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- GSAP + ScrollTrigger + Lenis smooth scroll -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <title>An-Inn-Sa — Arrive in Stillness</title>
+    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <!-- Smooth scroll behavior & basic reset -->
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none;
         }
 
         body {
-            background: #FCF9F3;
+            background-color: #0a0a0a;
             font-family: 'Inter', sans-serif;
-            color: #2A251F;
+            color: #e8e6e1;
             overflow-x: hidden;
+            line-height: 1.4;
         }
 
-        /* flattering color palette: warm sand, clay, deep timber */
-        :root {
-            --clay: #C4925F;
-            --sand: #EADABC;
-            --deep: #5A4A36;
-            --cream: #FFF9EF;
-            --warm-white: #FEFAF5;
+        /* Cinematic scrollbar (thin, minimal) */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7a05b;
+            border-radius: 8px;
         }
 
-        /* CUSTOM CURSOR — heavy but smooth */
-        .cursor {
-            width: 32px;
-            height: 32px;
-            border: 2px solid var(--clay);
-            border-radius: 50%;
-            position: fixed;
+        /* container for sections */
+        section {
+            position: relative;
+            width: 100%;
+            will-change: transform;
+        }
+
+        /* global parallax base */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            z-index: 0;
+            transform: translateY(0);
+            will-change: transform;
             pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
-            transform: translate(-50%, -50%);
-            backdrop-filter: invert(0.1);
-        }
-        .cursor-follower {
-            width: 8px;
-            height: 8px;
-            background: var(--clay);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.08s linear;
-            transform: translate(-50%, -50%);
-        }
-        a, button, .game-card, .btn, .inquire-link, .reset-game {
-            cursor: none;
-        }
-        a:hover ~ .cursor, button:hover ~ .cursor, .game-card:hover ~ .cursor {
-            transform: translate(-50%, -50%) scale(1.5);
-            background: rgba(196, 146, 95, 0.2);
-            border-color: #AD7948;
         }
 
-        /* Lenis smooth scroll */
-        html.lenis {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto;
+        .section-inner {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 5%;
         }
 
-        /* container + whitespace */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 48px;
-        }
-
-        /* typography large + bold */
-        h1, h2, h3, .logo h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
+        /* typography large */
+        .giant-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 10vw, 7rem);
             letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
-        /* navigation minimal */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 32px 0 28px;
-            flex-wrap: wrap;
+        .quote-line {
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
         }
-        .logo h1 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #B87C4E, #E0A269);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .nav-links a {
-            margin-left: 48px;
-            text-decoration: none;
-            font-weight: 500;
-            color: #6F5A41;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: #C4925F; }
 
-        /* hero section with parallax and large typography */
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            padding: 80px 0 100px;
-        }
-        .hero-text h2 {
-            font-size: 5.2rem;
-            line-height: 1.05;
-            color: #A27042;
-        }
-        .tagline {
-            font-size: 1.15rem;
-            border-left: 5px solid #E1BB8B;
-            padding-left: 28px;
-            margin: 32px 0 30px;
-            color: #7D6548;
-        }
-        .btn {
+        /* button minimal */
+        .btn-gold {
             display: inline-block;
-            padding: 14px 38px;
-            border-radius: 60px;
-            font-weight: 700;
-            transition: all 0.3s;
+            background: transparent;
+            border: 1.5px solid #c7a05b;
+            color: #c7a05b;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             text-decoration: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(4px);
+            border-radius: 2px;
         }
-        .btn-primary { background: var(--clay); color: white; box-shadow: 0 8px 18px rgba(170, 110, 50, 0.15);}
-        .btn-primary:hover { background: #AD7948; transform: translateY(-4px);}
-        .btn-outline { border: 2px solid var(--clay); color: #B47A48; background: transparent;}
-        .btn-outline:hover { background: #FFF3E6; transform: translateY(-4px);}
-        .hero-image img { width: 100%; border-radius: 40px; box-shadow: 0 28px 38px -15px rgba(0,0,0,0.1);}
 
-        /* section reveal */
-        .section-title {
-            font-size: 3.8rem;
-            text-align: center;
-            margin: 100px 0 20px;
-            color: #966E44;
+        .btn-gold:hover {
+            background: rgba(199, 160, 91, 0.12);
+            border-color: #e0b87a;
+            color: #e0b87a;
+            transform: scale(1.02);
         }
-        .cards-grid {
+
+        /* Pulsing booking button (glow effect) */
+        .booking-button {
+            background: #c7a05b;
+            color: #0a0a0a;
+            border: none;
+            padding: 1.2rem 2.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
+            animation: softPulse 2.2s infinite;
+        }
+
+        @keyframes softPulse {
+            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
+            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
+        }
+
+        .booking-button:hover {
+            background: #dbb16e;
+            transform: scale(1.02);
+            animation: none;
+            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
+        }
+
+        /* horizontal scroll (rooms & spaces) */
+        .horizontal-scroll {
             display: flex;
-            gap: 48px;
-            margin: 60px 0;
-            flex-wrap: wrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1.5rem;
+            padding: 2rem 5% 4rem 5%;
+            scroll-behavior: smooth;
+            cursor: grab;
+            scrollbar-width: thin;
         }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
         .room-card {
-            flex: 1;
-            background: white;
-            border-radius: 36px;
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+            position: relative;
+            border-radius: 24px;
             overflow: hidden;
-            transition: all 0.4s;
-            box-shadow: 0 20px 32px -12px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: #111;
         }
-        .room-card img { width: 100%; height: 320px; object-fit: cover; transition: transform 0.8s;}
-        .room-card:hover img { transform: scale(1.03);}
-        .room-info { padding: 28px;}
 
-        /* restaurant / about style */
-        .restaurant-story {
-            background: linear-gradient(115deg, #FFF8EF, #FFFCF5);
-            border-radius: 48px;
-            padding: 56px 48px;
-            margin: 70px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 48px;
+        @media (min-width: 900px) {
+            .room-card { flex: 0 0 70%; }
         }
-        /* menu styling */
-        .menu-showcase {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin: 40px 0;
+
+        .room-card img {
+            width: 100%;
+            height: 85vh;
+            object-fit: cover;
+            transition: transform 0.8s ease-out;
+            display: block;
         }
-        .menu-col {
-            flex: 1;
-            background: white;
-            border-radius: 40px;
-            padding: 32px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+
+        .room-card:hover img {
+            transform: scale(1.03);
         }
+
+        .room-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 1.5rem;
+            border-left: 3px solid #c7a05b;
+        }
+
+        /* layered reveal sections */
+        .reveal-block {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal-block.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* image zoom interactive */
+        .zoom-img {
+            transition: transform 0.5s ease-out;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* menu grid (simple elegant) */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .menu-category h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
         .menu-item {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #EFE2D0;
-            padding: 14px 0;
+            border-bottom: 1px dashed rgba(255,255,240,0.2);
+            padding: 0.6rem 0;
         }
 
-        /* game section with heavy interactive storytelling */
-        .game-lab {
-            background: #FFFBF2;
-            border-radius: 58px;
-            padding: 60px 40px;
-            margin: 90px 0;
-            border: 1px solid #F3E7D8;
-        }
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 22px;
-            max-width: 720px;
-            margin: 40px auto;
-        }
-        .game-card {
-            background: #FEF1E2;
-            aspect-ratio: 1;
-            border-radius: 28px;
+        /* header nav minimal */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .game-card i { font-size: 2.3rem; color: #BE8654; }
-        .game-stats {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            font-weight: 700;
-        }
-        .reset-game {
-            background: var(--clay);
-            border: none;
-            padding: 12px 34px;
-            border-radius: 40px;
-            font-weight: 700;
-            color: white;
-            display: block;
-            margin: 20px auto;
-        }
-
-        /* contact */
-        .contact-wrap {
-            background: #F2E8DC;
-            border-radius: 48px;
-            padding: 48px 44px;
-            display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.5);
+            transition: all 0.3s;
         }
-        .footer {
-            background: #E7DBCB;
-            padding: 48px 0;
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .nav-book {
+            background: transparent;
+            border: 1px solid #c7a05b;
+            padding: 0.5rem 1.8rem;
+            color: #e8e6e1;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        /* Fullscreen hero with slow zoom */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            animation: slowZoom 26s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        .hero-text {
+            position: absolute;
+            bottom: 20%;
+            left: 5%;
+            z-index: 2;
+            animation: fadeSlideUp 1.8s ease-out;
+        }
+
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.8rem, 12vw, 6rem);
+            font-weight: 400;
+        }
+
+        /* sections background tints */
+        .intro-section, .emotion-section {
+            background: #050505;
+        }
+        .dining-section {
+            background: #0e0c0a;
+        }
+        .cta-section {
+            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
+        }
+        footer {
+            background: #020202;
             text-align: center;
-            margin-top: 70px;
+            padding: 2rem;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(199,160,91,0.2);
         }
-        @media (max-width: 800px) {
-            .container { padding: 0 24px; }
-            .hero-text h2 { font-size: 3rem; }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .section-inner { padding: 3rem 5%; }
+            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
         }
     </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
 
-<div class="container">
-    <div class="navbar">
-        <div class="logo"><h1>◈ AN·INN·SA ◈</h1></div>
-        <div class="nav-links">
-            <a href="#rooms">SUITES</a>
-            <a href="#about">ABOUT</a>
-            <a href="#restaurant">RESTAURANT</a>
-            <a href="#game">GAME</a>
-            <a href="#contact">CONTACT</a>
+<nav>
+    <div class="logo">AN-INN-SA</div>
+    <a href="#booking" class="nav-book">RESERVE</a>
+</nav>
+
+<!-- 1. Hero Section (Fullscreen cinematic, slow zoom) -->
+<section class="hero">
+    <!-- Using a high-quality atmospheric video-like placeholder image - but we'll use a looping abstract cinematic clip? Instead, use a stunning static image with slow zoom (since video might add complexity but matches mood) -->
+    <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
+        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
+    </div>
+</section>
+
+<!-- 2. Immersive Introduction: Large typography, scroll fade motion -->
+<section class="intro-section">
+    <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
+        <div class="reveal-block">
+            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
+            <div style="height: 4rem;"></div>
+            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
+            <div style="height: 4rem;"></div>
+            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
+            <div style="height: 3rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
+</section>
 
-    <!-- Hero parallax -->
-    <div class="hero" id="hero">
-        <div class="hero-text">
-            <h2>YOU CAME<br>TO THE RIGHT PLACE</h2>
-            <div class="tagline">Relax and Stay, the An-Inn-Sa Way — where kinetic storytelling meets serene comfort.</div>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">⟡ BOOK NOW ⟡</a>
-                <a href="#rooms" class="btn btn-outline">EXPLORE SUITES</a>
+<!-- 3. Rooms & Spaces (Horizontal Scroll, big visuals, zoom on hover) -->
+<section style="background: #0a0908;">
+    <div class="section-inner" style="padding-bottom: 0;">
+        <div class="reveal-block">
+            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
+            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
+        </div>
+    </div>
+    <div class="horizontal-scroll">
+        <!-- Suite Card (image placeholder: high-end hotel vibe) -->
+        <div class="room-card">
+            <img src="https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
+                <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
-        <div class="hero-image" data-speed="0.95">
-            <img src="https://placehold.co/900x600/F3E9DC/C28A55?text=An-Inn-Sa+Kinetic+Lobby" alt="lobby" loading="lazy">
-        </div>
-    </div>
-
-    <!-- ROOMS with suites.png -->
-    <div id="rooms">
-        <h2 class="section-title">SIGNATURE SANCTUARIES</h2>
-        <div class="cards-grid">
-            <div class="room-card" data-reveal="left">
-                <img src="suites.png" alt="Signature Suite" loading="lazy">
-                <div class="room-info"><h3>Signature Suite</h3><p>Light-filled elegance, lounge space, plush textures — an elevated retreat.</p><a href="#" class="inquire-link" style="color:#C28A55; font-weight:600;">INQUIRE →</a></div>
-            </div>
-            <div class="room-card" data-reveal="right">
-                <img src="https://placehold.co/700x500/EADDCB/c6905a?text=Deluxe+Room" alt="Deluxe" loading="lazy">
-                <div class="room-info"><h3>Deluxe Room</h3><p>Minimalist calm, modern amenities, peaceful rest & productivity.</p><a href="#" class="inquire-link" style="color:#C28A55; font-weight:600;">INQUIRE →</a></div>
+        <!-- Deluxe Room Card -->
+        <div class="room-card">
+            <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
+                <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500;">INQUIRE →</a>
             </div>
         </div>
-    </div>
-
-    <!-- ABOUT US section - interactive storytelling -->
-    <div id="about" style="margin: 80px 0;">
-        <h2 class="section-title">THE UNSEEN STORY</h2>
-        <div class="restaurant-story">
-            <div style="flex:1.2"><h3 style="font-size:2.2rem;">Active Theory · Unseen Studio</h3><p style="margin-top:20px; line-height:1.7;">An-Inn-Sa isn't just a hotel — it's a kinetic canvas. Every corner tells a story through motion, light, and texture. We blend minimalism with warmth, creating spaces where you feel both grounded and inspired. Our philosophy: calm motion, intentional pauses, and design that breathes.</p><i class="fas fa-feather-alt" style="margin-top:24px; display:inline-block; color:#C4925F;"></i></div>
-            <div style="flex:1"><img src="https://placehold.co/500x400/F0E0CE/c1834e?text=Kinetic+Atrium" style="border-radius:36px; width:100%;" loading="lazy"></div>
+        <!-- extra visual suite for cinematic flow -->
+        <div class="room-card">
+            <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Suite">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
+                <p>Private balcony, meditative views, and handcrafted interiors.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+            </div>
         </div>
     </div>
+</section>
 
-    <!-- RESTAURANT SECTION -->
-    <div id="restaurant">
-        <h2 class="section-title">INNSA LOUNGE & GRILL</h2>
-        <div class="restaurant-story" style="background:#FEFAF0;">
-            <div style="flex:1"><img src="https://placehold.co/500x400/F2E3D2/c48f5d?text=InnSa+Dining" style="border-radius:36px; width:100%;" loading="lazy"></div>
-            <div style="flex:1.2"><h3 style="font-size:2rem;">Where Great Taste Meets Great Moments</h3><p style="margin:20px 0;">A mix of local & international dishes, fresh ingredients, and an atmosphere that welcomes casual meals, business lunches, or quiet solo dinners. Breakfast, lunch, dinner — every moment, curated.</p><span style="background:#EADBBC; padding:6px 20px; border-radius:40px;">Book a Table</span></div>
+<!-- 4. Amenities / Experience (Dining + Menu from brochure) ambient layered animations -->
+<section class="dining-section">
+    <div class="section-inner">
+        <div class="reveal-block">
+            <p class="quote-line" style="letter-spacing: 2px;">InnSa Lounge & Grill</p>
+            <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
+        </div>
+        <div class="menu-grid reveal-block">
+            <div class="menu-category">
+                <h3>Appetizers</h3>
+                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div>
+                <div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div>
+                <div class="menu-item"><span>French Fries</span><span>$19</span></div>
+                <div class="menu-item"><span>Chicken Wings</span><span>$20</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Mains</h3>
+                <div class="menu-item"><span>Nyama Choma</span><span>$58</span></div>
+                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div>
+                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div>
+                <div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Desserts</h3>
+                <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
+                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
+                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
+                <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Drinks</h3>
+                <div class="menu-item"><span>Orange Juice</span><span>$10</span></div>
+                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span>$10</span></div>
+                <div class="menu-item"><span>Mojitos</span><span>$15</span></div>
+                <div class="menu-item"><span>Soda</span><span>$8</span></div>
+            </div>
+        </div>
+        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
+            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
         </div>
     </div>
+</section>
 
-    <!-- MENU -->
-    <div id="menu">
-        <h2 class="section-title">THE CULINARY CODEX</h2>
-        <div class="menu-showcase">
-            <div class="menu-col"><h3>APPETIZERS</h3><div class="menu-item"><span>Chicken/Vegetable Soup</span><span>$22</span></div><div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div><div class="menu-item"><span>French Fries</span><span>$19</span></div><div class="menu-item"><span>Chicken Wings</span><span>$20</span></div><h3 style="margin-top:30px;">MAINS</h3><div class="menu-item"><span>Nyama Choma</span><span>$58</span></div><div class="menu-item"><span>Ugali with Beef Stew</span><span>$42</span></div><div class="menu-item"><span>Stir-Fried Rice/Noodles</span><span>$48</span></div><div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div></div>
-            <div class="menu-col"><h3>DESSERTS</h3><div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div><div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice</span></div><div class="menu-item"><span>Tiramisu</span><span>$18 slice</span></div><div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div><h3 style="margin-top:30px;">DRINKS</h3><div class="menu-item"><span>Orange Juice</span><span>$10</span></div><div class="menu-item"><span>Coffee (Hot/Iced)</span><span>$10</span></div><div class="menu-item"><span>Mojitos</span><span>$15</span></div><div class="menu-item"><span>Soda</span><span>$8</span></div></div>
+<!-- 5. Emotional Highlight Section (dreamlike atmosphere) -->
+<section class="emotion-section" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+    <img src="https://images.pexels.com/photos/2340970/pexels-photo-2340970.jpeg?auto=compress&cs=tinysrgb&w=1600" style="position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; transform: scale(1.02); filter: brightness(0.7);" alt="stars atmosphere">
+    <div class="section-inner" style="text-align: center; max-width: 800px;">
+        <div class="reveal-block">
+            <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
+            <div style="height: 2rem;"></div>
+            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
+            <div style="height: 2rem;"></div>
+            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
+            <div style="height: 2rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
         </div>
     </div>
+</section>
 
-    <!-- MEMORY GAME with heavy interactive storytelling & custom hover -->
-    <div id="game" class="game-lab">
-        <h3 style="font-family:'Syne'; font-size:2.4rem; text-align:center;">⚡ MEMORY CODEX · KINETIC PLAY ⚡</h3>
-        <p style="text-align:center; margin-bottom:20px;">Match pairs — feel the physics. Each flip tells a story.</p>
-        <div class="game-board" id="memoryBoard"></div>
-        <div class="game-stats"><span>🎯 MOVES: <span id="moveCount">0</span></span><span>🏆 PAIRS: <span id="matchCount">0</span> / <span id="totalPairs">8</span></span></div>
-        <button class="reset-game" id="resetGameBtn"><i class="fas fa-sync-alt"></i> NEW GAME</button>
-        <div id="gameMessage" style="text-align:center; margin-top:18px; font-weight:500;"></div>
+<!-- 6. Call to Action (Booking) with pulsing button and subtle background shift -->
+<section id="booking" class="cta-section" style="padding: 6rem 5%; text-align: center;">
+    <div class="reveal-block">
+        <h2 class="giant-text" style="font-size: clamp(2.8rem, 8vw, 5rem);">Book your escape</h2>
+        <p style="margin: 1rem 0 2.8rem 0; font-size: 1.2rem; font-weight: 300;">Reserve your stay — your room is waiting.</p>
+        <a href="#" class="btn-gold booking-button" style="text-decoration: none;">RESERVE NOW →</a>
+        <div style="margin-top: 3rem;">
+            <p style="font-size: 0.9rem;">Tel: +676 7676 76767 &nbsp;|&nbsp; wasilwaa@maxwellsda.org</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
+        </div>
     </div>
+</section>
 
-    <!-- CONTACT -->
-    <div id="contact" class="contact-wrap">
-        <div><h3 style="font-size:2rem;">STAY WITH US</h3><p><i class="fas fa-phone-alt"></i> Tel: 676767676767</p><p><i class="fas fa-envelope"></i> wasilwaa@maxwellsda.org</p><div style="margin-top:20px;"><i class="fab fa-instagram" style="font-size:1.8rem; margin-right:20px;"></i><i class="fab fa-twitter" style="font-size:1.8rem;"></i></div></div>
-        <div><img src="https://placehold.co/240x110/E7D7C2/c48a58?text=AN-INN-SA" style="border-radius:28px;" loading="lazy"></div>
-    </div>
-</div>
-<div class="footer"><p>© 2025 AN-INN-SA — ACTIVE THEORY · UNSEEN STUDIO MOTION</p></div>
+<footer>
+    <p>An-Inn-Sa — Comfort, culture & calmness. A modern hotel nestled in stillness.</p>
+    <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Images for cinematic storytelling</p>
+</footer>
 
+<!-- Intersection Observer for fade + slide-up reveals and parallax simple background particles -->
 <script>
-    // ========== CUSTOM CURSOR HEAVY & SMOOTH ==========
-    const cursor = document.getElementById('cursor');
-    const cursorFollower = document.getElementById('cursorFollower');
-    document.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.15, overwrite: 'auto' });
-        gsap.to(cursorFollower, { x: e.clientX, y: e.clientY, duration: 0.08 });
-    });
-    document.querySelectorAll('a, button, .game-card, .btn, .reset-game').forEach(el => {
-        el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1.6)'; cursor.style.background = 'rgba(196,146,95,0.2)'; });
-        el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; });
-    });
-
-    // ========== SMOOTH SCROLL LENIS + PARALLAX ==========
-    const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-    gsap.registerPlugin(ScrollTrigger);
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-    gsap.ticker.lagSmoothing(0);
-
-    // PARALLAX effect on hero image
-    gsap.to(".hero-image", { y: 40, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 } });
-    // scroll-based reveals with stagger
-    gsap.utils.toArray("[data-reveal]").forEach(el => {
-        gsap.from(el, { opacity: 0, y: 60, duration: 0.8, scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" } });
-    });
-    gsap.from(".room-card, .restaurant-story, .menu-col, .game-lab", { opacity: 0, y: 45, stagger: 0.1, duration: 0.8, scrollTrigger: { trigger: "#rooms", start: "top 80%" } });
-    gsap.from(".section-title", { opacity: 0, scale: 0.95, duration: 0.7, scrollTrigger: { trigger: ".section-title", start: "top 85%", toggleActions: "play none none reverse" } });
-
-    // ========== MEMORY GAME (smooth animations + physics) ==========
-    const iconSet = ["fa-crown", "fa-champagne-glasses", "fa-moon", "fa-feather", "fa-tree", "fa-mug-hot", "fa-utensils", "fa-spa"];
-    let gameCards = [...iconSet, ...iconSet];
-    let shuffled = [], cardsData = [];
-    let first = null, second = null, lock = false, moves = 0, matches = 0;
-    const totalPairs = iconSet.length;
-    const boardEl = document.getElementById("memoryBoard");
-    const movesSpan = document.getElementById("moveCount");
-    const matchSpan = document.getElementById("matchCount");
-    const totalSpan = document.getElementById("totalPairs");
-    const msgSpan = document.getElementById("gameMessage");
-    totalSpan.innerText = totalPairs;
-
-    function shuffleArray(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
-    function initGame() {
-        shuffled = shuffleArray([...gameCards]);
-        boardEl.innerHTML = "";
-        cardsData = []; first = second = null; lock = false; moves = 0; matches = 0;
-        movesSpan.innerText = moves; matchSpan.innerText = matches; msgSpan.innerText = "";
-        shuffled.forEach((icon, idx) => {
-            const card = document.createElement("div"); card.classList.add("game-card"); card.dataset.idx = idx;
-            const iconEl = document.createElement("i"); iconEl.classList.add("fas", icon); iconEl.style.display = "none";
-            const backEl = document.createElement("i"); backEl.classList.add("fas", "fa-question-circle"); backEl.style.color = "#CDAA7A"; backEl.style.fontSize = "2rem";
-            card.appendChild(backEl); card.appendChild(iconEl);
-            card.addEventListener("click", () => handleCardClick(card, idx, icon, iconEl, backEl));
-            boardEl.appendChild(card);
-            cardsData.push({ div: card, icon, matched: false, iconElem: iconEl, backElem: backEl });
+    // reveal elements on scroll
+    const revealElements = document.querySelectorAll('.reveal-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
         });
-        gsap.fromTo(".game-card", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, stagger: 0.02 });
-    }
-    function flipOpen(card, iconElem, backElem) { backElem.style.display = "none"; iconElem.style.display = "block"; card.classList.add("flipped"); gsap.fromTo(iconElem, { rotate: -12, scale: 0.8 }, { rotate: 0, scale: 1, duration: 0.2 }); }
-    function flipBack(card, iconElem, backElem) { backElem.style.display = "block"; iconElem.style.display = "none"; card.classList.remove("flipped"); }
-    function handleCardClick(card, idx, icon, iconElem, backElem) {
-        if (lock || cardsData[idx].matched) return;
-        if (first && first.idx === idx) return;
-        if (first && second) return;
-        flipOpen(card, iconElem, backElem);
-        if (!first) { first = { idx, icon, div: card, iconElem, backElem }; }
-        else if (!second) {
-            second = { idx, icon, div: card, iconElem, backElem };
-            moves++; movesSpan.innerText = moves;
-            checkMatch();
-        }
-    }
-    function checkMatch() {
-        if (first.icon === second.icon) {
-            cardsData[first.idx].matched = true; cardsData[second.idx].matched = true;
-            first.div.classList.add("matched"); second.div.classList.add("matched");
-            gsap.to([first.div, second.div], { duration: 0.2, boxShadow: "0 0 0 2px #D9A066", scale: 1.02, yoyo: true, repeat: 1 });
-            matches++; matchSpan.innerText = matches;
-            resetTurn();
-            if (matches === totalPairs) { msgSpan.innerHTML = "🏆 KINETIC MASTERY — PERFECT MEMORY! 🏆"; confettiBlast(); }
-            else { msgSpan.innerHTML = "✦ MATCH UNLOCKED · FLOW ✦"; setTimeout(() => { if(msgSpan.innerHTML.includes("MATCH")) msgSpan.innerHTML = ""; }, 1000); }
-        } else {
-            lock = true; msgSpan.innerHTML = "✧ MISS · PHYSICS RESET ✧";
-            gsap.to([first.div, second.div], { x: 4, repeat: 2, yoyo: true, duration: 0.08 });
-            setTimeout(() => {
-                flipBack(first.div, first.iconElem, first.backElem); flipBack(second.div, second.iconElem, second.backElem);
-                resetTurn(); lock = false; msgSpan.innerHTML = "";
-            }, 700);
-        }
-    }
-    function resetTurn() { first = null; second = null; }
-    function confettiBlast() { for (let i = 0; i < 60; i++) { const conf = document.createElement("div"); conf.style.position = "fixed"; conf.style.width = "8px"; conf.style.height = "8px"; conf.style.background = `hsl(${Math.random() * 40 + 30}, 70%, 60%)`; conf.style.left = Math.random() * window.innerWidth + "px"; conf.style.top = "-10px"; conf.style.pointerEvents = "none"; conf.style.borderRadius = "50%"; conf.style.zIndex = "9999"; document.body.appendChild(conf); gsap.to(conf, { y: window.innerHeight + 100, rotation: 360, duration: 1.2, ease: "power2.out", onComplete: () => conf.remove() }); } }
-    document.getElementById("resetGameBtn").addEventListener("click", () => initGame());
-    initGame();
+    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
+    revealElements.forEach(el => observer.observe(el));
 
-    // lazy loading images + compression friendly: all images already have loading="lazy"
-    // flattering color scheme integrated
+    // Parallax effect for hero background and emotional section (optional)
+    window.addEventListener('scroll', () => {
+        const heroBg = document.querySelector('.hero-video-bg');
+        if (heroBg) {
+            let scrollY = window.scrollY;
+            let rate = scrollY * 0.3;
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0004}) translateY(${rate * 0.05}px)`;
+        }
+        // subtle parallax for emotion section background
+        const emotionBg = document.querySelector('.emotion-section img');
+        if (emotionBg) {
+            let scrolled = window.scrollY;
+            emotionBg.style.transform = `translateY(${scrolled * 0.1}px) scale(1.02)`;
+        }
+    });
+
+    // optional smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // horizontal scroll for rooms can be slightly dragged, but auto snap works. add cursor grabbing
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.style.cursor = 'grabbing';
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+        scrollContainer.style.cursor = 'grab';
+    }
+
+    // tiny cinematic effect: show room card titles with more elegance
+    // also small auto glow cta (already animated)
+    console.log('Cinematic scroll journey ready — An-Inn-Sa');
 </script>
+
+<!-- optional ambient sound note: muted by default; removed to keep user-friendly 
+     but to match optional, we could embed but not auto play - respecting UX -->
 </body>
 </html>
