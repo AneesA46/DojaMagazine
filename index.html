@@ -235,7 +235,7 @@
             transition: 0.2s;
         }
 
-        /* hero section - clean static text with fade-in (no cursor movement) */
+        /* hero section */
         .hero {
             height: 100vh;
             position: relative;
@@ -277,7 +277,7 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        /* stars atmosphere section - static animated stars (no cursor interaction) */
+        /* stars atmosphere section */
         .emotion-section {
             background: #030303;
             position: relative;
@@ -312,7 +312,7 @@
             position: relative;
         }
 
-        /* FORMAL TOP NOTIFICATION (elegant, top-screen banner) */
+        /* FORMAL TOP NOTIFICATION */
         .top-notification {
             position: fixed;
             top: 20px;
@@ -374,7 +374,7 @@
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
         }
 
-        /* Cursor motion elements (subtle trail only, no text interaction) */
+        /* Cursor motion elements */
         .cursor-trail {
             position: fixed;
             width: 32px;
@@ -400,11 +400,23 @@
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
+        
+        /* Kiddy room special badge */
+        .kid-friendly-badge {
+            display: inline-block;
+            background: rgba(199, 160, 91, 0.2);
+            border: 1px solid #c7a05b;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
 
-<!-- Subtle cursor motion elements (no text-attraction) -->
+<!-- Subtle cursor motion elements -->
 <div class="cursor-trail" id="cursorTrail"></div>
 <div class="cursor-trail-dot" id="cursorDot"></div>
 
@@ -413,7 +425,7 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section (static elegant text, no cursor movement) -->
+<!-- Hero Section -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
@@ -439,7 +451,7 @@
     </div>
 </section>
 
-<!-- Rooms & Spaces Horizontal Scroll -->
+<!-- Rooms & Spaces Horizontal Scroll - Added Kiddy Suite -->
 <section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
@@ -470,6 +482,16 @@
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
                 <p>Private balcony, meditative views, and handcrafted interiors.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+            </div>
+        </div>
+        <!-- NEW: Kiddy Suite - Family Friendly Room -->
+        <div class="room-card">
+            <img src="https://images.pexels.com/photos/5971909/pexels-photo-5971909.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite - Family Room">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
+                <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
+                <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
     </div>
@@ -518,7 +540,7 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: static animated stars (no cursor movement) -->
+<!-- Emotional Highlight Section: stars atmosphere -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
@@ -595,7 +617,7 @@
         });
     }
 
-    // === CURSOR TRAIL (subtle effect, no text/star interaction) ===
+    // === CURSOR TRAIL (subtle effect) ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0;
@@ -624,7 +646,6 @@
     }
     animateTrail();
     
-    // subtle micro-interactions for hover on buttons/cards
     const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
     interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -643,7 +664,7 @@
         });
     });
     
-    // === STATIC STARS ATMOSPHERE (animated but not cursor-following) ===
+    // === STATIC STARS ATMOSPHERE (animated) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -717,7 +738,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax and scroll effects (hero background & dream bg - subtle)
+    // Parallax and scroll effects
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
