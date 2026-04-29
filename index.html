@@ -20,12 +20,6 @@
             overflow-x: hidden;
             line-height: 1.4;
             cursor: default;
-            opacity: 0;
-            animation: bodyFadeIn 0.4s ease forwards;
-        }
-        
-        @keyframes bodyFadeIn {
-            to { opacity: 1; }
         }
 
         /* Cinematic scrollbar */
@@ -172,7 +166,7 @@
             border-left: 3px solid #c7a05b;
         }
 
-        /* reveal animation for scroll sections */
+        /* reveal animation */
         .reveal-block {
             opacity: 0;
             transform: translateY(40px);
@@ -208,7 +202,7 @@
             padding: 0.6rem 0;
         }
 
-        /* navigation - fades in smoothly after hero */
+        /* navigation */
         nav {
             position: fixed;
             top: 0;
@@ -222,13 +216,6 @@
             backdrop-filter: blur(12px);
             background: rgba(0,0,0,0.5);
             transition: all 0.3s;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: navSlideIn 0.8s ease 0.7s forwards;
-        }
-        
-        @keyframes navSlideIn {
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
@@ -248,7 +235,7 @@
             transition: 0.2s;
         }
 
-        /* Hero section with "everything coming together" transition */
+        /* hero section - clean static text with fade-in (no cursor movement) */
         .hero {
             height: 100vh;
             position: relative;
@@ -262,26 +249,19 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1.2);
-            animation: bgReveal 2s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
+            transform: scale(1);
+            animation: slowZoom 26s infinite alternate ease-in-out;
         }
-        
-        @keyframes bgReveal {
-            0% { transform: scale(1.2); opacity: 0; }
-            30% { opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
-            animation: overlayAppear 1.2s ease forwards;
-        }
-        
-        @keyframes overlayAppear {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .hero-text {
@@ -289,67 +269,15 @@
             bottom: 20%;
             left: 5%;
             z-index: 2;
-        }
-        
-        /* Each text line assembles with unique delay and motion */
-        .hero-line {
-            display: block;
-            opacity: 0;
-            transform: translateY(50px) scale(0.96);
-            filter: blur(8px);
-            animation: textAssemble 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
-        }
-        
-        .hero-line-1 { animation-delay: 0.3s; }
-        .hero-line-2 { animation-delay: 0.6s; }
-        .hero-line-3 { animation-delay: 0.9s; }
-        
-        @keyframes textAssemble {
-            0% {
-                opacity: 0;
-                transform: translateY(50px) scale(0.96);
-                filter: blur(8px);
-            }
-            40% {
-                opacity: 0.8;
-                transform: translateY(-5px) scale(1.01);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
-        }
-        
-        /* Elegant underline that draws itself for the main title */
-        .hero-line-2 {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .hero-line-2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #c7a05b, rgba(199,160,91,0.3));
-            animation: underlineGrow 1.2s ease-out 1.2s forwards;
-        }
-        
-        @keyframes underlineGrow {
-            from { width: 0; }
-            to { width: 110px; }
-        }
-        
-        @media (max-width: 700px) {
-            @keyframes underlineGrow {
-                to { width: 70px; }
-            }
+            animation: fadeSlideUp 1.8s ease-out;
         }
 
-        /* stars atmosphere section */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        /* stars atmosphere section - static animated stars (no cursor interaction) */
         .emotion-section {
             background: #030303;
             position: relative;
@@ -384,7 +312,7 @@
             position: relative;
         }
 
-        /* FORMAL TOP NOTIFICATION */
+        /* FORMAL TOP NOTIFICATION (elegant, top-screen banner) */
         .top-notification {
             position: fixed;
             top: 20px;
@@ -446,7 +374,7 @@
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
         }
 
-        /* Cursor motion elements */
+        /* Cursor motion elements (subtle trail only, no text interaction) */
         .cursor-trail {
             position: fixed;
             width: 32px;
@@ -476,7 +404,7 @@
 </head>
 <body>
 
-<!-- Subtle cursor motion elements -->
+<!-- Subtle cursor motion elements (no text-attraction) -->
 <div class="cursor-trail" id="cursorTrail"></div>
 <div class="cursor-trail-dot" id="cursorDot"></div>
 
@@ -485,14 +413,14 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section with "everything coming together" assembly transition -->
+<!-- Hero Section (static elegant text, no cursor movement) -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-        <p class="quote-line hero-line hero-line-1" style="margin-bottom: 0.5rem;">You came to the right place</p>
-        <h1 class="giant-text hero-line hero-line-2" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p class="hero-line hero-line-3" style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
+        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
+        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
     </div>
 </section>
 
@@ -590,7 +518,7 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: static animated stars -->
+<!-- Emotional Highlight Section: static animated stars (no cursor movement) -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
@@ -667,7 +595,7 @@
         });
     }
 
-    // === CURSOR TRAIL (subtle effect) ===
+    // === CURSOR TRAIL (subtle effect, no text/star interaction) ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0;
@@ -696,6 +624,7 @@
     }
     animateTrail();
     
+    // subtle micro-interactions for hover on buttons/cards
     const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
     interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -714,7 +643,7 @@
         });
     });
     
-    // === STATIC STARS ATMOSPHERE (animated twinkling) ===
+    // === STATIC STARS ATMOSPHERE (animated but not cursor-following) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -788,7 +717,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax and scroll effects
+    // Parallax and scroll effects (hero background & dream bg - subtle)
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
