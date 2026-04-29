@@ -20,6 +20,12 @@
             overflow-x: hidden;
             line-height: 1.4;
             cursor: default;
+            opacity: 0;
+            animation: bodyFadeIn 0.4s ease forwards;
+        }
+        
+        @keyframes bodyFadeIn {
+            to { opacity: 1; }
         }
 
         /* Cinematic scrollbar */
@@ -202,46 +208,7 @@
             padding: 0.6rem 0;
         }
 
-        /* about us grid */
-        .about-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3rem;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        .about-text {
-            flex: 1.2;
-            min-width: 260px;
-        }
-        .about-highlight {
-            flex: 0.8;
-            min-width: 240px;
-            background: rgba(199, 160, 91, 0.05);
-            padding: 2rem;
-            border-left: 2px solid #c7a05b;
-            backdrop-filter: blur(4px);
-        }
-        .about-highlight p {
-            font-style: italic;
-            font-size: 1.2rem;
-            line-height: 1.5;
-            font-family: 'Cormorant Garamond', serif;
-        }
-        .about-text p {
-            margin-bottom: 1.2rem;
-            color: #ddd8ce;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-        .about-signature {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            color: #c7a05b;
-        }
-
-        /* navigation */
+        /* navigation - fades in smoothly after hero */
         nav {
             position: fixed;
             top: 0;
@@ -257,10 +224,10 @@
             transition: all 0.3s;
             opacity: 0;
             transform: translateY(-20px);
-            animation: navFadeIn 1s ease 0.6s forwards;
+            animation: navSlideIn 0.8s ease 0.7s forwards;
         }
         
-        @keyframes navFadeIn {
+        @keyframes navSlideIn {
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -296,12 +263,12 @@
             height: 100%;
             object-fit: cover;
             transform: scale(1.2);
-            animation: bgZoomReveal 2.2s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
+            animation: bgReveal 2s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
         }
         
-        @keyframes bgZoomReveal {
+        @keyframes bgReveal {
             0% { transform: scale(1.2); opacity: 0; }
-            40% { opacity: 1; }
+            30% { opacity: 1; }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -309,10 +276,10 @@
             position: absolute;
             inset: 0;
             background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
-            animation: overlayFade 1.5s ease forwards;
+            animation: overlayAppear 1.2s ease forwards;
         }
         
-        @keyframes overlayFade {
+        @keyframes overlayAppear {
             from { opacity: 0; }
             to { opacity: 1; }
         }
@@ -324,40 +291,28 @@
             z-index: 2;
         }
         
-        /* individual text lines animate in sequence */
-        .hero-line-1 {
+        /* Each text line assembles with unique delay and motion */
+        .hero-line {
             display: block;
             opacity: 0;
-            transform: translateY(40px) scale(0.96);
-            animation: textAssemble 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
-            animation-delay: 0.4s;
-        }
-        
-        .hero-line-2 {
-            display: block;
-            opacity: 0;
-            transform: translateY(40px) scale(0.96);
+            transform: translateY(50px) scale(0.96);
+            filter: blur(8px);
             animation: textAssemble 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
-            animation-delay: 0.7s;
         }
         
-        .hero-line-3 {
-            display: block;
-            opacity: 0;
-            transform: translateY(40px) scale(0.96);
-            animation: textAssemble 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.2) forwards;
-            animation-delay: 1.0s;
-        }
+        .hero-line-1 { animation-delay: 0.3s; }
+        .hero-line-2 { animation-delay: 0.6s; }
+        .hero-line-3 { animation-delay: 0.9s; }
         
         @keyframes textAssemble {
             0% {
                 opacity: 0;
-                transform: translateY(40px) scale(0.96);
-                filter: blur(4px);
+                transform: translateY(50px) scale(0.96);
+                filter: blur(8px);
             }
-            60% {
-                opacity: 0.9;
-                transform: translateY(-4px) scale(1.01);
+            40% {
+                opacity: 0.8;
+                transform: translateY(-5px) scale(1.01);
             }
             100% {
                 opacity: 1;
@@ -366,26 +321,32 @@
             }
         }
         
-        /* subtle shimmer underline for main title */
-        .hero-line-2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #c7a05b, rgba(199,160,91,0.2));
-            animation: lineExpand 1.2s ease-out 1.3s forwards;
-        }
-        
+        /* Elegant underline that draws itself for the main title */
         .hero-line-2 {
             position: relative;
             display: inline-block;
         }
         
-        @keyframes lineExpand {
+        .hero-line-2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #c7a05b, rgba(199,160,91,0.3));
+            animation: underlineGrow 1.2s ease-out 1.2s forwards;
+        }
+        
+        @keyframes underlineGrow {
             from { width: 0; }
-            to { width: 100px; }
+            to { width: 110px; }
+        }
+        
+        @media (max-width: 700px) {
+            @keyframes underlineGrow {
+                to { width: 70px; }
+            }
         }
 
         /* stars atmosphere section */
@@ -483,8 +444,6 @@
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
-            .about-grid { flex-direction: column; gap: 1.5rem; }
-            @keyframes lineExpand { to { width: 60px; } }
         }
 
         /* Cursor motion elements */
@@ -513,15 +472,6 @@
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
-        
-        /* prevent any flash of unstyled content */
-        body {
-            animation: bodyFade 0.2s ease;
-        }
-        @keyframes bodyFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -535,14 +485,14 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section with "everything coming together" transition -->
+<!-- Hero Section with "everything coming together" assembly transition -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-        <p class="quote-line hero-line-1" style="margin-bottom: 0.5rem;">You came to the right place</p>
-        <h1 class="giant-text hero-line-2" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p class="hero-line-3" style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
+        <p class="quote-line hero-line hero-line-1" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <h1 class="giant-text hero-line hero-line-2" style="font-weight: 300;">An-Inn-Sa</h1>
+        <p class="hero-line hero-line-3" style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
     </div>
 </section>
 
@@ -557,28 +507,6 @@
             <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
             <div style="height: 3rem;"></div>
             <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT US SECTION -->
-<section class="about-section" style="background: #0c0b0a;">
-    <div class="section-inner">
-        <div class="reveal-block">
-            <p class="quote-line" style="letter-spacing: 2px; font-size: 1rem; text-transform: uppercase;">Our Story</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 2rem;">About An-Inn-Sa</h2>
-        </div>
-        <div class="about-grid">
-            <div class="about-text reveal-block">
-                <p>An-Inn-Sa was born from a simple belief: that true hospitality is felt, not just offered. The name itself echoes quietude — a sanctuary where comfort, culture, and calmness flow into one another.</p>
-                <p>Designed as a modern escape, we blend minimalist elegance with timeless warmth. Every corner, every meal, every suite is crafted to invite stillness. Here, you don't just stay — you arrive, breathe, and let the world fall away.</p>
-                <p>Whether you are seeking a peaceful solo retreat, a romantic getaway, or a quiet space to create, An-Inn-Sa offers more than luxury. It offers a return to yourself.</p>
-                <div class="about-signature">— The An-Inn-Sa Family</div>
-            </div>
-            <div class="about-highlight reveal-block">
-                <p>“Not a hotel. A feeling. A home where silence is golden, and every detail whispers welcome.”</p>
-                <div style="margin-top: 1.5rem; font-style: normal; font-size: 0.8rem; letter-spacing: 1px;">✦ PEACE. WARMTH. SIMPLICITY. ✦</div>
-            </div>
         </div>
     </div>
 </section>
@@ -662,7 +590,7 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: stars atmosphere -->
+<!-- Emotional Highlight Section: static animated stars -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
@@ -786,7 +714,7 @@
         });
     });
     
-    // === STATIC STARS ATMOSPHERE (animated) ===
+    // === STATIC STARS ATMOSPHERE (animated twinkling) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -812,4 +740,91 @@
                     y: Math.random() * height,
                     radius: Math.random() * 2.2 + 0.6,
                     alpha: Math.random() * 0.6 + 0.2,
-                    twinkleSpeed: 0.005 + Math.random() *
+                    twinkleSpeed: 0.005 + Math.random() * 0.025,
+                });
+            }
+        }
+        
+        let time = 0;
+        function drawStars() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let s of stars) {
+                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
+                twinkle = Math.min(0.85, Math.max(0.15, twinkle));
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
+                ctx.fill();
+            }
+            time += 0.018;
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { resizeStars(); });
+        resizeStars();
+        drawStars();
+        
+        const emotionSection = document.querySelector('.emotion-section');
+        if (emotionSection) {
+            const observerStars = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) resizeStars();
+                });
+            }, { threshold: 0.1 });
+            observerStars.observe(emotionSection);
+        }
+    }
+    
+    // Intersection Observer for reveal animations
+    const revealElements = document.querySelectorAll('.reveal-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Parallax and scroll effects
+    window.addEventListener('scroll', () => {
+        const heroBg = document.querySelector('.hero-video-bg');
+        if (heroBg) {
+            let scrollY = window.scrollY;
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
+        }
+        const dreamBg = document.querySelector('.dream-bg');
+        if (dreamBg && window.scrollY > 100) {
+            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
+        }
+    });
+    
+    // Horizontal scroll drag functionality
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false;
+        let startX, scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.style.cursor = 'grabbing';
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
