@@ -40,19 +40,6 @@
             will-change: transform;
         }
 
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            object-fit: cover;
-            z-index: 0;
-            transform: translateY(0);
-            will-change: transform;
-            pointer-events: none;
-        }
-
         .section-inner {
             position: relative;
             z-index: 2;
@@ -248,7 +235,7 @@
             transition: 0.2s;
         }
 
-        /* hero section */
+        /* hero section - clean, static text with fade-in */
         .hero {
             height: 100vh;
             position: relative;
@@ -308,7 +295,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.7;
+            opacity: 0.8;
         }
         .dream-bg {
             position: absolute;
@@ -325,13 +312,13 @@
             position: relative;
         }
 
-        /* FORMAL TOP NOTIFICATION (elegant, top-of-screen banner) */
+        /* FORMAL TOP NOTIFICATION (elegant, top-screen banner) */
         .top-notification {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%) translateY(-120%);
-            background: rgba(20, 18, 16, 0.95);
+            background: rgba(20, 18, 16, 0.96);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(199, 160, 91, 0.5);
             border-radius: 12px;
@@ -385,16 +372,15 @@
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
-            .notification-message { font-size: 0.8rem; }
         }
 
-        /* Cursor motion elements */
+        /* Cursor motion elements (subtle trail only, no text interaction) */
         .cursor-trail {
             position: fixed;
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(199,160,91,0.3) 0%, rgba(199,160,91,0) 70%);
+            background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%);
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
@@ -403,14 +389,14 @@
         }
         .cursor-trail-dot {
             position: fixed;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: #c7a05b;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
             filter: blur(1px);
-            opacity: 0.6;
+            opacity: 0.5;
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
@@ -418,7 +404,7 @@
 </head>
 <body>
 
-<!-- Cursor motion elements -->
+<!-- Subtle cursor motion elements (no text-attraction) -->
 <div class="cursor-trail" id="cursorTrail"></div>
 <div class="cursor-trail-dot" id="cursorDot"></div>
 
@@ -427,7 +413,7 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero Section (static elegant text, no cursor movement) -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
@@ -532,7 +518,7 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: stars atmosphere -->
+<!-- Emotional Highlight Section: stars atmosphere + dreamlike imagery -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
@@ -549,7 +535,7 @@
     </div>
 </section>
 
-<!-- Call to Action + FORMAL TOP NOTIFICATION -->
+<!-- Call to Action + Formal Top Notification -->
 <section id="booking" class="cta-section" style="padding: 6rem 5%; text-align: center;">
     <div class="reveal-block">
         <h2 class="giant-text" style="font-size: clamp(2.8rem, 8vw, 5rem);">Book your escape</h2>
@@ -575,13 +561,12 @@
 </div>
 
 <script>
-    // === 1. RESERVE BUTTON - FORMAL TOP NOTIFICATION ===
+    // === RESERVE BUTTON: Formal top notification (no text motion) ===
     const reserveBtn = document.getElementById('reserveButton');
     const notification = document.getElementById('formalNotification');
     
     function showFormalNotification() {
         notification.classList.add('show');
-        // Auto-hide after 5 seconds
         setTimeout(() => {
             notification.classList.remove('show');
         }, 5000);
@@ -594,7 +579,6 @@
         });
     }
     
-    // Also handle nav-book link: scrolls and shows notification after scroll
     const navBookLink = document.querySelector('.nav-book');
     if (navBookLink) {
         navBookLink.addEventListener('click', (e) => {
@@ -611,7 +595,7 @@
         });
     }
 
-    // === 2. CURSOR MOTION: subtle trail + interactive effect ===
+    // === CURSOR TRAIL (subtle motion effect, no text interaction) ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0;
@@ -632,33 +616,34 @@
         let dx = mouseX - trailX;
         let dy = mouseY - trailY;
         let dist = Math.sqrt(dx*dx + dy*dy);
-        let size = Math.min(48, 28 + dist * 0.4);
+        let size = Math.min(46, 26 + dist * 0.4);
         trail.style.width = size + 'px';
         trail.style.height = size + 'px';
-        trail.style.opacity = 0.5 + Math.min(0.3, dist * 0.01);
+        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
         requestAnimationFrame(animateTrail);
     }
     animateTrail();
     
+    // subtle micro-interactions for hover on buttons/cards
     const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
     interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
             trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.5) 0%, rgba(199,160,91,0) 70%)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.45) 0%, rgba(199,160,91,0) 70%)';
             dot.style.background = '#e0b87a';
-            dot.style.width = '10px';
-            dot.style.height = '10px';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
         });
         el.addEventListener('mouseleave', () => {
             trail.style.transform = 'translate(-50%, -50%) scale(1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.3) 0%, rgba(199,160,91,0) 70%)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
             dot.style.background = '#c7a05b';
-            dot.style.width = '6px';
-            dot.style.height = '6px';
+            dot.style.width = '5px';
+            dot.style.height = '5px';
         });
     });
     
-    // === 3. STARS ATMOSPHERE (enhanced cinematic stars) ===
+    // === STARS ATMOSPHERE (animated canvas) ===
     const canvas = document.getElementById('starsCanvas');
     if (canvas) {
         let ctx = canvas.getContext('2d');
@@ -682,7 +667,7 @@
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 2.4 + 0.6,
+                    radius: Math.random() * 2.2 + 0.6,
                     alpha: Math.random() * 0.6 + 0.2,
                     twinkleSpeed: 0.005 + Math.random() * 0.025,
                 });
@@ -695,7 +680,7 @@
             ctx.clearRect(0, 0, width, height);
             for (let s of stars) {
                 let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
-                twinkle = Math.min(0.9, Math.max(0.15, twinkle));
+                twinkle = Math.min(0.85, Math.max(0.15, twinkle));
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
@@ -732,7 +717,7 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax effects
+    // Parallax and scroll effects (hero background & dream bg)
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
@@ -745,7 +730,7 @@
         }
     });
     
-    // horizontal scroll grab effect
+    // Horizontal scroll drag functionality
     const scrollContainer = document.querySelector('.horizontal-scroll');
     if(scrollContainer) {
         let isDown = false;
