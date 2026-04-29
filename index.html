@@ -235,7 +235,7 @@
             transition: 0.2s;
         }
 
-        /* hero section with smooth cursor-following text */
+        /* hero section - clean static text with fade-in (no cursor movement) */
         .hero {
             height: 100vh;
             position: relative;
@@ -261,7 +261,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
         }
 
         .hero-text {
@@ -270,16 +270,6 @@
             left: 5%;
             z-index: 2;
             animation: fadeSlideUp 1.8s ease-out;
-            transform: translate3d(0, 0, 0);
-            transition: transform 0.08s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            will-change: transform;
-        }
-        
-        /* individual text layers for smooth cursor attraction */
-        .hero-motion-item {
-            display: block;
-            transition: transform 0.12s cubic-bezier(0.18, 0.85, 0.3, 1.05);
-            will-change: transform;
         }
 
         @keyframes fadeSlideUp {
@@ -287,7 +277,7 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        /* stars atmosphere section - enhanced with cursor parallax */
+        /* stars atmosphere section - static animated stars (no cursor interaction) */
         .emotion-section {
             background: #030303;
             position: relative;
@@ -305,8 +295,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.9;
-            transition: transform 0.1s cubic-bezier(0.1, 0.7, 0.3, 1);
+            opacity: 0.8;
         }
         .dream-bg {
             position: absolute;
@@ -317,14 +306,13 @@
             filter: brightness(0.5) blur(1px);
             transform: scale(1.02);
             z-index: 0;
-            transition: transform 0.15s ease-out;
         }
         .emotion-section .section-inner {
             z-index: 3;
             position: relative;
         }
 
-        /* FORMAL TOP NOTIFICATION */
+        /* FORMAL TOP NOTIFICATION (elegant, top-screen banner) */
         .top-notification {
             position: fixed;
             top: 20px;
@@ -386,7 +374,7 @@
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
         }
 
-        /* Cursor trail (minimal) */
+        /* Cursor motion elements (subtle trail only, no text interaction) */
         .cursor-trail {
             position: fixed;
             width: 32px;
@@ -408,7 +396,7 @@
             pointer-events: none;
             z-index: 9998;
             filter: blur(1px);
-            opacity: 0.6;
+            opacity: 0.5;
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
@@ -416,7 +404,7 @@
 </head>
 <body>
 
-<!-- Cursor motion elements -->
+<!-- Subtle cursor motion elements (no text-attraction) -->
 <div class="cursor-trail" id="cursorTrail"></div>
 <div class="cursor-trail-dot" id="cursorDot"></div>
 
@@ -425,14 +413,14 @@
     <a href="#booking" class="nav-book">RESERVE</a>
 </nav>
 
-<!-- Hero Section with smooth cursor-tracking text -->
+<!-- Hero Section (static elegant text, no cursor movement) -->
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
-    <div class="hero-text" id="heroTextGroup">
-        <p class="quote-line hero-motion-item" data-motion-strength="0.14" data-motion-y="0.06" style="margin-bottom: 0.5rem;">You came to the right place</p>
-        <h1 class="giant-text hero-motion-item" data-motion-strength="0.22" data-motion-y="0.1" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p class="hero-motion-item" data-motion-strength="0.08" data-motion-y="0.04" style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
+    <div class="hero-text">
+        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
+        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
     </div>
 </section>
 
@@ -530,10 +518,10 @@
     </div>
 </section>
 
-<!-- Emotional Highlight Section: Stars move with cursor + text static but stars follow mouse -->
+<!-- Emotional Highlight Section: static animated stars (no cursor movement) -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" id="dreamBgLayer" alt="milky way atmosphere">
+    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
@@ -573,147 +561,7 @@
 </div>
 
 <script>
-    // === SMOOTH CURSOR-FOLLOWING TEXT (Hero section) ===
-    const heroTextItems = document.querySelectorAll('.hero-motion-item');
-    let mouseNormX = 0, mouseNormY = 0;
-    let targetTranslateX = 0, targetTranslateY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        // Normalized range -1 to 1, with center 0,0
-        let normX = (e.clientX / vw) * 2 - 1;
-        let normY = (e.clientY / vh) * 2 - 1;
-        // Clamp movement for elegance (max 28px horizontal, 20px vertical)
-        targetTranslateX = normX * 32;
-        targetTranslateY = normY * 20;
-        
-        heroTextItems.forEach((item) => {
-            const strengthX = parseFloat(item.getAttribute('data-motion-strength') || '0.12');
-            const strengthY = parseFloat(item.getAttribute('data-motion-y') || '0.07');
-            const moveX = targetTranslateX * strengthX;
-            const moveY = targetTranslateY * strengthY;
-            item.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-        });
-    });
-    
-    // reset on mouse leave window (optional)
-    document.addEventListener('mouseleave', () => {
-        heroTextItems.forEach(item => {
-            item.style.transform = `translate3d(0px, 0px, 0px)`;
-        });
-    });
-    
-    // === STARFIELD THAT MOVES WITH CURSOR (emotion section canvas parallax) ===
-    const canvas = document.getElementById('starsCanvas');
-    const dreamBg = document.getElementById('dreamBgLayer');
-    let starsCtx, starsArray = [];
-    let canvasWidth, canvasHeight;
-    let starMouseX = 0, starMouseY = 0;
-    let starOffsetX = 0, starOffsetY = 0;
-    
-    if (canvas) {
-        starsCtx = canvas.getContext('2d');
-        
-        function resizeStarsCanvas() {
-            const section = canvas.parentElement;
-            const rect = section.getBoundingClientRect();
-            canvasWidth = rect.width;
-            canvasHeight = rect.height;
-            canvas.width = canvasWidth;
-            canvas.height = canvasHeight;
-            initStarsArray();
-        }
-        
-        function initStarsArray() {
-            starsArray = [];
-            const starCount = Math.floor((canvasWidth * canvasHeight) / 3600);
-            for (let i = 0; i < starCount; i++) {
-                starsArray.push({
-                    x: Math.random() * canvasWidth,
-                    y: Math.random() * canvasHeight,
-                    radius: Math.random() * 2.2 + 0.6,
-                    alpha: Math.random() * 0.6 + 0.2,
-                    twinkleSpeed: 0.005 + Math.random() * 0.025,
-                    baseX: Math.random() * canvasWidth,
-                    baseY: Math.random() * canvasHeight
-                });
-            }
-        }
-        
-        // Update star positions based on cursor movement (smooth parallax)
-        let currentStarTranslateX = 0, currentStarTranslateY = 0;
-        let targetStarTranslateX = 0, targetStarTranslateY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            let normX = (e.clientX / vw) * 2 - 1;
-            let normY = (e.clientY / vh) * 2 - 1;
-            // Stars shift subtly in opposite direction to cursor (depth effect)
-            targetStarTranslateX = normX * 22;   // max shift 22px
-            targetStarTranslateY = normY * 14;
-        });
-        
-        let time = 0;
-        function drawStarsWithParallax() {
-            if (!starsCtx) return;
-            // smooth interpolation for starfield movement
-            currentStarTranslateX += (targetStarTranslateX - currentStarTranslateX) * 0.08;
-            currentStarTranslateY += (targetStarTranslateY - currentStarTranslateY) * 0.08;
-            
-            starsCtx.clearRect(0, 0, canvasWidth, canvasHeight);
-            for (let s of starsArray) {
-                let shiftedX = s.baseX + currentStarTranslateX * 0.7;
-                let shiftedY = s.baseY + currentStarTranslateY * 0.5;
-                // wrap around edges softly
-                if (shiftedX > canvasWidth) shiftedX -= canvasWidth;
-                if (shiftedX < 0) shiftedX += canvasWidth;
-                if (shiftedY > canvasHeight) shiftedY -= canvasHeight;
-                if (shiftedY < 0) shiftedY += canvasHeight;
-                
-                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.2;
-                twinkle = Math.min(0.9, Math.max(0.15, twinkle));
-                starsCtx.beginPath();
-                starsCtx.arc(shiftedX, shiftedY, s.radius, 0, Math.PI * 2);
-                starsCtx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.85})`;
-                starsCtx.fill();
-            }
-            time += 0.018;
-            requestAnimationFrame(drawStarsWithParallax);
-        }
-        
-        window.addEventListener('resize', () => {
-            resizeStarsCanvas();
-        });
-        resizeStarsCanvas();
-        drawStarsWithParallax();
-        
-        // also add subtle movement to dream background
-        if (dreamBg) {
-            let currentBgX = 0, targetBgX = 0;
-            let currentBgY = 0, targetBgY = 0;
-            document.addEventListener('mousemove', (e) => {
-                const vw = window.innerWidth;
-                const vh = window.innerHeight;
-                let normX = (e.clientX / vw) * 2 - 1;
-                let normY = (e.clientY / vh) * 2 - 1;
-                targetBgX = normX * 12;
-                targetBgY = normY * 8;
-            });
-            function animateDreamBg() {
-                currentBgX += (targetBgX - currentBgX) * 0.07;
-                currentBgY += (targetBgY - currentBgY) * 0.07;
-                if (dreamBg) {
-                    dreamBg.style.transform = `translate(${currentBgX}px, ${currentBgY}px) scale(1.02)`;
-                }
-                requestAnimationFrame(animateDreamBg);
-            }
-            animateDreamBg();
-        }
-    }
-    
-    // === RESERVATION NOTIFICATION ===
+    // === RESERVE BUTTON: Formal top notification ===
     const reserveBtn = document.getElementById('reserveButton');
     const notification = document.getElementById('formalNotification');
     
@@ -747,39 +595,165 @@
         });
     }
 
-    // === CURSOR TRAIL (SMOOTH DOT) ===
+    // === CURSOR TRAIL (subtle effect, no text/star interaction) ===
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
-    let mouseCurX = 0, mouseCurY = 0;
+    let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
     
     document.addEventListener('mousemove', (e) => {
-        mouseCurX = e.clientX;
-        mouseCurY = e.clientY;
-        dot.style.left = mouseCurX + 'px';
-        dot.style.top = mouseCurY + 'px';
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
     });
     
-    function animateCursorTrail() {
-        trailX += (mouseCurX - trailX) * 0.12;
-        trailY += (mouseCurY - trailY) * 0.12;
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
         trail.style.left = trailX + 'px';
         trail.style.top = trailY + 'px';
-        let dx = mouseCurX - trailX;
-        let dy = mouseCurY - trailY;
+        let dx = mouseX - trailX;
+        let dy = mouseY - trailY;
         let dist = Math.sqrt(dx*dx + dy*dy);
         let size = Math.min(46, 26 + dist * 0.4);
         trail.style.width = size + 'px';
         trail.style.height = size + 'px';
-        trail.style.opacity = 0.5 + Math.min(0.25, dist * 0.01);
-        requestAnimationFrame(animateCursorTrail);
+        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
+        requestAnimationFrame(animateTrail);
     }
-    animateCursorTrail();
+    animateTrail();
     
-    // Micro-interactions hover effect for interactive elements
-    const interactiveElements = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
-    interactiveElements.forEach(el => {
+    // subtle micro-interactions for hover on buttons/cards
+    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
+    interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
-            trail.style.transform = 'translate(-50%, -50%) scale(1.15)';
+            trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
             trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.45) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.
+            dot.style.background = '#e0b87a';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
+        });
+        el.addEventListener('mouseleave', () => {
+            trail.style.transform = 'translate(-50%, -50%) scale(1)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
+            dot.style.background = '#c7a05b';
+            dot.style.width = '5px';
+            dot.style.height = '5px';
+        });
+    });
+    
+    // === STATIC STARS ATMOSPHERE (animated but not cursor-following) ===
+    const canvas = document.getElementById('starsCanvas');
+    if (canvas) {
+        let ctx = canvas.getContext('2d');
+        let stars = [];
+        let width, height;
+        
+        function resizeStars() {
+            const section = canvas.parentElement;
+            const rect = section.getBoundingClientRect();
+            width = rect.width;
+            height = rect.height;
+            canvas.width = width;
+            canvas.height = height;
+            initStars();
+        }
+        
+        function initStars() {
+            stars = [];
+            const starCount = Math.floor((width * height) / 3800);
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2.2 + 0.6,
+                    alpha: Math.random() * 0.6 + 0.2,
+                    twinkleSpeed: 0.005 + Math.random() * 0.025,
+                });
+            }
+        }
+        
+        let time = 0;
+        function drawStars() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let s of stars) {
+                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
+                twinkle = Math.min(0.85, Math.max(0.15, twinkle));
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
+                ctx.fill();
+            }
+            time += 0.018;
+            requestAnimationFrame(drawStars);
+        }
+        
+        window.addEventListener('resize', () => { resizeStars(); });
+        resizeStars();
+        drawStars();
+        
+        const emotionSection = document.querySelector('.emotion-section');
+        if (emotionSection) {
+            const observerStars = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) resizeStars();
+                });
+            }, { threshold: 0.1 });
+            observerStars.observe(emotionSection);
+        }
+    }
+    
+    // Intersection Observer for reveal animations
+    const revealElements = document.querySelectorAll('.reveal-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Parallax and scroll effects (hero background & dream bg - subtle)
+    window.addEventListener('scroll', () => {
+        const heroBg = document.querySelector('.hero-video-bg');
+        if (heroBg) {
+            let scrollY = window.scrollY;
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
+        }
+        const dreamBg = document.querySelector('.dream-bg');
+        if (dreamBg && window.scrollY > 100) {
+            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
+        }
+    });
+    
+    // Horizontal scroll drag functionality
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false;
+        let startX, scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.style.cursor = 'grabbing';
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
