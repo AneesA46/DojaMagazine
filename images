@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>An-Inn-Sa — Arrive in Stillness</title>
+    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            color: #e8e6e1;
+            overflow-x: hidden;
+            line-height: 1.4;
+            cursor: default;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7a05b;
+            border-radius: 8px;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            will-change: transform;
+        }
+
+        .section-inner {
+            position: relative;
+            z-index: 2;
+            padding: 6rem 5%;
+        }
+
+        .giant-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 10vw, 7rem);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .quote-line {
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-weight: 300;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: transparent;
+            border: 1.5px solid #c7a05b;
+            color: #c7a05b;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(4px);
+            border-radius: 2px;
+        }
+
+        .btn-gold:hover {
+            background: rgba(199, 160, 91, 0.12);
+            border-color: #e0b87a;
+            color: #e0b87a;
+            transform: scale(1.02);
+        }
+
+        .booking-button {
+            background: #c7a05b;
+            color: #0a0a0a;
+            border: none;
+            padding: 1.2rem 2.8rem;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
+            animation: softPulse 2.2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes softPulse {
+            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
+            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
+        }
+
+        .booking-button:hover {
+            background: #dbb16e;
+            transform: scale(1.02);
+            animation: none;
+            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1.5rem;
+            padding: 2rem 5% 4rem 5%;
+            scroll-behavior: smooth;
+            cursor: grab;
+            scrollbar-width: thin;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .room-card {
+            flex: 0 0 85%;
+            scroll-snap-align: start;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: #1a1a2e;
+        }
+
+        @media (min-width: 900px) {
+            .room-card { flex: 0 0 70%; }
+        }
+
+        .room-card img {
+            width: 100%;
+            height: 85vh;
+            object-fit: cover;
+            transition: transform 0.8s ease-out;
+            display: block;
+        }
+
+        .room-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .room-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 1.5rem;
+            border-left: 3px solid #c7a05b;
+        }
+
+        .reveal-block {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .reveal-block.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .menu-category h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed rgba(255,255,240,0.2);
+            padding: 0.6rem 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex
