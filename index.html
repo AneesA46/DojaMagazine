@@ -132,7 +132,7 @@
             border-radius: 24px;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            background: #111;
+            background: #1a1a2e;
         }
 
         @media (min-width: 900px) {
@@ -400,6 +400,10 @@
             letter-spacing: 1px;
             margin-top: 0.5rem;
         }
+        
+        .room-card img {
+            background: linear-gradient(135deg, #2a1a3a 0%, #1a2a3a 100%);
+        }
     </style>
 </head>
 <body>
@@ -413,7 +417,7 @@
 </nav>
 
 <section class="hero">
-    <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere" style="object-position: center 30%;">
+    <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
         <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
@@ -444,33 +448,36 @@
         </div>
     </div>
     <div class="horizontal-scroll">
+        <!-- Signature Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
+            <img src="signature suite.jpg" alt="Signature Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
                 <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
+        <!-- Deluxe Room - using your uploaded image -->
         <div class="room-card">
-            <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
+            <img src="deluxe rooms.jpg" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
                 <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
+        <!-- Wellness Retreat - using your uploaded image -->
         <div class="room-card">
-            <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Suite">
+            <img src="wellness reaatreat.jpg" alt="Wellness Retreat">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
                 <p>Private balcony, meditative views, and handcrafted interiors.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- KIDDY SUITE - Using a reliable, working image URL from Unsplash (stable, child-friendly) -->
+        <!-- Kiddy Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="https://images.unsplash.com/photo-1567016376408-5e6be0a8ab86?w=1600&q=80" alt="Kiddy Suite - Colorful children's bedroom with bunk beds and toys">
+            <img src="kiddy suite.jpg" alt="Kiddy Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
                 <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
@@ -525,7 +532,7 @@
 
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
+    <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="milky way atmosphere">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
@@ -750,19 +757,76 @@
         scrollContainer.style.cursor = 'grab';
     }
 </script>
-</body></section>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An-Inn-Sa — Reservation</title>
 
-<!-- LOCATION -->
-<section class="section">
-<h2>Find Us</h2>
-<iframe 
-src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed">
-</iframe>
-</section>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- BOOKING -->
+<style>
+body{
+    margin:0;
+    font-family:Inter;
+    background:#0a0a0a;
+    color:#e8e6e1;
+}
+
+.section{
+    padding:4rem 5%;
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+h1,h2{
+    font-family:"Cormorant Garamond";
+    font-weight:400;
+}
+
+input,select{
+    width:100%;
+    padding:1rem;
+    margin:0.5rem 0;
+    border:none;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:1rem;
+    background:#c7a05b;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#success{
+    display:none;
+    margin-top:1rem;
+    padding:1rem;
+    background:#1a1a1a;
+    border-left:3px solid #c7a05b;
+}
+
+iframe{
+    width:100%;
+    height:300px;
+    border:0;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- RESERVATION -->
 <section class="section">
-<h2>Book your stay</h2>
+<h1>Book Your Stay</h1>
 
 <form id="form">
 <input type="text" placeholder="Full Name" required>
@@ -781,56 +845,30 @@ src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed"
 <option>Kiddy Suite</option>
 </select>
 
-<button type="submit">Confirm Booking</button>
+<button type="submit">Reserve Now</button>
 </form>
 
-<div id="success">Reservation saved successfully ✓</div>
+<div id="success">Reservation confirmed ✓</div>
 </section>
 
-<!-- ADMIN DEMO -->
+<!-- FIND US -->
 <section class="section">
-<h2>Bookings (Demo Storage)</h2>
-<div id="list"></div>
-</section>
+<h2>Find Us</h2>
 
-<!-- FOOTER -->
-<section class="section" style="text-align:center;">
-<p class="small">© 2025 An-Inn-Sa — Comfort, culture & calmness</p>
+<iframe 
+src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed">
+</iframe>
 </section>
 
 <script>
 const form = document.getElementById("form");
 const success = document.getElementById("success");
-const list = document.getElementById("list");
 
-function load(){
-    const data = JSON.parse(localStorage.getItem("bookings") || "[]");
-    list.innerHTML = data.map(b =>
-        `<div class="card">${b.name} — ${b.room} — ${b.checkIn}</div>`
-    ).join("");
-}
-
-form.addEventListener("submit", e=>{
+form.addEventListener("submit", (e)=>{
     e.preventDefault();
-
-    const booking = {
-        name: form[0].value,
-        email: form[1].value,
-        checkIn: form[2].value,
-        checkOut: form[3].value,
-        room: form[4].value
-    };
-
-    const data = JSON.parse(localStorage.getItem("bookings") || "[]");
-    data.push(booking);
-    localStorage.setItem("bookings", JSON.stringify(data));
-
     success.style.display = "block";
     form.reset();
-    load();
 });
-
-load();
 </script>
 
 </body>
