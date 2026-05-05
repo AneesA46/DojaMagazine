@@ -1,779 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa — Stillness Speaks</title>
-    <!-- Google Fonts: Elegant Serif + Clean Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            color: #e8e6e1;
-            overflow-x: hidden;
-            line-height: 1.4;
-            cursor: default;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c7a05b;
-            border-radius: 8px;
-        }
-
-        section {
-            position: relative;
-            width: 100%;
-        }
-
-        .section-inner {
-            position: relative;
-            z-index: 2;
-            padding: 6rem 5%;
-        }
-
-        .giant-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: clamp(3rem, 10vw, 7rem);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .quote-line {
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            font-weight: 300;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: -0.01em;
-        }
-
-        .btn-gold {
-            display: inline-block;
-            background: transparent;
-            border: 1.5px solid #c7a05b;
-            color: #c7a05b;
-            padding: 1rem 2.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(4px);
-            border-radius: 2px;
-        }
-
-        .btn-gold:hover {
-            background: rgba(199, 160, 91, 0.12);
-            border-color: #e0b87a;
-            color: #e0b87a;
-            transform: scale(1.02);
-        }
-
-        .booking-button {
-            background: #c7a05b;
-            color: #0a0a0a;
-            border: none;
-            padding: 1.2rem 2.8rem;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            transition: box-shadow 0.3s ease, transform 0.2s ease;
-            cursor: pointer;
-        }
-
-        .booking-button:hover {
-            background: #dbb16e;
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
-        }
-
-        /* Horizontal scroll rooms */
-        .horizontal-scroll {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 1.8rem;
-            padding: 2rem 5% 4rem 5%;
-            scroll-behavior: smooth;
-            cursor: grab;
-            scrollbar-width: thin;
-        }
-
-        .horizontal-scroll:active {
-            cursor: grabbing;
-        }
-
-        .horizontal-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .room-card {
-            flex: 0 0 85%;
-            scroll-snap-align: start;
-            position: relative;
-            border-radius: 28px;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            background: #1a1a2e;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
-        }
-
-        @media (min-width: 900px) {
-            .room-card { flex: 0 0 70%; }
-        }
-
-        .room-card img {
-            width: 100%;
-            height: 85vh;
-            object-fit: cover;
-            transition: transform 0.8s ease-out;
-            display: block;
-        }
-
-        .room-card:hover img {
-            transform: scale(1.04);
-        }
-
-        .room-caption {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            right: 2rem;
-            background: rgba(10, 10, 10, 0.75);
-            backdrop-filter: blur(12px);
-            padding: 1.5rem;
-            border-left: 3px solid #c7a05b;
-            border-radius: 12px;
-        }
-
-        .room-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin: 0.8rem 0 0.5rem;
-        }
-        .feature-tag {
-            background: rgba(199, 160, 91, 0.2);
-            border: 0.5px solid rgba(199,160,91,0.5);
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
-
-        .reveal-block {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .reveal-block.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Menu styling */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2.5rem;
-        }
-
-        .menu-category h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px dashed rgba(255,255,240,0.2);
-            padding: 0.6rem 0;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 5%;
-            z-index: 100;
-            backdrop-filter: blur(14px);
-            background: rgba(0,0,0,0.55);
-            transition: all 0.3s;
-        }
-
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .nav-book {
-            background: transparent;
-            border: 1px solid #c7a05b;
-            padding: 0.5rem 1.8rem;
-            color: #e8e6e1;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        /* Hero */
-        .hero {
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            will-change: transform;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
-        }
-
-        .hero-text {
-            position: absolute;
-            bottom: 22%;
-            left: 5%;
-            z-index: 2;
-            animation: fadeSlideUp 1.6s ease-out;
-        }
-
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(40px);}
-            100% { opacity: 1; transform: translateY(0);}
-        }
-
-        /* Emotion / dream section - now 6th section refined */
-        .emotion-section {
-            background: #030303;
-            position: relative;
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .stars-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.9;
-        }
-        .dream-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.28;
-            filter: brightness(0.6) blur(2px);
-            transform: scale(1.02);
-            z-index: 0;
-        }
-        .emotion-section .section-inner {
-            z-index: 3;
-            position: relative;
-        }
-
-        /* Notification */
-        .top-notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-120%);
-            background: rgba(20, 18, 16, 0.96);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(199, 160, 91, 0.6);
-            border-radius: 18px;
-            padding: 1rem 2rem;
-            min-width: 280px;
-            max-width: 480px;
-            z-index: 2000;
-            transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            text-align: center;
-        }
-        .top-notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        .notification-title {
-            font-weight: 600;
-            color: #c7a05b;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* reservation + find us combined (7th refined) */
-        .twin-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        .booking-panel, .map-panel {
-            flex: 1;
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 28px;
-            padding: 2rem;
-            border: 0.5px solid rgba(199,160,91,0.25);
-            transition: all 0.3s;
-        }
-        .booking-panel:hover, .map-panel:hover {
-            border-color: rgba(199,160,91,0.5);
-        }
-        .form-group {
-            margin-bottom: 1.2rem;
-            text-align: left;
-        }
-        input, select {
-            width: 100%;
-            padding: 0.9rem;
-            background: #1e1e1e;
-            border: 1px solid #2c2c2c;
-            color: #e8e6e1;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            transition: 0.2s;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #c7a05b;
-        }
-        .btn-submit {
-            background: #c7a05b;
-            border: none;
-            padding: 0.9rem;
-            font-weight: 600;
-            width: 100%;
-            border-radius: 40px;
-            color: #0a0a0a;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.2s;
-        }
-        .btn-submit:hover {
-            background: #e0b87a;
-            transform: scale(0.98);
-        }
-        iframe {
-            width: 100%;
-            height: 280px;
-            border: 0;
-            border-radius: 20px;
-            filter: grayscale(0.2) brightness(0.85);
-        }
-        .success-message {
-            margin-top: 1rem;
-            background: #1e2a1a;
-            border-left: 3px solid #c7a05b;
-            padding: 0.8rem;
-            border-radius: 12px;
-            display: none;
-        }
-
-        footer {
-            background: #020202;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(199,160,91,0.2);
-        }
-
-        /* custom cursor lazy smooth following */
-        .custom-cursor {
-            position: fixed;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(199,160,91,0.2) 0%, rgba(199,160,91,0) 75%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, opacity 0.2s;
-            will-change: left, top;
-        }
-        .cursor-dot {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: #c7a05b;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: 0.08s linear;
-            filter: blur(0.6px);
-        }
-
-        @media (max-width: 700px) {
-            .section-inner { padding: 3rem 5%; }
-            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
-            .twin-panel { flex-direction: column; }
-        }
-        .kid-friendly-badge {
-            display: inline-block;
-            background: rgba(199, 160, 91, 0.2);
-            border: 1px solid #c7a05b;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-        }
-    </style>
-</head>
-<body>
-
-<div class="custom-cursor" id="lazyCursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
-
-<nav>
-    <div class="logo">AN-INN-SA</div>
-    <a href="#" id="navReserveTrigger" class="nav-book">RESERVE</a>
-</nav>
-
-<!-- Hero -->
-<section class="hero">
-    <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen atmosphere" style="object-position: center 30%;">
-    <div class="hero-overlay"></div>
-    <div class="hero-text">
-        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
-        <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
-    </div>
-</section>
-
-<!-- intro -->
-<section class="intro-section">
-    <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
-        <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.8rem;">“You arrive.”</p>
-            <div style="height: 3rem;"></div>
-            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
-            <div style="height: 3rem;"></div>
-            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
-            <div style="height: 2rem;"></div>
-            <p style="max-width: 500px; margin: 0 auto; font-weight: 300;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Rooms with enhanced details -->
-<section style="background: #0a0908;">
-    <div class="section-inner" style="padding-bottom: 0;">
-        <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
-        </div>
-    </div>
-    <div class="horizontal-scroll">
-        <div class="room-card">
-            <img src="https://picsum.photos/id/164/1200/900" alt="Signature Suite">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
-                <p>Expansive living area, private terrace, panoramic nature views, premium linens & deep soaking tub.</p>
-                <div class="room-features"><span class="feature-tag">98 m²</span><span class="feature-tag">Ocean view</span><span class="feature-tag">Spa bathtub</span><span class="feature-tag">Butler service</span></div>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://picsum.photos/id/106/1200/900" alt="Deluxe Room">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
-                <p>Calm interior, ergonomic workspace, rainfall shower, curated minibar, hypoallergenic pillows.</p>
-                <div class="room-features"><span class="feature-tag">45 m²</span><span class="feature-tag">City skyline</span><span class="feature-tag">Rain shower</span><span class="feature-tag">Smart TV</span></div>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://picsum.photos/id/38/1200/900" alt="Wellness Retreat">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
-                <p>Meditation balcony, yoga mats, essential oil diffuser, soundproof walls & organic cotton bedding.</p>
-                <div class="room-features"><span class="feature-tag">62 m²</span><span class="feature-tag">Garden access</span><span class="feature-tag">Meditation kit</span><span class="feature-tag">Steam shower</span></div>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://picsum.photos/id/20/1200/900" alt="Kiddy Suite">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
-                <p>Whimsical family suite with bunk beds, story nook, board games, child-safe amenities & snack corner.</p>
-                <div class="room-features"><span class="feature-tag">55 m²</span><span class="feature-tag">Bunk beds</span><span class="feature-tag">Toys & books</span><span class="feature-tag">Baby monitor</span></div>
-                <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Dining section -->
-<section class="dining-section">
-    <div class="section-inner">
-        <div class="reveal-block">
-            <p class="quote-line" style="letter-spacing: 2px;">InnSa Lounge & Grill</p>
-            <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
-        </div>
-        <div class="menu-grid reveal-block">
-            <div class="menu-category"><h3>Appetizers</h3>
-                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div>
-                <div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div>
-                <div class="menu-item"><span>French Fries</span><span>$19</span></div>
-                <div class="menu-item"><span>Chicken Wings</span><span>$20</span></div>
-            </div>
-            <div class="menu-category"><h3>Mains</h3>
-                <div class="menu-item"><span>Nyama Choma</span><span>$58</span></div>
-                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div>
-                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div>
-                <div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div>
-            </div>
-            <div class="menu-category"><h3>Desserts</h3>
-                <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
-                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
-                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
-                <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
-            </div>
-            <div class="menu-category"><h3>Drinks</h3>
-                <div class="menu-item"><span>Orange Juice</span><span>$10</span></div>
-                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span>$10</span></div>
-                <div class="menu-item"><span>Mojitos</span><span>$15</span></div>
-                <div class="menu-item"><span>Soda</span><span>$8</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 6th page: Emotion Section (stars & dream) - refined poetic layout -->
-<section class="emotion-section">
-    <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="starry serenity">
-    <div class="section-inner" style="text-align: center; max-width: 800px;">
-        <div class="reveal-block">
-            <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
-            <div style="height: 1.8rem;"></div>
-            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
-            <div style="height: 1.8rem;"></div>
-            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
-            <div style="height: 1.5rem;"></div>
-            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
-            <div style="margin-top: 2rem;"><span class="feature-tag" style="background: #c7a05b20;">#ANINNSA quiet luxury</span></div>
-        </div>
-    </div>
-</section>
-
-<!-- 7th page: combined Reservation + Find Us (arranged elegantly) -->
-<section id="booking" style="background: #0e0c0a;">
-    <div class="section-inner">
-        <div class="reveal-block">
-            <p class="quote-line" style="letter-spacing: 2px;">Secure Your Stillness</p>
-            <h2 class="giant-text" style="font-size: 2.8rem;">Reserve & Arrive</h2>
-        </div>
-        <div class="twin-panel">
-            <div class="booking-panel">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 1rem;">Book Your Stay</h3>
-                <form id="reservationForm">
-                    <div class="form-group"><input type="text" id="fullName" placeholder="Full Name" required></div>
-                    <div class="form-group"><input type="email" id="email" placeholder="Email Address" required></div>
-                    <div class="form-group" style="display: flex; gap: 1rem;"><input type="date" id="checkin" required> <input type="date" id="checkout" required></div>
-                    <div class="form-group"><select id="roomSelect" required>
-                        <option value="">Select Sanctuary</option><option>Signature Suite</option><option>Deluxe Room</option><option>Wellness Retreat</option><option>Kiddy Suite</option>
-                    </select></div>
-                    <button type="submit" class="btn-submit">CONFIRM RESERVATION</button>
-                    <div id="formSuccessMsg" class="success-message">✓ Reservation confirmed. A confirmation will be sent to your email. We await your arrival.</div>
-                </form>
-            </div>
-            <div class="map-panel">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin-bottom: 1rem;">Find Serenity</h3>
-                <iframe src="https://maps.google.com/maps?q=nairobi+central&t=&z=13&ie=UTF8&iwloc=&output=embed" title="An-Inn-Sa Location" loading="lazy"></iframe>
-                <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">An-Inn-Sa · Nairobi / Quiet Valley Estate · Easy access from main arteries</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>An-Inn-Sa — Comfort, culture & calmness. A modern hotel nestled in stillness.</p>
-    <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Cinematic storytelling</p>
-</footer>
-
-<div id="reserveNotification" class="top-notification">
-    <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
-    <div class="notification-message">Your escape to serenity has been secured.</div>
-</div>
-
 <script>
-    // Smooth lazy cursor following + magnetic lag
+// ===============================
+// DEVICE CHECK (disable heavy effects on mobile)
+// ===============================
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+// ===============================
+// SAFE CURSOR (DESKTOP ONLY)
+// ===============================
+if (!isMobile) {
     const cursor = document.getElementById('lazyCursor');
     const dot = document.getElementById('cursorDot');
+
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
-    let dotX = 0, dotY = 0;
-    
+
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        dotX = mouseX;
-        dotY = mouseY;
-        dot.style.left = dotX + 'px';
-        dot.style.top = dotY + 'px';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
     });
-    
-    function smoothCursorFollow() {
-        cursorX += (mouseX - cursorX) * 0.09;
-        cursorY += (mouseY - cursorY) * 0.09;
+
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
-        const dist = Math.hypot(mouseX - cursorX, mouseY - cursorY);
-        let size = 44 + Math.min(18, dist * 0.25);
-        cursor.style.width = size + 'px';
-        cursor.style.height = size + 'px';
-        requestAnimationFrame(smoothCursorFollow);
+
+        requestAnimationFrame(animateCursor);
     }
-    smoothCursorFollow();
-    
-    // hover interactive enlargement
-    const interactives = document.querySelectorAll('.room-card, .btn-submit, .nav-book, .booking-button, .btn-gold');
-    interactives.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.background = 'radial-gradient(circle, rgba(199,160,91,0.4) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#e0b87a';
-            dot.style.width = '9px';
-            dot.style.height = '9px';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.background = 'radial-gradient(circle, rgba(199,160,91,0.2) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#c7a05b';
-            dot.style.width = '6px';
-            dot.style.height = '6px';
-        });
+    animateCursor();
+}
+
+// ===============================
+// IMAGE LAZY LOAD SAFETY
+// ===============================
+document.querySelectorAll("img").forEach(img => {
+    img.setAttribute("loading", "lazy");
+});
+
+// ===============================
+// REVEAL ON SCROLL (SAFE)
+// ===============================
+const reveals = document.querySelectorAll('.reveal-block');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+        }
     });
-    
-    // star canvas
+}, { threshold: 0.2 });
+
+reveals.forEach(el => observer.observe(el));
+
+// ===============================
+// THROTTLED SCROLL EFFECT
+// ===============================
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(() => {
+            const heroImg = document.querySelector('.hero-video-bg');
+
+            if (heroImg) {
+                let scrolled = window.scrollY;
+                heroImg.style.transform = `scale(${1 + scrolled * 0.0002})`;
+            }
+
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// ===============================
+// FORM VALIDATION (REAL FIX)
+// ===============================
+const form = document.getElementById('reservationForm');
+const successMsg = document.getElementById('formSuccessMsg');
+const notif = document.getElementById('reserveNotification');
+
+function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const room = document.getElementById('roomSelect').value;
+
+    if (!name || !email || !checkin || !checkout || !room) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if (!validEmail(email)) {
+        alert("Enter a valid email address.");
+        return;
+    }
+
+    if (new Date(checkout) <= new Date(checkin)) {
+        alert("Checkout must be after check-in.");
+        return;
+    }
+
+    // Fake success (ready for backend later)
+    successMsg.style.display = 'block';
+    notif.classList.add('show');
+
+    setTimeout(() => {
+        notif.classList.remove('show');
+        successMsg.style.display = 'none';
+    }, 4000);
+
+    form.reset();
+});
+
+// ===============================
+// NAVIGATION FIX
+// ===============================
+document.getElementById('navReserveTrigger').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('booking').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+
+// ===============================
+// STAR ANIMATION (OPTIMIZED)
+// ===============================
+if (!isMobile) {
     const canvas = document.getElementById('starsCanvas');
-    if(canvas){
-        let ctx = canvas.getContext('2d');
-        let stars = [], width, height;
-        function resizeStars(){
-            const rect = canvas.parentElement.getBoundingClientRect();
-            width = rect.width; height = rect.height;
-            canvas.width = width; canvas.height = height;
-            stars = [];
-            let starCount = Math.floor((width*height)/4200);
-            for(let i=0;i<starCount;i++){
-                stars.push({x:Math.random()*width, y:Math.random()*height, radius:Math.random()*2+0.5, alpha:Math.random()*0.6+0.2, speed:0.005+Math.random()*0.02});
-            }
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        let width, height;
+
+        function resize() {
+            width = canvas.parentElement.offsetWidth;
+            height = canvas.parentElement.offsetHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            stars = Array.from({ length: 80 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5,
+                a: Math.random()
+            }));
         }
-        let time=0;
-        function drawStars(){
-            if(!ctx) return;
-            ctx.clearRect(0,0,width,height);
-            for(let s of stars){
-                let twinkle = s.alpha + Math.sin(time*s.speed*10)*0.2;
-                twinkle = Math.min(0.85, Math.max(0.2, twinkle));
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            stars.forEach(s => {
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
-                ctx.fillStyle = `rgba(255, 245, 210, ${twinkle*0.85})`;
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${s.a})`;
                 ctx.fill();
-            }
-            time+=0.016;
-            requestAnimationFrame(drawStars);
+            });
+
+            requestAnimationFrame(draw);
         }
-        window.addEventListener('resize', ()=>{resizeStars();});
-        resizeStars();
-        drawStars();
+
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
     }
-    
-    // reveal on scroll
-    const reveals = document.querySelectorAll('.reveal-block');
-    const obs = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed'); obs.unobserve(e.target);}});
-    },{threshold:0.2});
-    reveals.forEach(r=>obs.observe(r));
-    
-    // parallax hero
-    window.addEventListener('scroll',()=>{
-        const heroImg = document.querySelector('.hero-video-bg');
-        if(heroImg){
-            let scrolled = window.scrollY;
-            heroImg.style.transform = `scale(${1 + scrolled*0.00025}) translateY(${scrolled*0.04}px)`;
-        }
-        const dream = document.querySelector('.dream-bg');
-        if(dream && window.scrollY>100) dream.style.transform = `translateY(${window.scrollY*0.07}px) scale(1.02)`;
-    });
-    
-    // horizontal grab scroll
-    const scrollDiv = document.querySelector('.horizontal-scroll');
-    if(scrollDiv){
-        let isDown=false, startX, scrollL;
-        scrollDiv.addEventListener('mousedown',(e)=>{isDown=true; scrollDiv.style.cursor='grabbing'; startX=e.pageX-scrollDiv.offsetLeft; scrollL=scrollDiv.scrollLeft;});
-        window.addEventListener('mouseup',()=>{isDown=false; scrollDiv.style.cursor='grab';});
-        scrollDiv.addEventListener('mousemove',(e)=>{if(!isDown)return; e.preventDefault(); const x=e.pageX-scrollDiv.offsetLeft; const walk=(x-startX)*1.3; scrollDiv.scrollLeft=scrollL-walk;});
-        scrollDiv.style.cursor='grab';
-    }
-    
-    // reservation notification + form
-    const form = document.getElementById('reservationForm');
-    const successMsg = document.getElementById('formSuccessMsg');
-    const notif = document.getElementById('reserveNotification');
-    function showNotif(){
-        notif.classList.add('show');
-        setTimeout(()=>{notif.classList.remove('show');}, 4500);
-    }
-    form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        if(document.getElementById('fullName').value && document.getElementById('email').value){
-            successMsg.style.display = 'block';
-            showNotif();
-            form.reset();
-            setTimeout(()=>{successMsg.style.display='none';}, 4000);
-        } else {
-            alert("Please fill in your details to reserve.");
-        }
-    });
-    document.getElementById('navReserveTrigger').addEventListener('click', (e)=>{
-        e.preventDefault();
-        document.getElementById('booking').scrollIntoView({behavior:'smooth', block:'start'});
-        setTimeout(()=>{showNotif();}, 600);
-    });
+}
 </script>
-</body>
-</html>
