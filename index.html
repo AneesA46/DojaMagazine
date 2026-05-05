@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa — Arrive in Stillness</title>
+    <title>An-Inn-Sa — Arrive in Stillness | Boutique Hotel</title>
     <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -74,6 +74,7 @@
             transition: all 0.4s ease;
             backdrop-filter: blur(4px);
             border-radius: 2px;
+            cursor: pointer;
         }
 
         .btn-gold:hover {
@@ -83,33 +84,51 @@
             transform: scale(1.02);
         }
 
+        /* IMPROVED RESERVATION BUTTON - Primary CTA */
         .booking-button {
             background: #c7a05b;
             color: #0a0a0a;
             border: none;
-            padding: 1.2rem 2.8rem;
-            font-weight: 600;
+            padding: 1rem 2rem;
+            font-weight: 700;
             font-size: 1rem;
             letter-spacing: 2px;
-            transition: box-shadow 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
-            animation: softPulse 2.2s infinite;
+            transition: all 0.3s ease;
             cursor: pointer;
+            border-radius: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        @keyframes softPulse {
-            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
-            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
+        .booking-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,240,0.3), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
         }
 
         .booking-button:hover {
-            background: #dbb16e;
-            transform: scale(1.02);
-            animation: none;
-            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
+            background: #e0b87a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(199, 160, 91, 0.4);
         }
 
+        .booking-button:hover::before {
+            left: 100%;
+        }
+
+        .booking-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Horizontal scroll rooms */
         .horizontal-scroll {
             display: flex;
             overflow-x: auto;
@@ -123,6 +142,12 @@
 
         .horizontal-scroll::-webkit-scrollbar {
             height: 4px;
+        }
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #1f1f1f;
+        }
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #c7a05b;
         }
 
         .room-card {
@@ -162,6 +187,7 @@
             border-left: 3px solid #c7a05b;
         }
 
+        /* Scroll reveal */
         .reveal-block {
             opacity: 0;
             transform: translateY(40px);
@@ -173,6 +199,7 @@
             transform: translateY(0);
         }
 
+        /* Dining Menu */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -196,6 +223,7 @@
             padding: 0.6rem 0;
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -204,10 +232,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             z-index: 100;
             backdrop-filter: blur(12px);
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.55);
             transition: all 0.3s;
         }
 
@@ -226,8 +254,15 @@
             font-size: 0.8rem;
             text-decoration: none;
             transition: 0.2s;
+            cursor: pointer;
         }
 
+        .nav-book:hover {
+            background: rgba(199, 160, 91, 0.15);
+            border-color: #e0b87a;
+        }
+
+        /* Hero section */
         .hero {
             height: 100vh;
             position: relative;
@@ -253,7 +288,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
         }
 
         .hero-text {
@@ -261,7 +296,35 @@
             bottom: 20%;
             left: 5%;
             z-index: 2;
-            animation: fadeSlideUp 1.8s ease-out;
+            animation: fadeSlideUp 1.6s ease-out;
+        }
+
+        /* Floating CTA Button (sticky for easy access) */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #c7a05b;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-cta:hover {
+            background: #e0b87a;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.5);
         }
 
         @keyframes fadeSlideUp {
@@ -269,6 +332,7 @@
             100% { opacity: 1; transform: translateY(0);}
         }
 
+        /* Emotion section with stars */
         .emotion-section {
             background: #030303;
             position: relative;
@@ -286,15 +350,15 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.85;
         }
         .dream-bg {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.3;
-            filter: brightness(0.5) blur(1px);
+            opacity: 0.25;
+            filter: brightness(0.6) blur(1px);
             transform: scale(1.02);
             z-index: 0;
         }
@@ -303,6 +367,7 @@
             position: relative;
         }
 
+        /* Success toast */
         .top-notification {
             position: fixed;
             top: 20px;
@@ -310,7 +375,7 @@
             transform: translateX(-50%) translateY(-120%);
             background: rgba(20, 18, 16, 0.96);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(199, 160, 91, 0.5);
+            border: 1px solid rgba(199, 160, 91, 0.6);
             border-radius: 12px;
             padding: 1rem 2rem;
             min-width: 280px;
@@ -318,10 +383,8 @@
             width: max-content;
             z-index: 2000;
             transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(199,160,91,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             text-align: center;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
         }
         .top-notification.show {
             transform: translateX(-50%) translateY(0);
@@ -334,22 +397,60 @@
             letter-spacing: 2px;
             margin-bottom: 8px;
         }
-        .notification-message {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #f0ede8;
-            line-height: 1.4;
-        }
-        .notification-detail {
-            font-size: 0.75rem;
-            color: #b9b3a5;
-            margin-top: 8px;
-            border-top: 1px solid rgba(199,160,91,0.2);
-            padding-top: 6px;
+
+        /* Kid friendly badge */
+        .kid-friendly-badge {
+            display: inline-block;
+            background: rgba(199, 160, 91, 0.2);
+            border: 1px solid #c7a05b;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
         }
 
-        .cta-section {
-            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
+        /* Reservation Form - Book Your Stay Section */
+        .booking-card {
+            background: #11110f;
+            border-radius: 32px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(199,160,91,0.3);
+            backdrop-filter: blur(2px);
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: #c7a05b;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.9rem;
+            background: #1e1e1c;
+            border: 1px solid #3a352c;
+            color: #e8e6e1;
+            font-family: 'Inter', sans-serif;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #c7a05b;
+        }
+        .booking-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .booking-row .form-group {
+            flex: 1;
         }
         footer {
             background: #020202;
@@ -361,7 +462,9 @@
         @media (max-width: 700px) {
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
-            .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
+            .top-notification { width: 90%; }
+            .booking-row { flex-direction: column; gap: 0; }
+            .floating-cta { padding: 0.7rem 1.5rem; font-size: 0.8rem; bottom: 20px; right: 20px; }
         }
 
         .cursor-trail {
@@ -373,49 +476,24 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, opacity 0.3s;
-            will-change: left, top;
-        }
-        .cursor-trail-dot {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: #c7a05b;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            filter: blur(1px);
-            opacity: 0.5;
-            transform: translate(-50%, -50%);
-            transition: 0.05s linear;
+            transition: width 0.2s, height 0.2s;
         }
         
-        .kid-friendly-badge {
-            display: inline-block;
-            background: rgba(199, 160, 91, 0.2);
-            border: 1px solid #c7a05b;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-        
-        .room-card img {
-            background: linear-gradient(135deg, #2a1a3a 0%, #1a2a3a 100%);
+        .section-highlight {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body>
 
 <div class="cursor-trail" id="cursorTrail"></div>
-<div class="cursor-trail-dot" id="cursorDot"></div>
 
 <nav>
     <div class="logo">AN-INN-SA</div>
-    <a href="#booking" class="nav-book">RESERVE</a>
+    <div class="nav-book" id="navBookBtn">BOOK YOUR STAY</div>
 </nav>
 
+<!-- Hero section -->
 <section class="hero">
     <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
@@ -426,20 +504,22 @@
     </div>
 </section>
 
+<!-- Intro stillness -->
 <section class="intro-section">
     <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
-            <div style="height: 4rem;"></div>
-            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
-            <div style="height: 4rem;"></div>
-            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
             <div style="height: 3rem;"></div>
+            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
+            <div style="height: 3rem;"></div>
+            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
+            <div style="height: 2rem;"></div>
             <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
 </section>
 
+<!-- Rooms horizontal scroll -->
 <section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
@@ -448,46 +528,40 @@
         </div>
     </div>
     <div class="horizontal-scroll">
-        <!-- Signature Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="signature suite.jpg" alt="Signature Suite">
+            <img src="https://picsum.photos/id/164/1200/800" alt="Signature Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
                 <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
+                <div style="margin-top: 0.6rem;"><span class="kid-friendly-badge">✦ HONEYMOON READY ✦</span></div>
             </div>
         </div>
-        <!-- Deluxe Room - using your uploaded image -->
         <div class="room-card">
-            <img src="deluxe rooms.jpg" alt="Deluxe Room">
+            <img src="https://picsum.photos/id/169/1200/800" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
                 <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Wellness Retreat - using your uploaded image -->
         <div class="room-card">
-            <img src="wellness reaatreat.jpg" alt="Wellness Retreat">
+            <img src="https://picsum.photos/id/30/1200/800" alt="Wellness Retreat">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
                 <p>Private balcony, meditative views, and handcrafted interiors.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Kiddy Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="kiddy suite.jpg" alt="Kiddy Suite">
+            <img src="https://picsum.photos/id/20/1200/800" alt="Kiddy Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
-                <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
+                <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities.</p>
                 <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Dining menu -->
 <section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
@@ -512,8 +586,8 @@
             <div class="menu-category">
                 <h3>Desserts</h3>
                 <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
-                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
-                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
+                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17</span></div>
+                <div class="menu-item"><span>Tiramisu</span><span>$18</span></div>
                 <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
             </div>
             <div class="menu-category">
@@ -524,12 +598,10 @@
                 <div class="menu-item"><span>Soda</span><span>$8</span></div>
             </div>
         </div>
-        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
-            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
-        </div>
     </div>
 </section>
 
+<!-- Emotional Starscape -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
     <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="milky way atmosphere">
@@ -546,64 +618,154 @@
     </div>
 </section>
 
-
-            <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
+<!-- RESERVATION SECTION: BOOK YOUR STAY (target location) -->
+<section id="booking" style="background: #0c0c0a; scroll-margin-top: 80px;">
+    <div class="section-inner">
+        <div class="reveal-block" style="text-align: center;">
+            <p class="quote-line" style="letter-spacing: 2px;">Secure your sanctuary</p>
+            <h2 class="giant-text" style="font-size: 3rem;">Book Your Stay</h2>
+            <div style="height: 0.5rem;"></div>
+            <p style="color: #bcb7ab;">Experience tranquility — reserve your private escape</p>
+        </div>
+        <div class="booking-card reveal-block">
+            <form id="reservationForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="guestName" required placeholder="e.g., James Sterling">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="guestEmail" required placeholder="hello@example.com">
+                </div>
+                <div class="booking-row">
+                    <div class="form-group">
+                        <label>Check-in</label>
+                        <input type="date" id="checkin" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out</label>
+                        <input type="date" id="checkout" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select id="roomSelect" required>
+                        <option value="">Select a room</option>
+                        <option>Signature Suite</option>
+                        <option>Deluxe Room</option>
+                        <option>Wellness Retreat</option>
+                        <option>Kiddy Suite</option>
+                    </select>
+                </div>
+                <button type="submit" class="booking-button" style="width:100%; margin-top: 0.5rem;">CONFIRM RESERVATION</button>
+            </form>
+            <div id="formSuccessMsg" style="margin-top: 1.2rem; text-align: center; display: none; color: #c7a05b; font-weight: 500;">✓ Reservation confirmed! A confirmation will be sent shortly.</div>
         </div>
     </div>
 </section>
-    
-<div id="formalNotification" class="top-notification">
+
+<!-- Google Maps Find Us -->
+<section style="padding: 2rem 5% 4rem; text-align: center;">
+    <div class="reveal-block">
+        <h2 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Find Us</h2>
+        <iframe src="https://maps.google.com/maps?q=nairobi+city+center&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="320" style="border:0; border-radius: 24px; margin-top: 1.5rem;" allowfullscreen="" loading="lazy"></iframe>
+        <p style="margin-top: 1rem; letter-spacing: 1px;">An-Inn-Sa · Nairobi, Kenya · Serene escapes</p>
+    </div>
+</section>
+
+<footer>
+    <p>An-Inn-Sa — Comfort, culture & calmness. A modern hotel nestled in stillness.</p>
+    <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Immersive storyliving</p>
+</footer>
+
+<!-- Floating CTA Button for easy booking access -->
+<div class="floating-cta" id="floatingCtaBtn">
+    ✦ BOOK NOW ✦
+</div>
+
+<div id="toastNotification" class="top-notification">
     <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
-    <div class="notification-message">Your escape to serenity has been secured.</div>
-    <div class="notification-detail">A confirmation e-mail with your itinerary will arrive shortly. We await your arrival.</div>
+    <div class="notification-message">Your escape to serenity has been secured. We await your arrival.</div>
 </div>
 
 <script>
-    const reserveBtn = document.getElementById('reserveButton');
-    const notification = document.getElementById('formalNotification');
-    
-    function showFormalNotification() {
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
-    }
-    
-    if (reserveBtn) {
-        reserveBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            showFormalNotification();
-        });
-    }
-    
-    const navBookLink = document.querySelector('.nav-book');
-    if (navBookLink) {
-        navBookLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const bookingSection = document.getElementById('booking');
-            if (bookingSection) {
-                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => {
-                    showFormalNotification();
-                }, 700);
-            } else {
-                showFormalNotification();
-            }
-        });
+    // Toast handler
+    const toast = document.getElementById('toastNotification');
+    function showToast() {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4800);
     }
 
+    // Booking form logic
+    const form = document.getElementById('reservationForm');
+    const successMsg = document.getElementById('formSuccessMsg');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('guestName').value.trim();
+        const email = document.getElementById('guestEmail').value.trim();
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const room = document.getElementById('roomSelect').value;
+        if (!name || !email || !checkin || !checkout || !room) {
+            alert("Please fill all reservation fields.");
+            return;
+        }
+        if (new Date(checkin) >= new Date(checkout)) {
+            alert("Check-out must be after check-in.");
+            return;
+        }
+        // Show success message and toast
+        successMsg.style.display = 'block';
+        showToast();
+        form.reset();
+        setTimeout(() => { successMsg.style.display = 'none'; }, 4000);
+    });
+
+    // IMPROVED: Function to smoothly scroll to booking section (Book Your Stay)
+    function scrollToBooking() {
+        const bookingSection = document.getElementById('booking');
+        if (bookingSection) {
+            bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Optional: add a subtle highlight effect
+            bookingSection.classList.add('section-highlight');
+            setTimeout(() => {
+                bookingSection.classList.remove('section-highlight');
+            }, 800);
+        }
+    }
+
+    // All reservation buttons trigger scroll to Book Your Stay
+    const navBtn = document.getElementById('navBookBtn');
+    const floatingBtn = document.getElementById('floatingCtaBtn');
+    
+    navBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToBooking();
+    });
+    
+    floatingBtn.addEventListener('click', () => {
+        scrollToBooking();
+    });
+    
+    // Also attach to any existing .booking-button inside hero or elsewhere? 
+    // But primary is the nav and floating button.
+    // Additionally, if there is a "Reserve" link in room captions, we add smooth scroll
+    const inquireLinks = document.querySelectorAll('.room-caption a');
+    inquireLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToBooking();
+        });
+    });
+
+    // Cursor trail effect
     const trail = document.getElementById('cursorTrail');
-    const dot = document.getElementById('cursorDot');
     let mouseX = 0, mouseY = 0;
     let trailX = 0, trailY = 0;
-    
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
     });
-    
     function animateTrail() {
         trailX += (mouseX - trailX) * 0.12;
         trailY += (mouseY - trailY) * 0.12;
@@ -612,93 +774,62 @@
         let dx = mouseX - trailX;
         let dy = mouseY - trailY;
         let dist = Math.sqrt(dx*dx + dy*dy);
-        let size = Math.min(46, 26 + dist * 0.4);
+        let size = Math.min(48, 22 + dist * 0.35);
         trail.style.width = size + 'px';
         trail.style.height = size + 'px';
-        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
         requestAnimationFrame(animateTrail);
     }
     animateTrail();
-    
-    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
-    interactiveItems.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.45) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#e0b87a';
-            dot.style.width = '8px';
-            dot.style.height = '8px';
-        });
-        el.addEventListener('mouseleave', () => {
-            trail.style.transform = 'translate(-50%, -50%) scale(1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#c7a05b';
-            dot.style.width = '5px';
-            dot.style.height = '5px';
-        });
-    });
-    
-    const canvas = document.getElementById('starsCanvas');
-    if (canvas) {
-        let ctx = canvas.getContext('2d');
-        let stars = [];
-        let width, height;
-        
+
+    // Stars Canvas Animation
+    const starCanvas = document.getElementById('starsCanvas');
+    if (starCanvas) {
+        let ctx = starCanvas.getContext('2d');
+        let starsArray = [];
+        let w, h;
         function resizeStars() {
-            const section = canvas.parentElement;
+            const section = starCanvas.parentElement;
             const rect = section.getBoundingClientRect();
-            width = rect.width;
-            height = rect.height;
-            canvas.width = width;
-            canvas.height = height;
+            w = rect.width;
+            h = rect.height;
+            starCanvas.width = w;
+            starCanvas.height = h;
             initStars();
         }
-        
         function initStars() {
-            stars = [];
-            const starCount = Math.floor((width * height) / 3800);
+            starsArray = [];
+            const starCount = Math.floor((w * h) / 4200);
             for (let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2.2 + 0.6,
+                starsArray.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    r: Math.random() * 2 + 0.5,
                     alpha: Math.random() * 0.6 + 0.2,
-                    twinkleSpeed: 0.005 + Math.random() * 0.025,
+                    speed: 0.004 + Math.random() * 0.02,
                 });
             }
         }
-        
         let time = 0;
         function drawStars() {
             if (!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            for (let s of stars) {
-                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
+            ctx.clearRect(0, 0, w, h);
+            for (let s of starsArray) {
+                let twinkle = s.alpha + Math.sin(time * s.speed * 10) * 0.2;
                 twinkle = Math.min(0.85, Math.max(0.15, twinkle));
                 ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
                 ctx.fill();
             }
             time += 0.018;
             requestAnimationFrame(drawStars);
         }
-        
         window.addEventListener('resize', () => { resizeStars(); });
         resizeStars();
         drawStars();
-        
-        const emotionSection = document.querySelector('.emotion-section');
-        if (emotionSection) {
-            const observerStars = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) resizeStars();
-                });
-            }, { threshold: 0.1 });
-            observerStars.observe(emotionSection);
-        }
     }
     
+    // Scroll reveal observer
     const revealElements = document.querySelectorAll('.reveal-block');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -710,18 +841,16 @@
     }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
     revealElements.forEach(el => observer.observe(el));
     
+    // Parallax effect for hero
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
             let scrollY = window.scrollY;
             heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
         }
-        const dreamBg = document.querySelector('.dream-bg');
-        if (dreamBg && window.scrollY > 100) {
-            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
-        }
     });
     
+    // Horizontal scroll drag
     const scrollContainer = document.querySelector('.horizontal-scroll');
     if(scrollContainer) {
         let isDown = false;
@@ -745,193 +874,4 @@
         });
         scrollContainer.style.cursor = 'grab';
     }
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An-Inn-Sa — Reservation</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-body{
-    margin:0;
-    font-family:Inter;
-    background:#0a0a0a;
-    color:#e8e6e1;
-}
-
-.section{
-    padding:4rem 5%;
-    max-width:900px;
-    margin:auto;
-    text-align:center;
-}
-
-h1,h2{
-    font-family:"Cormorant Garamond";
-    font-weight:400;
-}
-
-input,select{
-    width:100%;
-    padding:1rem;
-    margin:0.5rem 0;
-    border:none;
-    border-radius:6px;
-}
-
-button{
-    width:100%;
-    padding:1rem;
-    background:#c7a05b;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-#success{
-    display:none;
-    margin-top:1rem;
-    padding:1rem;
-    background:#1a1a1a;
-    border-left:3px solid #c7a05b;
-}
-
-iframe{
-    width:100%;
-    height:300px;
-    border:0;
-    border-radius:10px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- RESERVATION -->
-<section class="section">
-<h1>Book Your Stay</h1>
-
-<form id="form">
-<input type="text" placeholder="Full Name" required>
-<input type="email" placeholder="Email" required>
-
-<div style="display:flex;gap:1rem;">
-<input type="date" required>
-<input type="date" required>
-</div>
-
-<select required>
-<option value="">Select Room</option>
-<option>Signature Suite</option>
-<option>Deluxe Room</option>
-<option>Wellness Retreat</option>
-<option>Kiddy Suite</option>
-</select>
-
-<button type="submit">Reserve Now</button>
-</form>
-
-<div id="success">Reservation confirmed ✓</div>
-</section>
-
-<!-- FIND US -->
-<section class="section">
-<h2>Find Us</h2>
-
-<iframe 
-src="https://maps.google.com/maps?q=nairobi&t=&z=13&ie=UTF8&iwloc=&output=embed">
-</iframe>
-</section>
-
-<script>
-const form = document.getElementById("form");
-const success = document.getElementById("success");
-
-form.addEventListener("submit", (e)=>{
-    e.preventDefault();
-    success.style.display = "block";
-    form.reset();
-});
-</script>
- </div>
-</section>
-
-
-            <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
-    <footer>
-    <p>An-Inn-Sa — Comfort, culture & calmness. A modern hotel nestled in stillness.</p>
-    <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Images for cinematic storytelling</p>
-</footer>
-        </div>
-    </div>
-</section>
-</body>
-</html>\
-Here is an HTML document that creates an immersive hotel brand experience website for "An-Inn-Sa", blending cinematic visuals with a fully functional booking interface.
-
-html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa — Arrive in Stillness</title>
-    <!-- Google Fonts: Elegant Serif + Clean Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            color: #e8e6e1;
-            overflow-x: hidden;
-            line-height: 1.4;
-            cursor: default;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c7a05b;
-            border-radius: 8px;
-        }
-
-        section {
-            position: relative;
-            width: 100%;
-        }
-
-        .section-inner {
-            position: relative;
-            z-index: 2;
-            padding: 6rem 5%;
-        }
-
-        .giant-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: clamp(3rem, 10vw, 7rem);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .quote-line {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            font-weight: 300;
-            font-family: 'Inter', sans-serif;
-            letter-sp
+</
