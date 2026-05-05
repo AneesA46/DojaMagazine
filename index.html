@@ -1,6 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>An-Inn-Sa — Stillness Speaks</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Cormorant+Garamond&display=swap" rel="stylesheet">
+
+<style>
+body { margin:0; background:#0a0a0a; color:#e8e6e1; font-family:Inter; }
+
+/* KEEP YOUR ORIGINAL CSS (unchanged for design) */
+/* Just small performance tweak */
+img { max-width:100%; display:block; }
+
+/* Hide custom cursor on mobile */
+@media(max-width:768px){
+  .custom-cursor, .cursor-dot { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- KEEP YOUR ORIGINAL HTML STRUCTURE -->
+<!-- (Hero, rooms, dining, booking etc — unchanged) -->
+
+<!-- IMPORTANT: add loading lazy to images -->
+<img src="https://picsum.photos/id/104/1920/1080" loading="lazy">
+
+<!-- KEEP EVERYTHING ELSE SAME -->
+
 <script>
 // ===============================
-// DEVICE CHECK (disable heavy effects on mobile)
+// DEVICE CHECK
 // ===============================
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
@@ -34,42 +67,36 @@ if (!isMobile) {
 }
 
 // ===============================
-// IMAGE LAZY LOAD SAFETY
+// LAZY LOAD IMAGES
 // ===============================
 document.querySelectorAll("img").forEach(img => {
     img.setAttribute("loading", "lazy");
 });
 
 // ===============================
-// REVEAL ON SCROLL (SAFE)
+// REVEAL ANIMATION
 // ===============================
-const reveals = document.querySelectorAll('.reveal-block');
-
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
         }
     });
-}, { threshold: 0.2 });
-
-reveals.forEach(el => observer.observe(el));
+});
+document.querySelectorAll('.reveal-block').forEach(el => observer.observe(el));
 
 // ===============================
-// THROTTLED SCROLL EFFECT
+// THROTTLED SCROLL
 // ===============================
 let ticking = false;
 
 window.addEventListener('scroll', () => {
     if (!ticking) {
         requestAnimationFrame(() => {
-            const heroImg = document.querySelector('.hero-video-bg');
-
-            if (heroImg) {
-                let scrolled = window.scrollY;
-                heroImg.style.transform = `scale(${1 + scrolled * 0.0002})`;
+            const hero = document.querySelector('.hero-video-bg');
+            if (hero) {
+                hero.style.transform = `scale(${1 + window.scrollY * 0.0002})`;
             }
-
             ticking = false;
         });
         ticking = true;
@@ -77,103 +104,87 @@ window.addEventListener('scroll', () => {
 });
 
 // ===============================
-// FORM VALIDATION (REAL FIX)
+// FORM VALIDATION
 // ===============================
 const form = document.getElementById('reservationForm');
-const successMsg = document.getElementById('formSuccessMsg');
-const notif = document.getElementById('reserveNotification');
 
-function validEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+function validEmail(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+form.addEventListener('submit', e=>{
+  e.preventDefault();
 
-    const name = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const checkin = document.getElementById('checkin').value;
-    const checkout = document.getElementById('checkout').value;
-    const room = document.getElementById('roomSelect').value;
+  const name = fullName.value.trim();
+  const email = document.getElementById('email').value.trim();
+  const checkin = checkin.value;
+  const checkout = checkout.value;
+  const room = roomSelect.value;
 
-    if (!name || !email || !checkin || !checkout || !room) {
-        alert("Please fill in all fields.");
-        return;
-    }
+  if(!name || !email || !checkin || !checkout || !room){
+    alert("Fill all fields");
+    return;
+  }
 
-    if (!validEmail(email)) {
-        alert("Enter a valid email address.");
-        return;
-    }
+  if(!validEmail(email)){
+    alert("Invalid email");
+    return;
+  }
 
-    if (new Date(checkout) <= new Date(checkin)) {
-        alert("Checkout must be after check-in.");
-        return;
-    }
+  if(new Date(checkout) <= new Date(checkin)){
+    alert("Checkout must be after checkin");
+    return;
+  }
 
-    // Fake success (ready for backend later)
-    successMsg.style.display = 'block';
-    notif.classList.add('show');
-
-    setTimeout(() => {
-        notif.classList.remove('show');
-        successMsg.style.display = 'none';
-    }, 4000);
-
-    form.reset();
+  alert("Reservation successful!");
+  form.reset();
 });
 
 // ===============================
-// NAVIGATION FIX
+// NAV SCROLL FIX
 // ===============================
-document.getElementById('navReserveTrigger').addEventListener('click', (e) => {
-    e.preventDefault();
-    document.getElementById('booking').scrollIntoView({
-        behavior: 'smooth'
-    });
-});
+document.getElementById('navReserveTrigger').onclick = (e)=>{
+  e.preventDefault();
+  document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+};
 
 // ===============================
-// STAR ANIMATION (OPTIMIZED)
+// LIGHTWEIGHT STAR ANIMATION
 // ===============================
-if (!isMobile) {
-    const canvas = document.getElementById('starsCanvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
+if(!isMobile){
+  const canvas = document.getElementById('starsCanvas');
+  if(canvas){
+    const ctx = canvas.getContext('2d');
+    let stars = [];
 
-        let stars = [];
-        let width, height;
+    function init(){
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
 
-        function resize() {
-            width = canvas.parentElement.offsetWidth;
-            height = canvas.parentElement.offsetHeight;
-            canvas.width = width;
-            canvas.height = height;
-
-            stars = Array.from({ length: 80 }, () => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                r: Math.random() * 1.5,
-                a: Math.random()
-            }));
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-
-            stars.forEach(s => {
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255,255,255,${s.a})`;
-                ctx.fill();
-            });
-
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        draw();
+      stars = Array.from({length:60}, ()=>({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5
+      }));
     }
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle="white";
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', init);
+    init();
+    draw();
+  }
 }
 </script>
+
+</body>
+</html>
