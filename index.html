@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa — Arrive in Stillness</title>
-    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <title>An-Inn-Sa — The Art of Stillness</title>
+    <!-- Google Fonts: Luxury Serif + Modern Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,21 +16,22 @@
         body {
             background-color: #0a0a0a;
             font-family: 'Inter', sans-serif;
-            color: #e8e6e1;
+            color: #ece8df;
             overflow-x: hidden;
             line-height: 1.4;
             cursor: default;
+            scroll-behavior: smooth;
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+            background: #181818;
         }
         ::-webkit-scrollbar-thumb {
             background: #c7a05b;
-            border-radius: 8px;
+            border-radius: 12px;
         }
 
         section {
@@ -42,19 +43,19 @@
         .section-inner {
             position: relative;
             z-index: 2;
-            padding: 6rem 5%;
+            padding: 6rem 6%;
         }
 
         .giant-text {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 350;
+            font-size: clamp(3rem, 10vw, 6.5rem);
             letter-spacing: -0.02em;
-            line-height: 1.1;
+            line-height: 1.08;
         }
 
         .quote-line {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-size: clamp(1.3rem, 4vw, 2rem);
             font-weight: 300;
             font-family: 'Inter', sans-serif;
             letter-spacing: -0.01em;
@@ -66,9 +67,9 @@
             border: 1.5px solid #c7a05b;
             color: #c7a05b;
             padding: 1rem 2.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             text-decoration: none;
             transition: all 0.4s ease;
@@ -90,16 +91,16 @@
             padding: 1.2rem 2.8rem;
             font-weight: 600;
             font-size: 1rem;
-            letter-spacing: 2px;
+            letter-spacing: 2.2px;
             transition: box-shadow 0.3s ease, transform 0.2s ease;
             box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
-            animation: softPulse 2.2s infinite;
+            animation: softPulse 2.4s infinite;
             cursor: pointer;
         }
 
         @keyframes softPulse {
-            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
-            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.25); }
+            70% { box-shadow: 0 0 0 14px rgba(199, 160, 91, 0); }
             100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
         }
 
@@ -107,100 +108,97 @@
             background: #dbb16e;
             transform: scale(1.02);
             animation: none;
-            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
+            box-shadow: 0 12px 28px rgba(199, 160, 91, 0.35);
         }
 
+        /* horizontal scroll rooms */
         .horizontal-scroll {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 1.5rem;
-            padding: 2rem 5% 4rem 5%;
+            gap: 1.8rem;
+            padding: 2rem 6% 4rem 6%;
             scroll-behavior: smooth;
             cursor: grab;
             scrollbar-width: thin;
         }
-
-        .horizontal-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-        .horizontal-scroll::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        .horizontal-scroll::-webkit-scrollbar-thumb {
-            background: #c7a05b;
-            border-radius: 8px;
-        }
+        .horizontal-scroll:active { cursor: grabbing; }
+        .horizontal-scroll::-webkit-scrollbar { height: 4px; }
+        .horizontal-scroll::-webkit-scrollbar-track { background: #1a1a1a; border-radius: 20px; }
+        .horizontal-scroll::-webkit-scrollbar-thumb { background: #c7a05b; border-radius: 20px; }
 
         .room-card {
             flex: 0 0 85%;
             scroll-snap-align: start;
             position: relative;
-            border-radius: 24px;
+            border-radius: 28px;
             overflow: hidden;
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            background: #1a1a2e;
+            background: #16161f;
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
         }
-
-        @media (min-width: 900px) {
-            .room-card { flex: 0 0 70%; }
-        }
+        @media (min-width: 900px) { .room-card { flex: 0 0 68%; } }
 
         .room-card img {
             width: 100%;
-            height: 85vh;
+            height: 80vh;
             object-fit: cover;
             transition: transform 0.8s ease-out;
             display: block;
         }
-
-        .room-card:hover img {
-            transform: scale(1.03);
-        }
+        .room-card:hover img { transform: scale(1.03); }
 
         .room-caption {
             position: absolute;
             bottom: 2rem;
             left: 2rem;
             right: 2rem;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(8px);
+            background: rgba(8, 8, 12, 0.75);
+            backdrop-filter: blur(12px);
             padding: 1.5rem;
             border-left: 3px solid #c7a05b;
+            border-radius: 16px;
         }
 
+        .kid-friendly-badge {
+            display: inline-block;
+            background: rgba(199, 160, 91, 0.2);
+            border: 1px solid #c7a05b;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 0.6rem;
+        }
+
+        /* reveal animation */
         .reveal-block {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s ease;
+            transform: translateY(42px);
+            transition: opacity 1s cubic-bezier(0.2, 0.9, 0.3, 1), transform 1s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
+        .reveal-block.revealed { opacity: 1; transform: translateY(0); }
 
-        .reveal-block.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        /* menu styling */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
-
         .menu-category h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 400;
-            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
+            border-bottom: 1px solid rgba(199, 160, 91, 0.5);
             display: inline-block;
             margin-bottom: 1.5rem;
         }
-
         .menu-item {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px dashed rgba(255,255,240,0.2);
-            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(236, 232, 223, 0.2);
+            padding: 0.7rem 0;
         }
 
         nav {
@@ -211,36 +209,37 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 6%;
             z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(0,0,0,0.5);
-            transition: all 0.3s;
+            backdrop-filter: blur(16px);
+            background: rgba(0, 0, 0, 0.55);
+            transition: all 0.25s;
         }
-
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 500;
             letter-spacing: 1px;
         }
-
         .nav-book {
             background: transparent;
             border: 1px solid #c7a05b;
             padding: 0.5rem 1.8rem;
-            color: #e8e6e1;
-            font-size: 0.8rem;
+            color: #ece8df;
+            font-size: 0.75rem;
             text-decoration: none;
             transition: 0.2s;
+            border-radius: 40px;
+            font-weight: 500;
         }
+        .nav-book:hover { background: rgba(199,160,91,0.2); border-color: #e0b87a; }
 
+        /* hero */
         .hero {
             height: 100vh;
             position: relative;
             overflow: hidden;
         }
-
         .hero-video-bg {
             position: absolute;
             top: 0;
@@ -249,37 +248,34 @@
             height: 100%;
             object-fit: cover;
             transform: scale(1);
-            animation: slowZoom 26s infinite alternate ease-in-out;
+            animation: slowZen 28s infinite alternate ease-in-out;
         }
-
-        @keyframes slowZoom {
+        @keyframes slowZen {
             0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
+            100% { transform: scale(1.1); }
         }
-
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
         }
-
         .hero-text {
             position: absolute;
-            bottom: 20%;
-            left: 5%;
+            bottom: 18%;
+            left: 6%;
             z-index: 2;
-            animation: fadeSlideUp 1.8s ease-out;
+            animation: fadeSlideUp 1.4s ease-out;
         }
-
         @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(40px);}
+            0% { opacity: 0; transform: translateY(36px);}
             100% { opacity: 1; transform: translateY(0);}
         }
 
+        /* emotion section */
         .emotion-section {
-            background: #030303;
+            background: #040302;
             position: relative;
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -293,123 +289,74 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.8;
+            opacity: 0.9;
         }
         .dream-bg {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.3;
-            filter: brightness(0.5) blur(1px);
+            opacity: 0.28;
+            filter: brightness(0.6) blur(2px);
             transform: scale(1.02);
             z-index: 0;
         }
-        .emotion-section .section-inner {
-            z-index: 3;
-            position: relative;
-        }
 
+        /* notification */
         .top-notification {
             position: fixed;
-            top: 20px;
+            top: 24px;
             left: 50%;
-            transform: translateX(-50%) translateY(-120%);
-            background: rgba(20, 18, 16, 0.96);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(199, 160, 91, 0.5);
-            border-radius: 12px;
+            transform: translateX(-50%) translateY(-140%);
+            background: rgba(14, 12, 10, 0.96);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(199, 160, 91, 0.6);
+            border-radius: 28px;
             padding: 1rem 2rem;
             min-width: 280px;
-            max-width: 480px;
+            max-width: 500px;
             width: max-content;
             z-index: 2000;
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(199,160,91,0.2);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            box-shadow: 0 20px 35px -8px black;
             text-align: center;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
         }
-        .top-notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        .notification-title {
-            font-weight: 600;
-            color: #c7a05b;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-        .notification-message {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #f0ede8;
-            line-height: 1.4;
-        }
-        .notification-detail {
-            font-size: 0.75rem;
-            color: #b9b3a5;
-            margin-top: 8px;
-            border-top: 1px solid rgba(199,160,91,0.2);
-            padding-top: 6px;
-        }
+        .top-notification.show { transform: translateX(-50%) translateY(0); }
+        .notification-title { font-weight: 600; color: #c7a05b; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+        .notification-message { font-size: 0.9rem; color: #f0ede8; }
+        .notification-detail { font-size: 0.7rem; color: #bcb5a6; margin-top: 8px; border-top: 1px solid rgba(199,160,91,0.25); padding-top: 6px; }
 
-        .cta-section {
-            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
-        }
-        footer {
-            background: #020202;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(199,160,91,0.2);
-        }
-        @media (max-width: 700px) {
-            .section-inner { padding: 3rem 5%; }
-            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
-            .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
-        }
+        .cta-section { background: linear-gradient(135deg, #0a0806 0%, #15100a 100%); border-radius: 0; }
+        footer { background: #020202; text-align: center; padding: 2rem; font-size: 0.75rem; border-top: 1px solid rgba(199,160,91,0.2); }
 
+        /* cursor magic */
         .cursor-trail {
             position: fixed;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%);
+            background: radial-gradient(circle, rgba(199,160,91,0.28) 0%, rgba(199,160,91,0) 70%);
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s, opacity 0.3s;
-            will-change: left, top;
         }
         .cursor-trail-dot {
             position: fixed;
             width: 5px;
             height: 5px;
-            background: #c7a05b;
+            background: #dbb87a;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
             filter: blur(1px);
-            opacity: 0.5;
+            opacity: 0.6;
             transform: translate(-50%, -50%);
             transition: 0.05s linear;
         }
-        
-        .kid-friendly-badge {
-            display: inline-block;
-            background: rgba(199, 160, 91, 0.2);
-            border: 1px solid #c7a05b;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-        
-        .room-card img {
-            background: linear-gradient(135deg, #2a1a3a 0%, #1a2a3a 100%);
+        @media (max-width: 700px) {
+            .section-inner { padding: 3.5rem 5%; }
+            .room-caption { left: 1rem; bottom: 1rem; right: 1rem; padding: 1.2rem; }
         }
     </style>
 </head>
@@ -420,81 +367,85 @@
 
 <nav>
     <div class="logo">AN-INN-SA</div>
-    <a href="#booking" class="nav-book">RESERVE</a>
+    <a href="#booking-anchor" class="nav-book" id="navBookBtn">RESERVE</a>
 </nav>
 
+<!-- Hero Section -->
 <section class="hero">
-    <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen hotel atmosphere" style="object-position: center 30%;">
+    <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen landscape misty morning" style="object-position: center 20%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
+        <p class="quote-line" style="margin-bottom: 0.4rem; letter-spacing: 1px;">You came to the right place</p>
         <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; letter-spacing: 2.5px;">where stillness speaks</p>
     </div>
 </section>
 
+<!-- Poetic interlude -->
 <section class="intro-section">
     <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
-            <div style="height: 4rem;"></div>
-            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
-            <div style="height: 4rem;"></div>
-            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
+            <p class="quote-line" style="font-size: 1.9rem; font-weight: 300;">“You arrive.”</p>
             <div style="height: 3rem;"></div>
-            <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
+            <p class="quote-line" style="font-size: 1.9rem;">The world fades.</p>
+            <div style="height: 3rem;"></div>
+            <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
+            <div style="height: 2rem;"></div>
+            <p style="max-width: 520px; margin: 0 auto; font-weight: 300; color: #cfcabc;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
 </section>
 
-<section style="background: #0a0908;">
+<!-- Signature Rooms (horizontal) -->
+<section style="background: #0a0806;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
+            <p class="quote-line" style="font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase;">Sacred spaces</p>
+            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 0.2rem 0;">Rooms & Suites</h2>
         </div>
     </div>
     <div class="horizontal-scroll">
-        <!-- Signature Suite - using your uploaded image -->
+        <!-- Signature Suite -->
         <div class="room-card">
-            <img src="signature suite.jpg" alt="Signature Suite">
+            <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
                 <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">DISCOVER →</a>
             </div>
         </div>
-        <!-- Deluxe Room - using your uploaded image -->
+        <!-- Deluxe Room -->
         <div class="room-card">
-            <img src="deluxe rooms.jpg" alt="Deluxe Room">
+            <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
-                <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+                <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and serenity.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">DISCOVER →</a>
             </div>
         </div>
-        <!-- Wellness Retreat - using your uploaded image -->
+        <!-- Wellness Retreat -->
         <div class="room-card">
-            <img src="wellness reaatreat.jpg" alt="Wellness Retreat">
+            <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
-                <p>Private balcony, meditative views, and handcrafted interiors.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+                <p>Private balcony, meditative views, handcrafted interiors with stone bathing.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">DISCOVER →</a>
             </div>
         </div>
-        <!-- Kiddy Suite - using your uploaded image -->
+        <!-- Kiddy Suite (family) -->
         <div class="room-card">
-            <img src="kiddy suite.jpg" alt="Kiddy Suite">
+            <img src="https://images.pexels.com/photos/3288102/pexels-photo-3288102.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
                 <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
                 <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">DISCOVER →</a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Dining Lounge -->
 <section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
@@ -531,34 +482,46 @@
                 <div class="menu-item"><span>Soda</span><span>$8</span></div>
             </div>
         </div>
-        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
-            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
+        <div class="reveal-block" style="margin-top: 2.5rem; text-align: center;">
+            <p class="quote-line" style="font-size: 1rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
         </div>
     </div>
 </section>
 
+<!-- Emotional stars section (Stillness) -->
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="milky way atmosphere">
+    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way calm">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
-            <div style="height: 2rem;"></div>
+            <div style="height: 1.8rem;"></div>
             <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
-            <div style="height: 2rem;"></div>
+            <div style="height: 1.8rem;"></div>
             <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
-            <div style="height: 2rem;"></div>
+            <div style="height: 1.8rem;"></div>
             <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
         </div>
     </div>
 </section>
 
-
-            <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
+<!-- Booking CTA -->
+<section class="cta-section" id="booking-anchor">
+    <div class="section-inner" style="text-align: center;">
+        <div class="reveal-block">
+            <h2 class="giant-text" style="font-size: 3rem;">Secure your arrival</h2>
+            <p style="margin: 1rem auto; max-width: 500px;">Reserve your sanctuary — moments of stillness are only a click away.</p>
+            <button id="reserveButton" class="booking-button">BEGIN THE JOURNEY</button>
+            <p style="font-size: 0.7rem; margin-top: 2rem;">#ANINNSA • Quiet Luxury</p>
         </div>
     </div>
 </section>
-    
+
+<footer>
+    <p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p>
+</footer>
+
+<!-- elegant notification -->
 <div id="formalNotification" class="top-notification">
     <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
     <div class="notification-message">Your escape to serenity has been secured.</div>
@@ -566,192 +529,181 @@
 </div>
 
 <script>
-    const reserveBtn = document.getElementById('reserveButton');
-    const notification = document.getElementById('formalNotification');
-    
-    function showFormalNotification() {
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 5000);
-    }
-    
-    if (reserveBtn) {
-        reserveBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            showFormalNotification();
-        });
-    }
-    
-    const navBookLink = document.querySelector('.nav-book');
-    if (navBookLink) {
-        navBookLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const bookingSection = document.getElementById('booking');
-            if (bookingSection) {
-                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => {
-                    showFormalNotification();
-                }, 700);
-            } else {
-                showFormalNotification();
-            }
-        });
-    }
+    (function() {
+        const reserveBtn = document.getElementById('reserveButton');
+        const notification = document.getElementById('formalNotification');
+        const navBook = document.getElementById('navBookBtn');
 
-    const trail = document.getElementById('cursorTrail');
-    const dot = document.getElementById('cursorDot');
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
-    });
-    
-    function animateTrail() {
-        trailX += (mouseX - trailX) * 0.12;
-        trailY += (mouseY - trailY) * 0.12;
-        trail.style.left = trailX + 'px';
-        trail.style.top = trailY + 'px';
-        let dx = mouseX - trailX;
-        let dy = mouseY - trailY;
-        let dist = Math.sqrt(dx*dx + dy*dy);
-        let size = Math.min(46, 26 + dist * 0.4);
-        trail.style.width = size + 'px';
-        trail.style.height = size + 'px';
-        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
-        requestAnimationFrame(animateTrail);
-    }
-    animateTrail();
-    
-    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
-    interactiveItems.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.45) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#e0b87a';
-            dot.style.width = '8px';
-            dot.style.height = '8px';
+        function showFormalNotification() {
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 4800);
+        }
+
+        if (reserveBtn) {
+            reserveBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showFormalNotification();
+            });
+        }
+        if (navBook) {
+            navBook.addEventListener('click', (e) => {
+                e.preventDefault();
+                const bookingSection = document.getElementById('booking-anchor');
+                if (bookingSection) {
+                    bookingSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => showFormalNotification(), 600);
+                } else {
+                    showFormalNotification();
+                }
+            });
+        }
+
+        // cursor trail animation
+        const trail = document.getElementById('cursorTrail');
+        const dot = document.getElementById('cursorDot');
+        let mouseX = 0, mouseY = 0;
+        let trailX = 0, trailY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX + 'px';
+            dot.style.top = mouseY + 'px';
         });
-        el.addEventListener('mouseleave', () => {
-            trail.style.transform = 'translate(-50%, -50%) scale(1)';
-            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
-            dot.style.background = '#c7a05b';
-            dot.style.width = '5px';
-            dot.style.height = '5px';
+        function animateTrail() {
+            trailX += (mouseX - trailX) * 0.12;
+            trailY += (mouseY - trailY) * 0.12;
+            trail.style.left = trailX + 'px';
+            trail.style.top = trailY + 'px';
+            const dx = mouseX - trailX;
+            const dy = mouseY - trailY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            let size = Math.min(48, 28 + dist * 0.4);
+            trail.style.width = size + 'px';
+            trail.style.height = size + 'px';
+            trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.012);
+            requestAnimationFrame(animateTrail);
+        }
+        animateTrail();
+
+        const interactive = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button');
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                trail.style.transform = 'translate(-50%, -50%) scale(1.08)';
+                trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.5) 0%, rgba(199,160,91,0) 70%)';
+                dot.style.background = '#f0cf90';
+                dot.style.width = '8px';
+                dot.style.height = '8px';
+            });
+            el.addEventListener('mouseleave', () => {
+                trail.style.transform = 'translate(-50%, -50%) scale(1)';
+                trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
+                dot.style.background = '#c7a05b';
+                dot.style.width = '5px';
+                dot.style.height = '5px';
+            });
         });
-    });
-    
-    const canvas = document.getElementById('starsCanvas');
-    if (canvas) {
-        let ctx = canvas.getContext('2d');
-        let stars = [];
-        let width, height;
-        
-        function resizeStars() {
-            const section = canvas.parentElement;
-            const rect = section.getBoundingClientRect();
-            width = rect.width;
-            height = rect.height;
-            canvas.width = width;
-            canvas.height = height;
-            initStars();
-        }
-        
-        function initStars() {
-            stars = [];
-            const starCount = Math.floor((width * height) / 3800);
-            for (let i = 0; i < starCount; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2.2 + 0.6,
-                    alpha: Math.random() * 0.6 + 0.2,
-                    twinkleSpeed: 0.005 + Math.random() * 0.025,
-                });
+
+        // stars canvas (twinkling)
+        const canvas = document.getElementById('starsCanvas');
+        if (canvas) {
+            let ctx = canvas.getContext('2d');
+            let stars = [];
+            let width, height;
+            function resizeStars() {
+                const section = canvas.parentElement;
+                const rect = section.getBoundingClientRect();
+                width = rect.width;
+                height = rect.height;
+                canvas.width = width;
+                canvas.height = height;
+                initStars();
             }
-        }
-        
-        let time = 0;
-        function drawStars() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, width, height);
-            for (let s of stars) {
-                let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 12) * 0.18;
-                twinkle = Math.min(0.85, Math.max(0.15, twinkle));
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 245, 210, ${twinkle * 0.8})`;
-                ctx.fill();
+            function initStars() {
+                stars = [];
+                const starCount = Math.floor((width * height) / 4200);
+                for (let i = 0; i < starCount; i++) {
+                    stars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 2.1 + 0.5,
+                        alpha: Math.random() * 0.7 + 0.2,
+                        twinkleSpeed: 0.006 + Math.random() * 0.025,
+                    });
+                }
             }
-            time += 0.018;
-            requestAnimationFrame(drawStars);
-        }
-        
-        window.addEventListener('resize', () => { resizeStars(); });
-        resizeStars();
-        drawStars();
-        
-        const emotionSection = document.querySelector('.emotion-section');
-        if (emotionSection) {
+            let time = 0;
+            function drawStars() {
+                if (!ctx) return;
+                ctx.clearRect(0, 0, width, height);
+                for (let s of stars) {
+                    let twinkle = s.alpha + Math.sin(time * s.twinkleSpeed * 14) * 0.2;
+                    twinkle = Math.min(0.85, Math.max(0.2, twinkle));
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 248, 215, ${twinkle * 0.85})`;
+                    ctx.fill();
+                }
+                time += 0.018;
+                requestAnimationFrame(drawStars);
+            }
+            window.addEventListener('resize', () => resizeStars());
+            resizeStars();
+            drawStars();
             const observerStars = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) resizeStars();
-                });
+                entries.forEach(entry => { if (entry.isIntersecting) resizeStars(); });
             }, { threshold: 0.1 });
-            observerStars.observe(emotionSection);
+            observerStars.observe(canvas.parentElement);
         }
-    }
-    
-    const revealElements = document.querySelectorAll('.reveal-block');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+
+        // reveal on scroll
+        const reveals = document.querySelectorAll('.reveal-block');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+        reveals.forEach(el => observer.observe(el));
+
+        // Parallax hero background
+        window.addEventListener('scroll', () => {
+            const heroBg = document.querySelector('.hero-video-bg');
+            if (heroBg) {
+                let scrollY = window.scrollY;
+                heroBg.style.transform = `scale(${1 + scrollY * 0.00028}) translateY(${scrollY * 0.04}px)`;
+            }
+            const dreamBg = document.querySelector('.dream-bg');
+            if (dreamBg && window.scrollY > 100) {
+                dreamBg.style.transform = `translateY(${window.scrollY * 0.06}px) scale(1.02)`;
             }
         });
-    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
-    revealElements.forEach(el => observer.observe(el));
-    
-    window.addEventListener('scroll', () => {
-        const heroBg = document.querySelector('.hero-video-bg');
-        if (heroBg) {
-            let scrollY = window.scrollY;
-            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
-        }
-        const dreamBg = document.querySelector('.dream-bg');
-        if (dreamBg && window.scrollY > 100) {
-            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
-        }
-    });
-    
-    const scrollContainer = document.querySelector('.horizontal-scroll');
-    if(scrollContainer) {
-        let isDown = false;
-        let startX, scrollLeft;
-        scrollContainer.addEventListener('mousedown', (e) => {
-            isDown = true;
-            scrollContainer.style.cursor = 'grabbing';
-            startX = e.pageX - scrollContainer.offsetLeft;
-            scrollLeft = scrollContainer.scrollLeft;
-        });
-        window.addEventListener('mouseup', () => {
-            isDown = false;
+
+        // horizontal grab scroll
+        const scrollContainer = document.querySelector('.horizontal-scroll');
+        if(scrollContainer) {
+            let isDown = false, startX, scrollLeft;
+            scrollContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                scrollContainer.style.cursor = 'grabbing';
+                startX = e.pageX - scrollContainer.offsetLeft;
+                scrollLeft = scrollContainer.scrollLeft;
+            });
+            window.addEventListener('mouseup', () => {
+                isDown = false;
+                scrollContainer.style.cursor = 'grab';
+            });
+            scrollContainer.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - scrollContainer.offsetLeft;
+                const walk = (x - startX) * 1.1;
+                scrollContainer.scrollLeft = scrollLeft - walk;
+            });
             scrollContainer.style.cursor = 'grab';
-        });
-        scrollContainer.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 1.2;
-            scrollContainer.scrollLeft = scrollLeft - walk;
-        });
-        scrollContainer.style.cursor = 'grab';
-    }
+        }
+    })();
 </script>
 </body>
 </html>
