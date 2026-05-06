@@ -831,4 +831,21 @@
             isDown = true;
             scrollContainer.style.cursor = 'grabbing';
             startX = e.pageX - scrollContainer.offsetLeft;
-            scrollLeft =
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
