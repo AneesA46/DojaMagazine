@@ -818,4 +818,38 @@
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
             let scrollY = window.scrollY;
-            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
+        }
+        const dreamBg = document.querySelector('.dream-bg');
+        if (dreamBg && window.scrollY > 100) {
+            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
+        }
+    });
+    
+    // Horizontal scroll drag
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false;
+        let startX, scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.style.cursor = 'grabbing';
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+        window.addEventListener('mouseup', () => {
+            isDown = false;
+            scrollContainer.style.cursor = 'grab';
+        });
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1.2;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
