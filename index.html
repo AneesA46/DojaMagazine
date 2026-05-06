@@ -550,9 +550,9 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Deluxe Room - Contemporary comfort with city or nature views -->
+        <!-- Deluxe Room - Elegant contemporary hotel room with soft neutral tones -->
         <div class="room-card">
-            <img src="https://images.pexels.com/photos/3771834/pexels-photo-3771834.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
+            <img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
                 <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
@@ -568,9 +568,9 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Kiddy Suite - Playful, colorful family space -->
+        <!-- Kiddy Suite - Playful, colorful family space with bunk beds and toys -->
         <div class="room-card">
-            <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite">
+            <img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
                 <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
@@ -818,38 +818,4 @@
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) {
             let scrollY = window.scrollY;
-            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
-        }
-        const dreamBg = document.querySelector('.dream-bg');
-        if (dreamBg && window.scrollY > 100) {
-            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
-        }
-    });
-    
-    // Horizontal scroll drag
-    const scrollContainer = document.querySelector('.horizontal-scroll');
-    if(scrollContainer) {
-        let isDown = false;
-        let startX, scrollLeft;
-        scrollContainer.addEventListener('mousedown', (e) => {
-            isDown = true;
-            scrollContainer.style.cursor = 'grabbing';
-            startX = e.pageX - scrollContainer.offsetLeft;
-            scrollLeft = scrollContainer.scrollLeft;
-        });
-        window.addEventListener('mouseup', () => {
-            isDown = false;
-            scrollContainer.style.cursor = 'grab';
-        });
-        scrollContainer.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 1.2;
-            scrollContainer.scrollLeft = scrollLeft - walk;
-        });
-        scrollContainer.style.cursor = 'grab';
-    }
-</script>
-</body>
-</html>
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY
