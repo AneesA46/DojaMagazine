@@ -861,4 +861,185 @@
         </div>
         
         <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
-            <p class="quote-line" style="font-size: 1.2rem
+            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: #c7a05b;">✦ Tap any item to order ✦</p>
+        </div>
+    </div>
+</section>
+
+<section class="emotion-section">
+    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="peaceful landscape">
+    <div class="section-inner" style="text-align: center; max-width: 800px;">
+        <div class="reveal-block">
+            <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
+            <div style="height: 2rem;"></div>
+            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
+            <div style="height: 2rem;"></div>
+            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
+            <div style="height: 2rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section" id="booking-anchor">
+    <div class="section-inner" style="text-align: center;">
+        <div class="reveal-block">
+            <h2 class="giant-text" style="font-size: 3rem;">Secure your arrival</h2>
+            <p style="margin: 1rem auto; max-width: 500px;">Join the stars who've found their stillness here.</p>
+            <button id="reserveButton" class="booking-button">BEGIN THE JOURNEY</button>
+            <p style="font-size: 0.8rem; margin-top: 2rem;">#ANINNSA • Get social • Quiet luxury</p>
+        </div>
+    </div>
+</section>
+    
+<footer>
+    <p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p>
+</footer>
+
+<div id="orderNotification" class="order-notification">
+    <div class="order-notification-title">✨ ORDER PLACED ✨</div>
+    <div class="order-notification-message" id="orderMessage">Your item has been added</div>
+</div>
+
+<div id="reservationModal" class="modal-overlay">
+    <div class="reservation-modal">
+        <span class="close-modal" id="closeModalBtn">&times;</span>
+        <h3>reserve your stay</h3>
+        <p style="margin-bottom: 1rem; font-size: 0.8rem;">Fill in your details to secure a moment of stillness.</p>
+        <form id="bookingForm">
+            <div class="form-group">
+                <label>Full name</label>
+                <input type="text" id="guestName" placeholder="Luna Serene" required>
+            </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" id="guestEmail" placeholder="hello@stillness.com" required>
+            </div>
+            <div class="form-group">
+                <label>Phone number</label>
+                <input type="tel" id="guestPhone" placeholder="+1 (555) 123-4567">
+            </div>
+            <div class="form-group">
+                <label>Arrival date</label>
+                <input type="date" id="arrivalDate" required>
+            </div>
+            <div class="form-group">
+                <label>Preferred suite</label>
+                <select id="roomType">
+                    <option value="Signature Suite">Signature Suite</option>
+                    <option value="Deluxe Room">Deluxe Room</option>
+                    <option value="Wellness Retreat">Wellness Retreat</option>
+                    <option value="Kiddy Suite">Kiddy Suite</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Special requests</label>
+                <input type="text" id="specialNotes" placeholder="Anniversary, dietary needs...">
+            </div>
+            <button type="submit" class="reserve-submit">CONFIRM RESERVATION</button>
+            <div id="formSuccessMsg" class="form-success"></div>
+        </form>
+    </div>
+</div>
+
+<div id="formalNotification" class="top-notification">
+    <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
+    <div class="notification-message">Your escape to serenity has been secured.</div>
+</div>
+
+<script>
+    // Order notification
+    const orderNotification = document.getElementById('orderNotification');
+    const orderMessageSpan = document.getElementById('orderMessage');
+    
+    function showOrderNotification(itemName, itemPrice) {
+        orderMessageSpan.innerText = `${itemName} (${itemPrice}) added to your order`;
+        orderNotification.classList.add('show');
+        setTimeout(() => {
+            orderNotification.classList.remove('show');
+        }, 3500);
+    }
+    
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const itemName = item.getAttribute('data-item');
+            const itemPrice = item.getAttribute('data-price');
+            if (itemName) showOrderNotification(itemName, itemPrice);
+        });
+    });
+    
+    // Modal logic
+    const modal = document.getElementById('reservationModal');
+    const reserveBtn = document.getElementById('reserveButton');
+    const navReserve = document.getElementById('navReserveBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const bookingForm = document.getElementById('bookingForm');
+    const notification = document.getElementById('formalNotification');
+
+    function openModal() { modal.classList.add('active'); }
+    function closeModal() { modal.classList.remove('active'); const successDiv = document.getElementById('formSuccessMsg'); if(successDiv) successDiv.innerText = ''; bookingForm.reset(); }
+    function showNotification() { notification.classList.add('show'); setTimeout(() => notification.classList.remove('show'), 5000); }
+
+    if(reserveBtn) reserveBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if(navReserve) navReserve.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('guestName')?.value.trim();
+        const email = document.getElementById('guestEmail')?.value.trim();
+        const arrival = document.getElementById('arrivalDate')?.value;
+        if(!name || !email || !arrival) { alert("Please fill in name, email, and arrival date."); return; }
+        const successDiv = document.getElementById('formSuccessMsg');
+        successDiv.innerText = "✓ Reservation request received. We'll contact you shortly.";
+        setTimeout(() => { closeModal(); showNotification(); }, 1200);
+    });
+
+    // Cursor effects
+    const trail = document.getElementById('cursorTrail');
+    const dot = document.getElementById('cursorDot');
+    let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
+        trail.style.left = trailX + 'px';
+        trail.style.top = trailY + 'px';
+        let dist = Math.sqrt(Math.pow(mouseX - trailX, 2) + Math.pow(mouseY - trailY, 2));
+        let size = Math.min(46, 26 + dist * 0.4);
+        trail.style.width = size + 'px';
+        trail.style.height = size + 'px';
+        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+    
+    // Reveal animations
+    const revealElements = document.querySelectorAll('.reveal-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.2 });
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Parallax
+    window.addEventListener('scroll', () => {
+        const heroBg = document.querySelector('.hero-video-bg');
+        if (heroBg) heroBg.style.transform = `scale(${1 + window.scrollY * 0.0003}) translateY(${window.scrollY * 0.05}px)`;
+    });
+    
+    // Horizontal scroll
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false, startX, scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => { isDown = true; scrollContainer.style.cursor = 'grabbing'; startX = e.pageX - scrollContainer.offsetLeft; scrollLeft = scrollContainer.scrollLeft; });
+        window.addEventListener('mouseup', () => { isDown = false; scrollContainer.style.cursor = 'grab'; });
+        scrollContainer.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - scrollContainer.offsetLeft; const walk = (x - startX) * 1.2; scrollContainer.scrollLeft = scrollLeft - walk; });
+        scrollContainer.style.cursor = 'grab';
+    }
+</script>
+</body>
+</html>
