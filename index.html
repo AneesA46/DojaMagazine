@@ -200,8 +200,27 @@
         .menu-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 1px dashed rgba(255,255,240,0.2);
-            padding: 0.6rem 0;
+            padding: 0.8rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+        
+        .menu-item:hover {
+            background: rgba(199, 160, 91, 0.1);
+            padding-left: 0.5rem;
+            border-bottom-color: rgba(199, 160, 91, 0.5);
+        }
+        
+        .menu-item-name {
+            font-weight: 400;
+        }
+        
+        .menu-item-price {
+            font-weight: 500;
+            color: #c7a05b;
         }
 
         nav {
@@ -305,6 +324,46 @@
             position: relative;
         }
 
+        /* Order Notification (for menu items) */
+        .order-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(20, 18, 16, 0.96);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(199, 160, 91, 0.6);
+            border-radius: 16px;
+            padding: 1rem 1.8rem;
+            min-width: 260px;
+            max-width: 360px;
+            z-index: 2001;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: left;
+        }
+        .order-notification.show {
+            transform: translateX(0);
+        }
+        .order-notification-title {
+            font-weight: 600;
+            color: #c7a05b;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
+        }
+        .order-notification-message {
+            font-size: 0.9rem;
+            color: #f0ede8;
+        }
+        .order-notification-detail {
+            font-size: 0.7rem;
+            color: #b9b3a5;
+            margin-top: 6px;
+        }
+
         .top-notification {
             position: fixed;
             top: 20px;
@@ -364,6 +423,7 @@
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
             .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
+            .order-notification { bottom: 20px; right: 20px; left: 20px; width: auto; max-width: none; }
         }
 
         .cursor-trail {
@@ -541,7 +601,6 @@
         </div>
     </div>
     <div class="horizontal-scroll">
-        <!-- Signature Suite - Elegant luxury with warm lighting -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
             <div class="room-caption">
@@ -550,7 +609,6 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Deluxe Room - Elegant contemporary hotel room with soft neutral tones -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
             <div class="room-caption">
@@ -559,7 +617,6 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Wellness Retreat - Spa-like, calm nature inspired -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat">
             <div class="room-caption">
@@ -568,7 +625,6 @@
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
-        <!-- Kiddy Suite - Playful, colorful family space with bunk beds and toys -->
         <div class="room-card">
             <img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite">
             <div class="room-caption">
@@ -590,35 +646,84 @@
         <div class="menu-grid reveal-block">
             <div class="menu-category">
                 <h3>Appetizers</h3>
-                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div>
-                <div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div>
-                <div class="menu-item"><span>French Fries</span><span>$19</span></div>
-                <div class="menu-item"><span>Chicken Wings</span><span>$20</span></div>
+                <div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22">
+                    <span class="menu-item-name">Chicken or Vegetable Soup</span>
+                    <span class="menu-item-price">$22</span>
+                </div>
+                <div class="menu-item" data-item="Crispy Samosas" data-price="$24">
+                    <span class="menu-item-name">Crispy Samosas</span>
+                    <span class="menu-item-price">$24</span>
+                </div>
+                <div class="menu-item" data-item="French Fries" data-price="$19">
+                    <span class="menu-item-name">French Fries</span>
+                    <span class="menu-item-price">$19</span>
+                </div>
+                <div class="menu-item" data-item="Chicken Wings" data-price="$20">
+                    <span class="menu-item-name">Chicken Wings</span>
+                    <span class="menu-item-price">$20</span>
+                </div>
             </div>
             <div class="menu-category">
                 <h3>Mains</h3>
-                <div class="menu-item"><span>Nyama Choma</span><span>$58</span></div>
-                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div>
-                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div>
-                <div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div>
+                <div class="menu-item" data-item="Nyama Choma" data-price="$58">
+                    <span class="menu-item-name">Nyama Choma</span>
+                    <span class="menu-item-price">$58</span>
+                </div>
+                <div class="menu-item" data-item="Ugali with Beef/Chicken Stew" data-price="$42">
+                    <span class="menu-item-name">Ugali with Beef/Chicken Stew</span>
+                    <span class="menu-item-price">$42</span>
+                </div>
+                <div class="menu-item" data-item="Stir-Fried Rice or Noodles" data-price="$48">
+                    <span class="menu-item-name">Stir-Fried Rice or Noodles</span>
+                    <span class="menu-item-price">$48</span>
+                </div>
+                <div class="menu-item" data-item="Creamy Pasta" data-price="$38">
+                    <span class="menu-item-name">Creamy Pasta</span>
+                    <span class="menu-item-price">$38</span>
+                </div>
             </div>
             <div class="menu-category">
                 <h3>Desserts</h3>
-                <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
-                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
-                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
-                <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
+                <div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18">
+                    <span class="menu-item-name">Vanilla Ice Cream</span>
+                    <span class="menu-item-price">$18</span>
+                </div>
+                <div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17 slice / $100 whole">
+                    <span class="menu-item-name">Brownies with Ice Cream</span>
+                    <span class="menu-item-price">$17 slice / $100 whole</span>
+                </div>
+                <div class="menu-item" data-item="Tiramisu" data-price="$18 slice / $120 whole">
+                    <span class="menu-item-name">Tiramisu</span>
+                    <span class="menu-item-price">$18 slice / $120 whole</span>
+                </div>
+                <div class="menu-item" data-item="Chocolate Cake" data-price="$20">
+                    <span class="menu-item-name">Chocolate Cake</span>
+                    <span class="menu-item-price">$20</span>
+                </div>
             </div>
             <div class="menu-category">
                 <h3>Drinks</h3>
-                <div class="menu-item"><span>Orange Juice</span><span>$10</span></div>
-                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span>$10</span></div>
-                <div class="menu-item"><span>Mojitos</span><span>$15</span></div>
-                <div class="menu-item"><span>Soda</span><span>$8</span></div>
+                <div class="menu-item" data-item="Orange Juice" data-price="$10">
+                    <span class="menu-item-name">Orange Juice</span>
+                    <span class="menu-item-price">$10</span>
+                </div>
+                <div class="menu-item" data-item="Coffee (Hot or Iced)" data-price="$10">
+                    <span class="menu-item-name">Coffee (Hot or Iced)</span>
+                    <span class="menu-item-price">$10</span>
+                </div>
+                <div class="menu-item" data-item="Mojitos" data-price="$15">
+                    <span class="menu-item-name">Mojitos</span>
+                    <span class="menu-item-price">$15</span>
+                </div>
+                <div class="menu-item" data-item="Soda" data-price="$8">
+                    <span class="menu-item-name">Soda</span>
+                    <span class="menu-item-price">$8</span>
+                </div>
             </div>
         </div>
         <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
             <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: #c7a05b;">✦ Tap any item to order ✦</p>
         </div>
     </div>
 </section>
@@ -652,6 +757,13 @@
 <footer>
     <p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p>
 </footer>
+
+<!-- Order Notification (bottom right) -->
+<div id="orderNotification" class="order-notification">
+    <div class="order-notification-title">✨ ORDER PLACED ✨</div>
+    <div class="order-notification-message" id="orderMessage">Your item has been added</div>
+    <div class="order-notification-detail">Our kitchen will prepare it with care.</div>
+</div>
 
 <!-- Reservation Modal -->
 <div id="reservationModal" class="modal-overlay">
@@ -702,7 +814,33 @@
 </div>
 
 <script>
-    // reservation modal logic + notification
+    // Order notification for menu items
+    const orderNotification = document.getElementById('orderNotification');
+    const orderMessageSpan = document.getElementById('orderMessage');
+    
+    function showOrderNotification(itemName, itemPrice) {
+        orderMessageSpan.innerText = `${itemName} (${itemPrice}) added to your order`;
+        orderNotification.classList.add('show');
+        setTimeout(() => {
+            orderNotification.classList.remove('show');
+        }, 3500);
+    }
+    
+    // Add click listeners to all menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Stop propagation to avoid any parent conflicts
+            e.stopPropagation();
+            const itemName = item.getAttribute('data-item');
+            const itemPrice = item.getAttribute('data-price');
+            if (itemName) {
+                showOrderNotification(itemName, itemPrice);
+            }
+        });
+    });
+    
+    // reservation modal logic
     const modal = document.getElementById('reservationModal');
     const reserveBtn = document.getElementById('reserveButton');
     const navReserve = document.getElementById('navReserveBtn');
@@ -783,7 +921,7 @@
     }
     animateTrail();
     
-    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button, .reserve-submit, .close-modal');
+    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button, .reserve-submit, .close-modal, .menu-item');
     interactiveItems.forEach(el => {
         el.addEventListener('mouseenter', () => {
             trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
