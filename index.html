@@ -181,7 +181,6 @@
             transform: translateY(0);
         }
 
-        /* Review Card Styles */
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -306,6 +305,8 @@
             backdrop-filter: blur(12px);
             background: rgba(0,0,0,0.5);
             transition: all 0.3s;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -315,7 +316,12 @@
             letter-spacing: 1px;
         }
 
-        .nav-book {
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-book, .nav-gallery {
             background: transparent;
             border: 1px solid #c7a05b;
             padding: 0.5rem 1.8rem;
@@ -324,9 +330,106 @@
             text-decoration: none;
             transition: 0.2s;
             border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
         }
-        .nav-book:hover {
+        .nav-book:hover, .nav-gallery:hover {
             background: rgba(199,160,91,0.2);
+        }
+
+        /* Gallery Modal */
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.3s ease;
+        }
+        .gallery-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .gallery-container {
+            width: 90%;
+            max-width: 1300px;
+            height: 85vh;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 28px;
+            padding: 1.5rem;
+            position: relative;
+            overflow-y: auto;
+        }
+        .gallery-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #c7a05b;
+        }
+        .close-gallery {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #c7a05b;
+            z-index: 10;
+            background: rgba(0,0,0,0.5);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .close-gallery:hover {
+            background: #c7a05b;
+            color: #0a0a0a;
+        }
+        .gallery-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #c7a05b;
         }
 
         .hero {
@@ -477,6 +580,8 @@
             .section-inner { padding: 3rem 5%; }
             .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
             .top-notification, .order-notification { width: 90%; max-width: none; right: 5%; left: 5%; bottom: 20px; }
+            .nav-buttons { gap: 0.5rem; }
+            .nav-book, .nav-gallery { padding: 0.4rem 1rem; font-size: 0.7rem; }
         }
 
         .cursor-trail {
@@ -615,8 +720,20 @@
 
 <nav>
     <div class="logo">AN-INN-SA</div>
-    <a href="#" class="nav-book" id="navReserveBtn">RESERVE</a>
+    <div class="nav-buttons">
+        <a href="#" class="nav-gallery" id="galleryBtn">GALLERY</a>
+        <a href="#" class="nav-book" id="navReserveBtn">RESERVE</a>
+    </div>
 </nav>
+
+<!-- Gallery Modal -->
+<div id="galleryModal" class="gallery-modal">
+    <div class="gallery-container">
+        <div class="close-gallery" id="closeGalleryBtn">&times;</div>
+        <div class="gallery-title">✦ An-Inn-Sa · Visual Journey ✦</div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+</div>
 
 <section class="hero">
     <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen atmosphere">
@@ -685,42 +802,20 @@
         </div>
     </div>
     
-    <!-- Reviews Section after rooms -->
     <div class="section-inner">
         <div class="reveal-block">
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-text">"This place is pure peace. The stillness here healed something in me. An-Inn-Sa is the vibe."</div>
-                    <div class="review-author">
-                        <div class="review-avatar">ASAP</div>
-                        <div class="review-info">
-                            <div class="review-name">ASAP Rocky</div>
-                            <div class="review-stars">★★★★★</div>
-                            <div class="review-verified">verified guest · 2 weeks ago</div>
-                        </div>
-                    </div>
+                    <div class="review-author"><div class="review-avatar">ASAP</div><div class="review-info"><div class="review-name">ASAP Rocky</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 weeks ago</div></div></div>
                 </div>
                 <div class="review-card">
                     <div class="review-text">"I found my escape. The Wellness Retreat changed my whole perspective. Coming back every season."</div>
-                    <div class="review-author">
-                        <div class="review-avatar">SZA</div>
-                        <div class="review-info">
-                            <div class="review-name">SZA</div>
-                            <div class="review-stars">★★★★★</div>
-                            <div class="review-verified">verified guest · 1 month ago</div>
-                        </div>
-                    </div>
+                    <div class="review-author"><div class="review-avatar">SZA</div><div class="review-info"><div class="review-name">SZA</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 1 month ago</div></div></div>
                 </div>
                 <div class="review-card">
                     <div class="review-text">"The architecture and energy... it's a masterpiece. Quiet luxury at its finest. Yeezy approved."</div>
-                    <div class="review-author">
-                        <div class="review-avatar">YE</div>
-                        <div class="review-info">
-                            <div class="review-name">Kanye West</div>
-                            <div class="review-stars">★★★★★</div>
-                            <div class="review-verified">verified guest · 3 weeks ago</div>
-                        </div>
-                    </div>
+                    <div class="review-author"><div class="review-avatar">YE</div><div class="review-info"><div class="review-name">Kanye West</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 weeks ago</div></div></div>
                 </div>
             </div>
         </div>
@@ -734,130 +829,37 @@
             <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
         </div>
         <div class="menu-grid reveal-block">
-            <div class="menu-category">
-                <h3>Appetizers</h3>
-                <div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22">
-                    <span class="menu-item-name">Chicken or Vegetable Soup</span>
-                    <span class="menu-item-price">$22</span>
-                </div>
-                <div class="menu-item" data-item="Crispy Samosas" data-price="$24">
-                    <span class="menu-item-name">Crispy Samosas</span>
-                    <span class="menu-item-price">$24</span>
-                </div>
-                <div class="menu-item" data-item="French Fries" data-price="$19">
-                    <span class="menu-item-name">French Fries</span>
-                    <span class="menu-item-price">$19</span>
-                </div>
-                <div class="menu-item" data-item="Chicken Wings" data-price="$20">
-                    <span class="menu-item-name">Chicken Wings</span>
-                    <span class="menu-item-price">$20</span>
-                </div>
+            <div class="menu-category"><h3>Appetizers</h3>
+                <div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22"><span class="menu-item-name">Chicken or Vegetable Soup</span><span class="menu-item-price">$22</span></div>
+                <div class="menu-item" data-item="Crispy Samosas" data-price="$24"><span class="menu-item-name">Crispy Samosas</span><span class="menu-item-price">$24</span></div>
+                <div class="menu-item" data-item="French Fries" data-price="$19"><span class="menu-item-name">French Fries</span><span class="menu-item-price">$19</span></div>
+                <div class="menu-item" data-item="Chicken Wings" data-price="$20"><span class="menu-item-name">Chicken Wings</span><span class="menu-item-price">$20</span></div>
             </div>
-            <div class="menu-category">
-                <h3>Mains</h3>
-                <div class="menu-item" data-item="Nyama Choma" data-price="$58">
-                    <span class="menu-item-name">Nyama Choma</span>
-                    <span class="menu-item-price">$58</span>
-                </div>
-                <div class="menu-item" data-item="Ugali with Beef/Chicken Stew" data-price="$42">
-                    <span class="menu-item-name">Ugali with Beef/Chicken Stew</span>
-                    <span class="menu-item-price">$42</span>
-                </div>
-                <div class="menu-item" data-item="Stir-Fried Rice or Noodles" data-price="$48">
-                    <span class="menu-item-name">Stir-Fried Rice or Noodles</span>
-                    <span class="menu-item-price">$48</span>
-                </div>
-                <div class="menu-item" data-item="Creamy Pasta" data-price="$38">
-                    <span class="menu-item-name">Creamy Pasta</span>
-                    <span class="menu-item-price">$38</span>
-                </div>
+            <div class="menu-category"><h3>Mains</h3>
+                <div class="menu-item" data-item="Nyama Choma" data-price="$58"><span class="menu-item-name">Nyama Choma</span><span class="menu-item-price">$58</span></div>
+                <div class="menu-item" data-item="Ugali with Beef/Chicken Stew" data-price="$42"><span class="menu-item-name">Ugali with Beef/Chicken Stew</span><span class="menu-item-price">$42</span></div>
+                <div class="menu-item" data-item="Stir-Fried Rice or Noodles" data-price="$48"><span class="menu-item-name">Stir-Fried Rice or Noodles</span><span class="menu-item-price">$48</span></div>
+                <div class="menu-item" data-item="Creamy Pasta" data-price="$38"><span class="menu-item-name">Creamy Pasta</span><span class="menu-item-price">$38</span></div>
             </div>
-            <div class="menu-category">
-                <h3>Desserts</h3>
-                <div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18">
-                    <span class="menu-item-name">Vanilla Ice Cream</span>
-                    <span class="menu-item-price">$18</span>
-                </div>
-                <div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17 slice">
-                    <span class="menu-item-name">Brownies with Ice Cream</span>
-                    <span class="menu-item-price">$17 slice</span>
-                </div>
-                <div class="menu-item" data-item="Tiramisu" data-price="$18 slice">
-                    <span class="menu-item-name">Tiramisu</span>
-                    <span class="menu-item-price">$18 slice</span>
-                </div>
-                <div class="menu-item" data-item="Chocolate Cake" data-price="$20">
-                    <span class="menu-item-name">Chocolate Cake</span>
-                    <span class="menu-item-price">$20</span>
-                </div>
+            <div class="menu-category"><h3>Desserts</h3>
+                <div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18"><span class="menu-item-name">Vanilla Ice Cream</span><span class="menu-item-price">$18</span></div>
+                <div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17 slice"><span class="menu-item-name">Brownies with Ice Cream</span><span class="menu-item-price">$17 slice</span></div>
+                <div class="menu-item" data-item="Tiramisu" data-price="$18 slice"><span class="menu-item-name">Tiramisu</span><span class="menu-item-price">$18 slice</span></div>
+                <div class="menu-item" data-item="Chocolate Cake" data-price="$20"><span class="menu-item-name">Chocolate Cake</span><span class="menu-item-price">$20</span></div>
             </div>
-            <div class="menu-category">
-                <h3>Drinks</h3>
-                <div class="menu-item" data-item="Orange Juice" data-price="$10">
-                    <span class="menu-item-name">Orange Juice</span>
-                    <span class="menu-item-price">$10</span>
-                </div>
-                <div class="menu-item" data-item="Coffee" data-price="$10">
-                    <span class="menu-item-name">Coffee (Hot or Iced)</span>
-                    <span class="menu-item-price">$10</span>
-                </div>
-                <div class="menu-item" data-item="Mojitos" data-price="$15">
-                    <span class="menu-item-name">Mojitos</span>
-                    <span class="menu-item-price">$15</span>
-                </div>
-                <div class="menu-item" data-item="Soda" data-price="$8">
-                    <span class="menu-item-name">Soda</span>
-                    <span class="menu-item-price">$8</span>
-                </div>
+            <div class="menu-category"><h3>Drinks</h3>
+                <div class="menu-item" data-item="Orange Juice" data-price="$10"><span class="menu-item-name">Orange Juice</span><span class="menu-item-price">$10</span></div>
+                <div class="menu-item" data-item="Coffee" data-price="$10"><span class="menu-item-name">Coffee (Hot or Iced)</span><span class="menu-item-price">$10</span></div>
+                <div class="menu-item" data-item="Mojitos" data-price="$15"><span class="menu-item-name">Mojitos</span><span class="menu-item-price">$15</span></div>
+                <div class="menu-item" data-item="Soda" data-price="$8"><span class="menu-item-name">Soda</span><span class="menu-item-price">$8</span></div>
             </div>
         </div>
         
-        <!-- Dining Reviews -->
         <div class="reviews-grid reveal-block" style="margin-top: 3rem;">
-            <div class="review-card">
-                <div class="review-text">"The Nyama Choma is fire. Best meal I've had touring. The vibes? Immaculate."</div>
-                <div class="review-author">
-                    <div class="review-avatar">DRAKE</div>
-                    <div class="review-info">
-                        <div class="review-name">Drake</div>
-                        <div class="review-stars">★★★★★</div>
-                        <div class="review-verified">verified diner · 1 week ago</div>
-                    </div>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-text">"Kid-friendly AND delicious? My whole family loved it. The Kiddy Suite is a blessing."</div>
-                <div class="review-author">
-                    <div class="review-avatar">RIH</div>
-                    <div class="review-info">
-                        <div class="review-name">Rihanna</div>
-                        <div class="review-stars">★★★★★</div>
-                        <div class="review-verified">verified guest · 3 days ago</div>
-                    </div>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-text">"The Tiramisu changed my life. No cap. An-Inn-Sa is the only place I'm staying now."</div>
-                <div class="review-author">
-                    <div class="review-avatar">ESD</div>
-                    <div class="review-info">
-                        <div class="review-name">Essdeekid</div>
-                        <div class="review-stars">★★★★★</div>
-                        <div class="review-verified">verified guest · 5 days ago</div>
-                    </div>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="review-text">"OKURRR! This place is luxury realness. The staff, the food, the energy — 10s across the board!"</div>
-                <div class="review-author">
-                    <div class="review-avatar">CARDI</div>
-                    <div class="review-info">
-                        <div class="review-name">Cardi B</div>
-                        <div class="review-stars">★★★★★</div>
-                        <div class="review-verified">verified guest · 2 days ago</div>
-                    </div>
-                </div>
-            </div>
+            <div class="review-card"><div class="review-text">"The Nyama Choma is fire. Best meal I've had touring. The vibes? Immaculate."</div><div class="review-author"><div class="review-avatar">DRAKE</div><div class="review-info"><div class="review-name">Drake</div><div class="review-stars">★★★★★</div><div class="review-verified">verified diner · 1 week ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"Kid-friendly AND delicious? My whole family loved it. The Kiddy Suite is a blessing."</div><div class="review-author"><div class="review-avatar">RIH</div><div class="review-info"><div class="review-name">Rihanna</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 days ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"The Tiramisu changed my life. No cap. An-Inn-Sa is the only place I'm staying now."</div><div class="review-author"><div class="review-avatar">ESD</div><div class="review-info"><div class="review-name">Essdeekid</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 5 days ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"OKURRR! This place is luxury realness. The staff, the food, the energy — 10s across the board!"</div><div class="review-author"><div class="review-avatar">CARDI</div><div class="review-info"><div class="review-name">Cardi B</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 days ago</div></div></div></div>
         </div>
         
         <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
@@ -907,39 +909,7 @@
         <span class="close-modal" id="closeModalBtn">&times;</span>
         <h3>reserve your stay</h3>
         <p style="margin-bottom: 1rem; font-size: 0.8rem;">Fill in your details to secure a moment of stillness.</p>
-        <form id="bookingForm">
-            <div class="form-group">
-                <label>Full name</label>
-                <input type="text" id="guestName" placeholder="Luna Serene" required>
-            </div>
-            <div class="form-group">
-                <label>Email address</label>
-                <input type="email" id="guestEmail" placeholder="hello@stillness.com" required>
-            </div>
-            <div class="form-group">
-                <label>Phone number</label>
-                <input type="tel" id="guestPhone" placeholder="+1 (555) 123-4567">
-            </div>
-            <div class="form-group">
-                <label>Arrival date</label>
-                <input type="date" id="arrivalDate" required>
-            </div>
-            <div class="form-group">
-                <label>Preferred suite</label>
-                <select id="roomType">
-                    <option value="Signature Suite">Signature Suite</option>
-                    <option value="Deluxe Room">Deluxe Room</option>
-                    <option value="Wellness Retreat">Wellness Retreat</option>
-                    <option value="Kiddy Suite">Kiddy Suite</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Special requests</label>
-                <input type="text" id="specialNotes" placeholder="Anniversary, dietary needs...">
-            </div>
-            <button type="submit" class="reserve-submit">CONFIRM RESERVATION</button>
-            <div id="formSuccessMsg" class="form-success"></div>
-        </form>
+        <form id="bookingForm"><div class="form-group"><label>Full name</label><input type="text" id="guestName" placeholder="Luna Serene" required></div><div class="form-group"><label>Email address</label><input type="email" id="guestEmail" placeholder="hello@stillness.com" required></div><div class="form-group"><label>Phone number</label><input type="tel" id="guestPhone" placeholder="+1 (555) 123-4567"></div><div class="form-group"><label>Arrival date</label><input type="date" id="arrivalDate" required></div><div class="form-group"><label>Preferred suite</label><select id="roomType"><option value="Signature Suite">Signature Suite</option><option value="Deluxe Room">Deluxe Room</option><option value="Wellness Retreat">Wellness Retreat</option><option value="Kiddy Suite">Kiddy Suite</option></select></div><div class="form-group"><label>Special requests</label><input type="text" id="specialNotes" placeholder="Anniversary, dietary needs..."></div><button type="submit" class="reserve-submit">CONFIRM RESERVATION</button><div id="formSuccessMsg" class="form-success"></div></form>
     </div>
 </div>
 
@@ -949,16 +919,51 @@
 </div>
 
 <script>
+    // Gallery Images
+    const galleryImages = [
+        { src: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Lobby · Where stillness welcomes you" },
+        { src: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Signature Suite · Pure elegance" },
+        { src: "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Deluxe Room · Contemporary comfort" },
+        { src: "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Wellness Retreat · Inner peace" },
+        { src: "https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Kiddy Suite · Joyful family moments" },
+        { src: "https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Infinity Pool · Serene waters" },
+        { src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Spa & Meditation · Rejuvenation" },
+        { src: "https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Rooftop Lounge · Sunset views" },
+        { src: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "InnSa Grill · Dining experience" },
+        { src: "https://images.pexels.com/photos/704097/pexels-photo-704097.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Garden Terrace · Nature's embrace" },
+        { src: "https://images.pexels.com/photos/706081/pexels-photo-706081.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Library Lounge · Quiet reading" },
+        { src: "https://images.pexels.com/photos/2581921/pexels-photo-2581921.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Night Ambiance · Starlit serenity" }
+    ];
+    
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryBtn = document.getElementById('galleryBtn');
+    const closeGalleryBtn = document.getElementById('closeGalleryBtn');
+    const galleryGrid = document.getElementById('galleryGrid');
+    
+    function buildGallery() {
+        galleryGrid.innerHTML = '';
+        galleryImages.forEach(img => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `<img src="${img.src}" alt="${img.caption}"><div class="gallery-caption">${img.caption}</div>`;
+            galleryGrid.appendChild(item);
+        });
+    }
+    
+    function openGallery() { galleryModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeGallery() { galleryModal.classList.remove('active'); document.body.style.overflow = ''; }
+    
+    if(galleryBtn) galleryBtn.addEventListener('click', (e) => { e.preventDefault(); buildGallery(); openGallery(); });
+    if(closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
+    galleryModal.addEventListener('click', (e) => { if(e.target === galleryModal) closeGallery(); });
+    
     // Order notification
     const orderNotification = document.getElementById('orderNotification');
     const orderMessageSpan = document.getElementById('orderMessage');
-    
     function showOrderNotification(itemName, itemPrice) {
         orderMessageSpan.innerText = `${itemName} (${itemPrice}) added to your order`;
         orderNotification.classList.add('show');
-        setTimeout(() => {
-            orderNotification.classList.remove('show');
-        }, 3500);
+        setTimeout(() => orderNotification.classList.remove('show'), 3500);
     }
     
     const menuItems = document.querySelectorAll('.menu-item');
@@ -978,16 +983,13 @@
     const closeModalBtn = document.getElementById('closeModalBtn');
     const bookingForm = document.getElementById('bookingForm');
     const notification = document.getElementById('formalNotification');
-
     function openModal() { modal.classList.add('active'); }
     function closeModal() { modal.classList.remove('active'); const successDiv = document.getElementById('formSuccessMsg'); if(successDiv) successDiv.innerText = ''; bookingForm.reset(); }
     function showNotification() { notification.classList.add('show'); setTimeout(() => notification.classList.remove('show'), 5000); }
-
     if(reserveBtn) reserveBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
     if(navReserve) navReserve.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
     if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-
     bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('guestName')?.value.trim();
@@ -998,7 +1000,7 @@
         successDiv.innerText = "✓ Reservation request received. We'll contact you shortly.";
         setTimeout(() => { closeModal(); showNotification(); }, 1200);
     });
-
+    
     // Cursor effects
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
@@ -1018,20 +1020,17 @@
     }
     animateTrail();
     
-    // Reveal animations
     const revealElements = document.querySelectorAll('.reveal-block');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
     }, { threshold: 0.2 });
     revealElements.forEach(el => observer.observe(el));
     
-    // Parallax
     window.addEventListener('scroll', () => {
         const heroBg = document.querySelector('.hero-video-bg');
         if (heroBg) heroBg.style.transform = `scale(${1 + window.scrollY * 0.0003}) translateY(${window.scrollY * 0.05}px)`;
     });
     
-    // Horizontal scroll
     const scrollContainer = document.querySelector('.horizontal-scroll');
     if(scrollContainer) {
         let isDown = false, startX, scrollLeft;
