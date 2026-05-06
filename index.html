@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>An-Inn-Sa — Arrive in Stillness · Starry Sanctuary</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <title>An-Inn-Sa — Arrive in Stillness · Reserve Your Stay</title>
+    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,79 +14,47 @@
         }
 
         body {
-            background-color: #07070a;
+            background-color: #0a0a0a;
             font-family: 'Inter', sans-serif;
-            color: #ece8df;
+            color: #e8e6e1;
             overflow-x: hidden;
             line-height: 1.4;
             cursor: default;
         }
 
-        /* universal star overlay for blank backgrounds */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-image: radial-gradient(2px 2px at 15% 30%, rgba(255,245,210,0.25) 1px, transparent 1px),
-                              radial-gradient(1px 1px at 72% 88%, rgba(255,240,190,0.3) 1px, transparent 1px),
-                              radial-gradient(3px 3px at 45% 20%, rgba(255,230,170,0.15) 1px, transparent 1px);
-            background-size: 180px 180px, 220px 220px, 300px 300px;
-            background-repeat: repeat;
-            z-index: 0;
-            opacity: 0.5;
-        }
-
         ::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #121212;
+            background: #1a1a1a;
         }
         ::-webkit-scrollbar-thumb {
             background: #c7a05b;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
         section {
             position: relative;
             width: 100%;
-            z-index: 2;
-            background: rgba(7, 7, 10, 0.7);
-            backdrop-filter: blur(0px);
-        }
-
-        /* additional canvas starfield for deeper sections */
-        .deep-stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.55;
+            will-change: transform;
         }
 
         .section-inner {
             position: relative;
-            z-index: 3;
-            padding: 6rem 6%;
+            z-index: 2;
+            padding: 6rem 5%;
         }
 
         .giant-text {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 350;
-            font-size: clamp(3rem, 10vw, 6.5rem);
+            font-weight: 400;
+            font-size: clamp(3rem, 10vw, 7rem);
             letter-spacing: -0.02em;
-            line-height: 1.08;
+            line-height: 1.1;
         }
 
         .quote-line {
-            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
             font-weight: 300;
             font-family: 'Inter', sans-serif;
             letter-spacing: -0.01em;
@@ -98,14 +66,21 @@
             border: 1.5px solid #c7a05b;
             color: #c7a05b;
             padding: 1rem 2.5rem;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             text-decoration: none;
             transition: all 0.4s ease;
             backdrop-filter: blur(4px);
             border-radius: 2px;
+        }
+
+        .btn-gold:hover {
+            background: rgba(199, 160, 91, 0.12);
+            border-color: #e0b87a;
+            color: #e0b87a;
+            transform: scale(1.02);
         }
 
         .booking-button {
@@ -115,95 +90,118 @@
             padding: 1.2rem 2.8rem;
             font-weight: 600;
             font-size: 1rem;
-            letter-spacing: 2.2px;
+            letter-spacing: 2px;
             transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
+            animation: softPulse 2.2s infinite;
             cursor: pointer;
             border-radius: 2px;
-            box-shadow: 0 0 15px rgba(199,160,91,0.3);
+        }
+
+        @keyframes softPulse {
+            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
+            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
         }
 
         .booking-button:hover {
-            background: #e0b87a;
+            background: #dbb16e;
             transform: scale(1.02);
-            box-shadow: 0 10px 28px rgba(199,160,91,0.5);
+            animation: none;
+            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
         }
 
-        /* horizontal scroll rooms */
         .horizontal-scroll {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 1.8rem;
-            padding: 2rem 6% 4rem 6%;
+            gap: 1.5rem;
+            padding: 2rem 5% 4rem 5%;
             scroll-behavior: smooth;
             cursor: grab;
             scrollbar-width: thin;
         }
-        .horizontal-scroll::-webkit-scrollbar { height: 4px; }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 4px;
+        }
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #c7a05b;
+            border-radius: 8px;
+        }
+
         .room-card {
             flex: 0 0 85%;
             scroll-snap-align: start;
             position: relative;
-            border-radius: 28px;
+            border-radius: 24px;
             overflow: hidden;
-            transition: all 0.5s;
-            background: #14141e;
-            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.6);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: #1a1a2e;
         }
-        @media (min-width: 900px) { .room-card { flex: 0 0 68%; } }
+
+        @media (min-width: 900px) {
+            .room-card { flex: 0 0 70%; }
+        }
+
         .room-card img {
             width: 100%;
-            height: 80vh;
+            height: 85vh;
             object-fit: cover;
-            transition: transform 0.7s;
+            transition: transform 0.8s ease-out;
+            display: block;
         }
-        .room-card:hover img { transform: scale(1.03); }
+
+        .room-card:hover img {
+            transform: scale(1.03);
+        }
+
         .room-caption {
             position: absolute;
             bottom: 2rem;
             left: 2rem;
             right: 2rem;
-            background: rgba(8, 8, 14, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(8px);
             padding: 1.5rem;
             border-left: 3px solid #c7a05b;
-            border-radius: 16px;
-        }
-        .kid-friendly-badge {
-            display: inline-block;
-            background: rgba(199, 160, 91, 0.2);
-            border: 1px solid #c7a05b;
-            border-radius: 40px;
-            padding: 0.2rem 1rem;
-            font-size: 0.7rem;
-            margin-top: 0.6rem;
         }
 
         .reveal-block {
             opacity: 0;
-            transform: translateY(42px);
-            transition: opacity 1s cubic-bezier(0.2, 0.9, 0.3, 1), transform 1s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transform: translateY(40px);
+            transition: opacity 1s ease, transform 1s ease;
         }
-        .reveal-block.revealed { opacity: 1; transform: translateY(0); }
+
+        .reveal-block.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2.5rem;
         }
+
         .menu-category h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            border-bottom: 1px solid rgba(199, 160, 91, 0.5);
+            font-weight: 400;
+            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
             display: inline-block;
             margin-bottom: 1.5rem;
         }
+
         .menu-item {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px dashed rgba(236, 232, 223, 0.2);
-            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(255,255,240,0.2);
+            padding: 0.6rem 0;
         }
 
         nav {
@@ -214,33 +212,40 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 6%;
-            z-index: 110;
-            backdrop-filter: blur(16px);
-            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem 5%;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.5);
+            transition: all 0.3s;
         }
+
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             font-weight: 500;
+            letter-spacing: 1px;
         }
+
         .nav-book {
             background: transparent;
             border: 1px solid #c7a05b;
             padding: 0.5rem 1.8rem;
-            color: #ece8df;
-            font-size: 0.75rem;
+            color: #e8e6e1;
+            font-size: 0.8rem;
             text-decoration: none;
-            border-radius: 40px;
+            transition: 0.2s;
+            border-radius: 2px;
+        }
+        .nav-book:hover {
+            background: rgba(199,160,91,0.2);
         }
 
-        /* Hero */
         .hero {
             height: 100vh;
             position: relative;
             overflow: hidden;
-            background: #030305;
         }
+
         .hero-video-bg {
             position: absolute;
             top: 0;
@@ -248,59 +253,165 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.65);
-            animation: slowZen 26s infinite alternate;
+            transform: scale(1);
+            animation: slowZoom 26s infinite alternate ease-in-out;
         }
-        @keyframes slowZen {
+
+        @keyframes slowZoom {
             0% { transform: scale(1); }
             100% { transform: scale(1.08); }
         }
+
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
         }
+
         .hero-text {
             position: absolute;
-            bottom: 18%;
-            left: 6%;
-            z-index: 5;
-            animation: fadeSlideUp 1.4s ease-out;
+            bottom: 20%;
+            left: 5%;
+            z-index: 2;
+            animation: fadeSlideUp 1.8s ease-out;
         }
+
         @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(36px);}
+            0% { opacity: 0; transform: translateY(40px);}
             100% { opacity: 1; transform: translateY(0);}
         }
 
-        /* emotion section star canvas */
         .emotion-section {
-            background: #020104;
+            background: #030303;
             position: relative;
-            min-height: 85vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .stars-canvas {
+        .dream-bg {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 2;
+            object-fit: cover;
+            opacity: 0.3;
+            filter: brightness(0.5) blur(1px);
+            transform: scale(1.02);
+            z-index: 0;
+        }
+        .emotion-section .section-inner {
+            z-index: 3;
+            position: relative;
         }
 
-        /* Modal reservation form (starry luxury) */
+        .top-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            background: rgba(20, 18, 16, 0.96);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(199, 160, 91, 0.5);
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            min-width: 280px;
+            max-width: 480px;
+            width: max-content;
+            z-index: 2000;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(199,160,91,0.2);
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+        .top-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .notification-title {
+            font-weight: 600;
+            color: #c7a05b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .notification-message {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #f0ede8;
+            line-height: 1.4;
+        }
+        .notification-detail {
+            font-size: 0.75rem;
+            color: #b9b3a5;
+            margin-top: 8px;
+            border-top: 1px solid rgba(199,160,91,0.2);
+            padding-top: 6px;
+        }
+
+        .cta-section {
+            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
+        }
+        footer {
+            background: #020202;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(199,160,91,0.2);
+        }
+        @media (max-width: 700px) {
+            .section-inner { padding: 3rem 5%; }
+            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
+            .top-notification { width: 90%; max-width: none; padding: 0.8rem 1.2rem; }
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, opacity 0.3s;
+            will-change: left, top;
+        }
+        .cursor-trail-dot {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: #c7a05b;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            filter: blur(1px);
+            opacity: 0.5;
+            transform: translate(-50%, -50%);
+            transition: 0.05s linear;
+        }
+        
+        .kid-friendly-badge {
+            display: inline-block;
+            background: rgba(199, 160, 91, 0.2);
+            border: 1px solid #c7a05b;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Modal Reservation Form Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(3, 3, 8, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -314,18 +425,16 @@
             opacity: 1;
         }
         .reservation-modal {
-            background: rgba(12, 12, 20, 0.96);
-            border: 1px solid rgba(199, 160, 91, 0.6);
-            border-radius: 32px;
+            background: #12100e;
+            border: 1px solid rgba(199, 160, 91, 0.5);
+            border-radius: 24px;
             max-width: 520px;
             width: 90%;
-            padding: 2rem 2rem 2.2rem;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(199,160,91,0.3);
-            font-family: 'Inter', sans-serif;
+            padding: 2rem;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
             position: relative;
-            z-index: 1001;
             transform: scale(0.96);
-            transition: transform 0.3s;
+            transition: transform 0.25s ease;
         }
         .modal-overlay.active .reservation-modal {
             transform: scale(1);
@@ -333,118 +442,60 @@
         .reservation-modal h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            color: #dbb87a;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.3px;
+            color: #c7a05b;
+            margin-bottom: 0.3rem;
         }
         .form-group {
             margin-bottom: 1.2rem;
         }
         .form-group label {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 6px;
-            color: #cdc6b5;
+            margin-bottom: 5px;
+            color: #bcb7ab;
         }
         .form-group input, .form-group select {
             width: 100%;
-            background: rgba(20, 20, 30, 0.8);
-            border: 1px solid #3e3a32;
-            padding: 12px 15px;
-            color: #f0ede8;
-            border-radius: 16px;
+            background: #1e1c18;
+            border: 1px solid #3a3630;
+            padding: 12px 14px;
+            color: #ece8df;
+            border-radius: 12px;
             font-size: 0.9rem;
             transition: 0.2s;
         }
         .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #c7a05b;
-            box-shadow: 0 0 0 2px rgba(199,160,91,0.3);
         }
         .reserve-submit {
             background: #c7a05b;
             color: #0a0a0a;
             border: none;
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             font-weight: 600;
             font-size: 1rem;
             letter-spacing: 1.5px;
             border-radius: 40px;
-            margin-top: 12px;
+            margin-top: 10px;
             cursor: pointer;
-            transition: 0.2s;
-        }
-        .reserve-submit:hover {
-            background: #e0b87a;
         }
         .close-modal {
             position: absolute;
-            top: 18px;
-            right: 22px;
+            top: 16px;
+            right: 20px;
             font-size: 1.8rem;
             cursor: pointer;
             color: #c7a05b;
-            transition: 0.2s;
         }
-        .close-modal:hover { color: #f3d392; }
         .form-success {
             text-align: center;
-            color: #c7e0b5;
+            color: #a8d08d;
+            font-size: 0.8rem;
             margin-top: 12px;
-            font-size: 0.85rem;
-        }
-
-        .top-notification {
-            position: fixed;
-            top: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-140%);
-            background: rgba(14, 12, 10, 0.96);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(199, 160, 91, 0.6);
-            border-radius: 28px;
-            padding: 1rem 2rem;
-            z-index: 2000;
-            transition: transform 0.4s;
-            text-align: center;
-        }
-        .top-notification.show { transform: translateX(-50%) translateY(0); }
-
-        /* cursor */
-        .cursor-trail {
-            position: fixed;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(199,160,91,0.3) 0%, rgba(199,160,91,0) 70%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-trail-dot {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: #e2bc7c;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            filter: blur(1px);
-        }
-        @media (max-width: 700px) {
-            .section-inner { padding: 3rem 5%; }
-        }
-        .starry-bg-fix {
-            position: relative;
-            isolation: isolate;
-        }
-        .static-stars {
-            background-image: radial-gradient(1.2px 1.2px at 25% 40%, rgba(250,245,210,0.35) 1px, transparent 1px),
-                              radial-gradient(2px 2px at 70% 85%, rgba(250,240,190,0.25) 1px, transparent 1px);
-            background-size: 140px 140px, 210px 210px;
         }
     </style>
 </head>
@@ -455,106 +506,159 @@
 
 <nav>
     <div class="logo">AN-INN-SA</div>
-    <a href="#" class="nav-book" id="openModalNav">RESERVE</a>
+    <a href="#" class="nav-book" id="navReserveBtn">RESERVE</a>
 </nav>
 
 <section class="hero">
-    <img class="hero-video-bg" src="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="starry sanctuary mist" style="object-position: center 30%;">
+    <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
-        <p class="quote-line" style="margin-bottom: 0.4rem;">You came to the right place</p>
+        <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
         <h1 class="giant-text" style="font-weight: 300;">An-Inn-Sa</h1>
-        <p style="margin-top: 1rem; font-size: 0.9rem; letter-spacing: 2.5px;">where stillness speaks under stars</p>
+        <p style="margin-top: 1rem; font-size: 1rem; letter-spacing: 2px;">where stillness speaks</p>
     </div>
 </section>
 
-<section class="intro-section" style="background: rgba(5,5,10,0.8);">
+<section class="intro-section">
     <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.9rem;">“You arrive.”</p>
-            <div style="height: 3rem;"></div>
-            <p class="quote-line" style="font-size: 1.9rem;">The world fades.</p>
-            <div style="height: 3rem;"></div>
+            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
+            <div style="height: 4rem;"></div>
+            <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
+            <div style="height: 4rem;"></div>
             <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
-            <div style="height: 2rem;"></div>
-            <p style="max-width: 520px; margin: 0 auto; font-weight: 300;">Comfort, culture, calmness — a celestial sanctuary.</p>
+            <div style="height: 3rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
 </section>
 
-<!-- Rooms Horizontal Scroll -->
-<section style="background: rgba(4,4,8,0.85);">
+<section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 0.9rem; letter-spacing: 3px;">Sacred spaces</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem);">Rooms & Suites</h2>
+            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
+            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
         </div>
     </div>
     <div class="horizontal-scroll">
-        <div class="room-card"><img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Signature Suite</h3><p>Spacious retreat, natural light, lounge area.</p><a href="#" style="color:#c7a05b;">DISCOVER →</a></div></div>
-        <div class="room-card"><img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Deluxe Room</h3><p>Soft bedding, modern amenities, calming atmosphere.</p><a href="#" style="color:#c7a05b;">DISCOVER →</a></div></div>
-        <div class="room-card"><img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Wellness Retreat</h3><p>Private balcony, meditative views.</p><a href="#" style="color:#c7a05b;">DISCOVER →</a></div></div>
-        <div class="room-card"><img src="https://images.pexels.com/photos/3288102/pexels-photo-3288102.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Kiddy Suite</h3><p>Playful decor, family friendly.</p><div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div><a href="#" style="color:#c7a05b;">DISCOVER →</a></div></div>
+        <div class="room-card">
+            <img src="https://picsum.photos/id/164/1200/800" alt="Signature Suite">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
+                <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="https://picsum.photos/id/112/1200/800" alt="Deluxe Room">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
+                <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="https://picsum.photos/id/127/1200/800" alt="Wellness Retreat">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
+                <p>Private balcony, meditative views, and handcrafted interiors.</p>
+                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="https://picsum.photos/id/20/1200/800" alt="Kiddy Suite">
+            <div class="room-caption">
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
+                <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
+                <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
+                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Dining section (with starry background) -->
-<section class="dining-section" style="background: radial-gradient(ellipse at bottom, #0a0810, #020105);">
+<section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
-            <p class="quote-line">InnSa Lounge & Grill</p>
+            <p class="quote-line" style="letter-spacing: 2px;">InnSa Lounge & Grill</p>
             <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
         </div>
         <div class="menu-grid reveal-block">
-            <div class="menu-category"><h3>Appetizers</h3><div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div><div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div><div class="menu-item"><span>French Fries</span><span>$19</span></div><div class="menu-item"><span>Chicken Wings</span><span>$20</span></div></div>
-            <div class="menu-category"><h3>Mains</h3><div class="menu-item"><span>Nyama Choma</span><span>$58</span></div><div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div><div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div><div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div></div>
-            <div class="menu-category"><h3>Desserts</h3><div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div><div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice</span></div><div class="menu-item"><span>Tiramisu</span><span>$18 slice</span></div><div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div></div>
-            <div class="menu-category"><h3>Drinks</h3><div class="menu-item"><span>Orange Juice</span><span>$10</span></div><div class="menu-item"><span>Coffee</span><span>$10</span></div><div class="menu-item"><span>Mojitos</span><span>$15</span></div><div class="menu-item"><span>Soda</span><span>$8</span></div></div>
+            <div class="menu-category">
+                <h3>Appetizers</h3>
+                <div class="menu-item"><span>Chicken or Vegetable Soup</span><span>$22</span></div>
+                <div class="menu-item"><span>Crispy Samosas</span><span>$24</span></div>
+                <div class="menu-item"><span>French Fries</span><span>$19</span></div>
+                <div class="menu-item"><span>Chicken Wings</span><span>$20</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Mains</h3>
+                <div class="menu-item"><span>Nyama Choma</span><span>$58</span></div>
+                <div class="menu-item"><span>Ugali with Beef/Chicken Stew</span><span>$42</span></div>
+                <div class="menu-item"><span>Stir-Fried Rice or Noodles</span><span>$48</span></div>
+                <div class="menu-item"><span>Creamy Pasta</span><span>$38</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Desserts</h3>
+                <div class="menu-item"><span>Vanilla Ice Cream</span><span>$18</span></div>
+                <div class="menu-item"><span>Brownies with Ice Cream</span><span>$17 slice / $100 whole</span></div>
+                <div class="menu-item"><span>Tiramisu</span><span>$18 slice / $120 whole</span></div>
+                <div class="menu-item"><span>Chocolate Cake</span><span>$20</span></div>
+            </div>
+            <div class="menu-category">
+                <h3>Drinks</h3>
+                <div class="menu-item"><span>Orange Juice</span><span>$10</span></div>
+                <div class="menu-item"><span>Coffee (Hot or Iced)</span><span>$10</span></div>
+                <div class="menu-item"><span>Mojitos</span><span>$15</span></div>
+                <div class="menu-item"><span>Soda</span><span>$8</span></div>
+            </div>
         </div>
-        <div class="reveal-block" style="margin-top: 2rem; text-align: center;"><p class="quote-line" style="font-size: 1rem;">Freshly prepared • Under a canopy of stars</p></div>
+        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
+            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
+        </div>
     </div>
 </section>
 
-<!-- Emotion + deep stars canvas -->
 <section class="emotion-section">
-    <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" style="position:absolute; width:100%; height:100%; object-fit:cover; opacity:0.25; filter:blur(3px);">
+    <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="peaceful landscape">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p><div style="height: 1.8rem;"></div>
-            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p><div style="height: 1.8rem;"></div>
-            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem);">Your home away from home</p>
-            <p style="margin-top: 1rem;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
+            <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
+            <div style="height: 2rem;"></div>
+            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
+            <div style="height: 2rem;"></div>
+            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
+            <div style="height: 2rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
         </div>
     </div>
 </section>
 
-<!-- Booking CTA -->
-<section class="cta-section" style="background: #030307; border-top: 1px solid rgba(199,160,91,0.2);">
+<section class="cta-section" id="booking-anchor">
     <div class="section-inner" style="text-align: center;">
         <div class="reveal-block">
             <h2 class="giant-text" style="font-size: 3rem;">Secure your arrival</h2>
-            <p style="margin: 1rem auto; max-width: 500px;">Reserve your sanctuary — moments of stillness await.</p>
-            <button id="reserveMainBtn" class="booking-button">BEGIN THE JOURNEY</button>
-            <p style="font-size: 0.7rem; margin-top: 2rem;">#ANINNSA • Quiet Luxury under stars</p>
+            <p style="margin: 1rem auto; max-width: 500px;">Reserve your sanctuary — moments of stillness are only a click away.</p>
+            <button id="reserveButton" class="booking-button">BEGIN THE JOURNEY</button>
+            <p style="font-size: 0.8rem; margin-top: 2rem;">#ANINNSA • Get social • Quiet luxury</p>
         </div>
     </div>
 </section>
-
-<footer style="background:#010101; text-align:center; padding:2rem; font-size:0.75rem;">
-    <p>An-Inn-Sa — where every soul finds silence and starlight. © 2025</p>
+    
+<footer>
+    <p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p>
 </footer>
 
-<!-- Reservation Modal (Form) -->
+<!-- Reservation Modal -->
 <div id="reservationModal" class="modal-overlay">
     <div class="reservation-modal">
         <span class="close-modal" id="closeModalBtn">&times;</span>
-        <h3>arrive in stillness</h3>
-        <p style="margin-bottom: 1.2rem; font-size: 0.85rem; color: #bcb5a6;">Fill your journey details</p>
+        <h3>reserve your stay</h3>
+        <p style="margin-bottom: 1rem; font-size: 0.8rem;">Fill in your details to secure a moment of stillness.</p>
         <form id="bookingForm">
             <div class="form-group">
                 <label>Full name</label>
-                <input type="text" id="guestName" placeholder="e.g., Luna Devine" required>
+                <input type="text" id="guestName" placeholder="Luna Serene" required>
             </div>
             <div class="form-group">
                 <label>Email address</label>
@@ -562,7 +666,7 @@
             </div>
             <div class="form-group">
                 <label>Phone number</label>
-                <input type="tel" id="guestPhone" placeholder="+1 (555) 000-9999">
+                <input type="tel" id="guestPhone" placeholder="+1 (555) 123-4567">
             </div>
             <div class="form-group">
                 <label>Arrival date</label>
@@ -574,160 +678,157 @@
                     <option value="Signature Suite">Signature Suite</option>
                     <option value="Deluxe Room">Deluxe Room</option>
                     <option value="Wellness Retreat">Wellness Retreat</option>
-                    <option value="Kiddy Suite">Kiddy Suite (Family)</option>
+                    <option value="Kiddy Suite">Kiddy Suite</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Special notes (optional)</label>
-                <input type="text" id="specialNotes" placeholder="Anniversary, dietary, etc.">
+                <label>Special requests</label>
+                <input type="text" id="specialNotes" placeholder="Anniversary, dietary needs...">
             </div>
-            <button type="submit" class="reserve-submit">secure reservation</button>
+            <button type="submit" class="reserve-submit">CONFIRM RESERVATION</button>
             <div id="formSuccessMsg" class="form-success"></div>
         </form>
     </div>
 </div>
 
 <div id="formalNotification" class="top-notification">
-    <div class="notification-title">✨ AN-INN-SA · RESERVATION CONFIRMED ✨</div>
-    <div class="notification-message">Your celestial escape has been secured.</div>
-    <div class="notification-detail">A confirmation e-mail with itinerary will arrive shortly. We await your arrival under the stars.</div>
+    <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
+    <div class="notification-message">Your escape to serenity has been secured.</div>
+    <div class="notification-detail">A confirmation e-mail with your itinerary will arrive shortly. We await your arrival.</div>
 </div>
 
 <script>
-    (function(){
-        const modal = document.getElementById('reservationModal');
-        const openBtns = [document.getElementById('reserveMainBtn'), document.getElementById('openModalNav')];
-        const closeBtn = document.getElementById('closeModalBtn');
-        const bookingForm = document.getElementById('bookingForm');
-        const notification = document.getElementById('formalNotification');
+    // reservation modal logic + notification
+    const modal = document.getElementById('reservationModal');
+    const reserveBtn = document.getElementById('reserveButton');
+    const navReserve = document.getElementById('navReserveBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const bookingForm = document.getElementById('bookingForm');
+    const notification = document.getElementById('formalNotification');
 
-        function openModal() {
-            modal.classList.add('active');
-        }
-        function closeModal() {
-            modal.classList.remove('active');
-            const successDiv = document.getElementById('formSuccessMsg');
-            if(successDiv) successDiv.innerText = '';
-            bookingForm.reset();
-        }
-        openBtns.forEach(btn => {
-            if(btn) btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal();
-            });
-        });
-        if(closeBtn) closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if(e.target === modal) closeModal();
-        });
+    function openModal() {
+        modal.classList.add('active');
+    }
+    function closeModal() {
+        modal.classList.remove('active');
+        const successDiv = document.getElementById('formSuccessMsg');
+        if(successDiv) successDiv.innerText = '';
+        bookingForm.reset();
+    }
+    function showNotification() {
+        notification.classList.add('show');
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 5000);
+    }
 
-        bookingForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('guestName')?.value.trim();
-            const email = document.getElementById('guestEmail')?.value.trim();
-            const arrival = document.getElementById('arrivalDate')?.value;
-            if(!name || !email || !arrival) {
-                alert("Please fill in name, email, and arrival date.");
-                return;
+    if(reserveBtn) reserveBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+    });
+    if(navReserve) navReserve.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+    });
+    if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) closeModal();
+    });
+
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('guestName')?.value.trim();
+        const email = document.getElementById('guestEmail')?.value.trim();
+        const arrival = document.getElementById('arrivalDate')?.value;
+        if(!name || !email || !arrival) {
+            alert("Please fill in name, email, and arrival date to secure your reservation.");
+            return;
+        }
+        const successDiv = document.getElementById('formSuccessMsg');
+        successDiv.innerText = "✓ Reservation request received. We'll contact you shortly.";
+        setTimeout(() => {
+            closeModal();
+            showNotification();
+        }, 1200);
+    });
+
+    // Cursor & interactive effects (maintained)
+    const trail = document.getElementById('cursorTrail');
+    const dot = document.getElementById('cursorDot');
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+    });
+    function animateTrail() {
+        trailX += (mouseX - trailX) * 0.12;
+        trailY += (mouseY - trailY) * 0.12;
+        trail.style.left = trailX + 'px';
+        trail.style.top = trailY + 'px';
+        let dx = mouseX - trailX;
+        let dy = mouseY - trailY;
+        let dist = Math.sqrt(dx*dx + dy*dy);
+        let size = Math.min(46, 26 + dist * 0.4);
+        trail.style.width = size + 'px';
+        trail.style.height = size + 'px';
+        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
+        requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+    
+    const interactiveItems = document.querySelectorAll('.btn-gold, .room-card, .nav-book, .booking-button, .reserve-submit, .close-modal');
+    interactiveItems.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            trail.style.transform = 'translate(-50%, -50%) scale(1.1)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.45) 0%, rgba(199,160,91,0) 70%)';
+            dot.style.background = '#e0b87a';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
+        });
+        el.addEventListener('mouseleave', () => {
+            trail.style.transform = 'translate(-50%, -50%) scale(1)';
+            trail.style.background = 'radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%)';
+            dot.style.background = '#c7a05b';
+            dot.style.width = '5px';
+            dot.style.height = '5px';
+        });
+    });
+    
+    // reveal on scroll
+    const revealElements = document.querySelectorAll('.reveal-block');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
             }
-            // Show success + notification
-            const successDiv = document.getElementById('formSuccessMsg');
-            successDiv.innerText = "✓ Reservation request received. We'll be in touch soon.";
-            setTimeout(() => {
-                closeModal();
-                // show floating notification
-                notification.classList.add('show');
-                setTimeout(() => notification.classList.remove('show'), 4500);
-            }, 1200);
         });
-
-        // Cursor trail effect
-        const trail = document.getElementById('cursorTrail');
-        const dot = document.getElementById('cursorDot');
-        let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
-        });
-        function animateTrail() {
-            trailX += (mouseX - trailX) * 0.12;
-            trailY += (mouseY - trailY) * 0.12;
-            trail.style.left = trailX + 'px'; trail.style.top = trailY + 'px';
-            let dx = mouseX - trailX, dy = mouseY - trailY;
-            let dist = Math.sqrt(dx*dx+dy*dy);
-            let size = Math.min(46, 28 + dist * 0.4);
-            trail.style.width = size + 'px'; trail.style.height = size + 'px';
-            trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.012);
-            requestAnimationFrame(animateTrail);
+    }, { threshold: 0.2, rootMargin: "0px 0px -60px 0px" });
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Parallax effect
+    window.addEventListener('scroll', () => {
+        const heroBg = document.querySelector('.hero-video-bg');
+        if (heroBg) {
+            let scrollY = window.scrollY;
+            heroBg.style.transform = `scale(${1 + scrollY * 0.0003}) translateY(${scrollY * 0.05}px)`;
         }
-        animateTrail();
-        
-        // stars canvas (animated)
-        const canvas = document.getElementById('starsCanvas');
-        if(canvas) {
-            let ctx = canvas.getContext('2d');
-            let starsArray = [], width, height;
-            function resizeStars() {
-                const container = canvas.parentElement;
-                const rect = container.getBoundingClientRect();
-                width = rect.width; height = rect.height;
-                canvas.width = width; canvas.height = height;
-                initStars();
-            }
-            function initStars() {
-                starsArray = [];
-                const starCount = Math.floor((width * height) / 3500);
-                for (let i=0; i<starCount; i++) {
-                    starsArray.push({
-                        x: Math.random() * width,
-                        y: Math.random() * height,
-                        radius: Math.random() * 2.1 + 0.6,
-                        alpha: Math.random() * 0.7 + 0.25,
-                        speed: 0.006 + Math.random() * 0.025,
-                    });
-                }
-            }
-            let time = 0;
-            function drawStars() {
-                if(!ctx) return;
-                ctx.clearRect(0, 0, width, height);
-                for(let s of starsArray) {
-                    let twinkle = s.alpha + Math.sin(time * s.speed * 12) * 0.2;
-                    twinkle = Math.min(0.95, Math.max(0.2, twinkle));
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
-                    ctx.fillStyle = `rgba(255, 245, 205, ${twinkle * 0.85})`;
-                    ctx.fill();
-                }
-                time += 0.018;
-                requestAnimationFrame(drawStars);
-            }
-            window.addEventListener('resize', () => resizeStars());
-            resizeStars();
-            drawStars();
+        const dreamBg = document.querySelector('.dream-bg');
+        if (dreamBg && window.scrollY > 100) {
+            dreamBg.style.transform = `translateY(${window.scrollY * 0.08}px) scale(1.02)`;
         }
-
-        // reveal animation
-        const reveals = document.querySelectorAll('.reveal-block');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-        }, { threshold: 0.2 });
-        reveals.forEach(el => observer.observe(el));
-
-        // parallax hero bg
-        window.addEventListener('scroll', () => {
-            const heroBg = document.querySelector('.hero-video-bg');
-            if(heroBg) heroBg.style.transform = `scale(${1 + window.scrollY * 0.00025}) translateY(${window.scrollY * 0.04}px)`;
-        });
-        const scrollHor = document.querySelector('.horizontal-scroll');
-        if(scrollHor) {
-            let isDown=false, startX, scrollLeft;
-            scrollHor.addEventListener('mousedown', (e) => { isDown=true; scrollHor.style.cursor='grabbing'; startX=e.pageX-scrollHor.offsetLeft; scrollLeft=scrollHor.scrollLeft; });
-            window.addEventListener('mouseup', () => { isDown=false; scrollHor.style.cursor='grab'; });
-            scrollHor.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX-scrollHor.offsetLeft; const walk = (x-startX)*1.1; scrollHor.scrollLeft = scrollLeft - walk; });
-            scrollHor.style.cursor='grab';
-        }
-    })();
-</script>
-</body>
-</html>
+    });
+    
+    // Horizontal scroll drag
+    const scrollContainer = document.querySelector('.horizontal-scroll');
+    if(scrollContainer) {
+        let isDown = false;
+        let startX, scrollLeft;
+        scrollContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            scrollContainer.style.cursor = 'grabbing';
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft =
