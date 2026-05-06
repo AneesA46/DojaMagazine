@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>An-Inn-Sa — Arrive in Stillness</title>
+    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     <style>
         * {
@@ -122,6 +123,13 @@
 
         .horizontal-scroll::-webkit-scrollbar {
             height: 4px;
+        }
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #c7a05b;
+            border-radius: 8px;
         }
 
         .room-card {
@@ -399,6 +407,10 @@
             letter-spacing: 1px;
             margin-top: 0.5rem;
         }
+        
+        .room-card img {
+            background: linear-gradient(135deg, #2a1a3a 0%, #1a2a3a 100%);
+        }
     </style>
 </head>
 <body>
@@ -412,7 +424,7 @@
 </nav>
 
 <section class="hero">
-    <img class="hero-video-bg" src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="zen hotel atmosphere">
+    <img class="hero-video-bg" src="https://picsum.photos/id/104/1920/1080" alt="zen hotel atmosphere" style="object-position: center 30%;">
     <div class="hero-overlay"></div>
     <div class="hero-text">
         <p class="quote-line" style="margin-bottom: 0.5rem;">You came to the right place</p>
@@ -424,7 +436,7 @@
 <section class="intro-section">
     <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">"You arrive."</p>
+            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
             <div style="height: 4rem;"></div>
             <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
             <div style="height: 4rem;"></div>
@@ -443,32 +455,36 @@
         </div>
     </div>
     <div class="horizontal-scroll">
+        <!-- Signature Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="signature suite.jpg" alt="Signature Suite" onerror="this.src='https://picsum.photos/id/106/1600/900'">
+            <img src="signature suite.jpg" alt="Signature Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
                 <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
             </div>
         </div>
+        <!-- Deluxe Room - using your uploaded image -->
         <div class="room-card">
-            <img src="deluxe rooms.jpg" alt="Deluxe Room" onerror="this.src='https://picsum.photos/id/107/1600/900'">
+            <img src="deluxe rooms.jpg" alt="Deluxe Room">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
                 <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
+        <!-- Wellness Retreat - using your uploaded image -->
         <div class="room-card">
-            <img src="wellness reaatreat.jpg" alt="Wellness Retreat" onerror="this.src='https://picsum.photos/id/108/1600/900'">
+            <img src="wellness reaatreat.jpg" alt="Wellness Retreat">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
                 <p>Private balcony, meditative views, and handcrafted interiors.</p>
                 <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
             </div>
         </div>
+        <!-- Kiddy Suite - using your uploaded image -->
         <div class="room-card">
-            <img src="kiddy suite.jpg" alt="Kiddy Suite" onerror="this.src='https://picsum.photos/id/20/1600/900'">
+            <img src="kiddy suite.jpg" alt="Kiddy Suite">
             <div class="room-caption">
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
                 <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
@@ -523,7 +539,7 @@
 
 <section class="emotion-section">
     <canvas id="starsCanvas" class="stars-canvas"></canvas>
-    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="milky way atmosphere">
+    <img src="https://picsum.photos/id/15/1920/1080" class="dream-bg" alt="milky way atmosphere">
     <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
@@ -537,23 +553,12 @@
     </div>
 </section>
 
-<section id="booking" class="cta-section" style="padding: 6rem 5%; text-align: center;">
-    <div class="reveal-block">
-        <h2 class="giant-text" style="font-size: clamp(2.8rem, 8vw, 5rem);">Book your escape</h2>
-        <p style="margin: 1rem 0 2.8rem 0; font-size: 1.2rem; font-weight: 300;">Reserve your stay — your room is waiting.</p>
-        <button id="reserveButton" class="btn-gold booking-button" style="text-decoration: none; border: none; cursor: pointer;">RESERVE NOW →</button>
-        <div style="margin-top: 3rem;">
-            <p style="font-size: 0.9rem;">Tel: +676 7676 76767 &nbsp;|&nbsp; wasilwaa@maxwellsda.org</p>
+
             <p style="font-size: 0.8rem; margin-top: 1rem;">#ANINNSA • Get social • Quiet luxury</p>
         </div>
     </div>
 </section>
-
-<footer>
-    <p>An-Inn-Sa — Comfort, culture & calmness. A modern hotel nestled in stillness.</p>
-    <p style="margin-top: 0.6rem;">© 2025 An-Inn-Sa | Images for cinematic storytelling</p>
-</footer>
-
+    
 <div id="formalNotification" class="top-notification">
     <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
     <div class="notification-message">Your escape to serenity has been secured.</div>
