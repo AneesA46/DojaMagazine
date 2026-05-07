@@ -4,309 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>An-Inn-Sa — Arrive in Stillness</title>
-    <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            color: #e8e6e1;
-            overflow-x: hidden;
-            line-height: 1.4;
-            cursor: default;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c7a05b;
-            border-radius: 8px;
-        }
-
-        section {
-            position: relative;
-            width: 100%;
-            will-change: transform;
-        }
-
-        .section-inner {
-            position: relative;
-            z-index: 2;
-            padding: 6rem 5%;
-        }
-
-        .giant-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-            font-size: clamp(3rem, 10vw, 7rem);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .quote-line {
-            font-size: clamp(1.4rem, 4vw, 2.2rem);
-            font-weight: 300;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: -0.01em;
-        }
-
-        .booking-button {
-            background: #c7a05b;
-            color: #0a0a0a;
-            border: none;
-            padding: 1.2rem 2.8rem;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 0 rgba(199, 160, 91, 0.4);
-            animation: softPulse 2.2s infinite;
-            cursor: pointer;
-            border-radius: 2px;
-        }
-
-        @keyframes softPulse {
-            0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); }
-            70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); }
-        }
-
-        .booking-button:hover {
-            background: #dbb16e;
-            transform: scale(1.02);
-            animation: none;
-            box-shadow: 0 8px 25px rgba(199, 160, 91, 0.3);
-        }
-
-        .horizontal-scroll {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 1.5rem;
-            padding: 2rem 5% 4rem 5%;
-            scroll-behavior: smooth;
-            cursor: grab;
-            scrollbar-width: thin;
-        }
-
-        .room-card {
-            flex: 0 0 85%;
-            scroll-snap-align: start;
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            background: #1a1a2e;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #0a0a0a; font-family: 'Inter', sans-serif; color: #e8e6e1; overflow-x: hidden; cursor: default; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #c7a05b; border-radius: 8px; }
+        section { position: relative; width: 100%; }
+        .section-inner { position: relative; z-index: 2; padding: 6rem 5%; }
+        .giant-text { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: -0.02em; line-height: 1.1; }
+        .quote-line { font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 300; font-family: 'Inter', sans-serif; }
+        .booking-button { background: #c7a05b; color: #0a0a0a; border: none; padding: 1.2rem 2.8rem; font-weight: 600; font-size: 1rem; letter-spacing: 2px; transition: all 0.3s ease; animation: softPulse 2.2s infinite; cursor: pointer; border-radius: 2px; }
+        @keyframes softPulse { 0% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0.2); } 70% { box-shadow: 0 0 0 12px rgba(199, 160, 91, 0); } 100% { box-shadow: 0 0 0 0 rgba(199, 160, 91, 0); } }
+        .booking-button:hover { background: #dbb16e; transform: scale(1.02); animation: none; }
+        .horizontal-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 1.5rem; padding: 2rem 5% 4rem 5%; scroll-behavior: smooth; cursor: grab; }
+        .room-card { flex: 0 0 85%; scroll-snap-align: start; position: relative; border-radius: 24px; overflow: hidden; background: #1a1a2e; }
         @media (min-width: 900px) { .room-card { flex: 0 0 70%; } }
         .room-card img { width: 100%; height: 85vh; object-fit: cover; transition: transform 0.8s ease-out; }
         .room-card:hover img { transform: scale(1.03); }
-        .room-caption {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            right: 2rem;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(8px);
-            padding: 1.5rem;
-            border-left: 3px solid #c7a05b;
-        }
-
+        .room-caption { position: absolute; bottom: 2rem; left: 2rem; right: 2rem; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(8px); padding: 1.5rem; border-left: 3px solid #c7a05b; }
         .reveal-block { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
         .reveal-block.revealed { opacity: 1; transform: translateY(0); }
-
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
         .review-card { background: rgba(20, 18, 22, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(199, 160, 91, 0.3); border-radius: 20px; padding: 1.5rem; transition: all 0.3s ease; }
         .review-card:hover { border-color: #c7a05b; transform: translateY(-5px); }
         .review-text { font-size: 0.95rem; line-height: 1.5; font-style: italic; margin-bottom: 1rem; color: #e0dcd3; }
         .review-author { display: flex; align-items: center; gap: 0.8rem; }
-        .review-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #c7a05b, #8b6b3c); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #0a0a0a; }
-
+        .review-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #c7a05b, #8b6b3c); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1rem; color: #0a0a0a; }
+        .review-info { flex: 1; }
+        .review-name { font-weight: 600; color: #c7a05b; font-size: 1rem; }
+        .review-stars { color: #c7a05b; font-size: 0.8rem; letter-spacing: 2px; }
+        .review-verified { font-size: 0.7rem; color: #8a8578; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
         .menu-category h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; border-bottom: 1px solid rgba(199, 160, 91, 0.4); display: inline-block; margin-bottom: 1.5rem; }
         .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,240,0.2); padding: 0.8rem 0; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; }
         .menu-item:hover { background: rgba(199, 160, 91, 0.1); padding-left: 0.5rem; }
         .menu-item-price { font-weight: 500; color: #c7a05b; }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            background: rgba(0,0,0,0.5);
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+        nav { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; z-index: 100; backdrop-filter: blur(12px); background: rgba(0,0,0,0.5); gap: 1rem; flex-wrap: wrap; }
         .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; }
         .nav-buttons { display: flex; gap: 1rem; }
-        .nav-book, .nav-gallery { background: transparent; border: 1px solid #c7a05b; padding: 0.5rem 1.8rem; color: #e8e6e1; font-size: 0.8rem; cursor: pointer; border-radius: 2px; transition: 0.2s; }
+        .nav-book, .nav-gallery { background: transparent; border: 1px solid #c7a05b; padding: 0.5rem 1.8rem; color: #e8e6e1; font-size: 0.8rem; cursor: pointer; border-radius: 2px; transition: 0.2s; font-family: 'Inter', sans-serif; }
         .nav-book:hover, .nav-gallery:hover { background: rgba(199,160,91,0.2); }
-
-        /* Enhanced Gallery Modal */
-        .gallery-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0.2s, opacity 0.3s ease;
-        }
-        .gallery-modal.active { visibility: visible; opacity: 1; }
-        .gallery-container {
-            width: 90%;
-            max-width: 1400px;
-            height: 90vh;
-            background: rgba(10, 10, 10, 0.9);
-            border-radius: 28px;
-            padding: 1.5rem;
-            position: relative;
-            overflow-y: auto;
-        }
-        .close-gallery {
-            position: sticky;
-            top: 0;
-            float: right;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #c7a05b;
-            z-index: 10;
-            background: rgba(0,0,0,0.6);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s;
-        }
-        .close-gallery:hover { background: #c7a05b; color: #0a0a0a; }
-        .gallery-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: #c7a05b; clear: both; padding-top: 0.5rem; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 1rem; }
-        .gallery-item {
-            background: #161616;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(199, 160, 91, 0.2);
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover { transform: translateY(-5px); border-color: #c7a05b; }
-        .gallery-img {
-            width: 100%;
-            aspect-ratio: 16/10;
-            object-fit: cover;
-            display: block;
-        }
-        .gallery-actions {
-            display: flex;
-            justify-content: space-around;
-            padding: 1rem;
-            background: rgba(0,0,0,0.5);
-            border-top: 1px solid rgba(199,160,91,0.2);
-        }
-        .action-btn {
-            background: transparent;
-            border: none;
-            color: #bcb7ab;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        .action-btn i { font-size: 1.2rem; }
-        .action-btn:hover { background: rgba(199,160,91,0.2); color: #c7a05b; }
-        .like-btn.liked { color: #ff4d4d; }
-        .like-btn.liked i { animation: heartBeat 0.3s ease; }
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-        .like-count, .comment-count { font-size: 0.85rem; }
-        .comment-section {
-            padding: 0.8rem 1rem;
-            border-top: 1px solid rgba(199,160,91,0.15);
-            background: rgba(0,0,0,0.3);
-        }
-        .comment-list {
-            max-height: 120px;
-            overflow-y: auto;
-            margin-bottom: 0.8rem;
-            font-size: 0.75rem;
-        }
-        .comment-item {
-            padding: 0.3rem 0;
-            color: #bcb7ab;
-            border-bottom: 1px dashed rgba(255,255,255,0.05);
-        }
-        .comment-username { color: #c7a05b; font-weight: 600; margin-right: 0.5rem; }
-        .comment-input-group {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .comment-input {
-            flex: 1;
-            background: #1e1c18;
-            border: 1px solid #3a3630;
-            padding: 0.5rem;
-            border-radius: 20px;
-            color: white;
-            font-size: 0.75rem;
-        }
-        .comment-submit {
-            background: #c7a05b;
-            border: none;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-        .share-toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #c7a05b;
-            color: #0a0a0a;
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            z-index: 2100;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .share-toast.show { opacity: 1; }
-
         .hero { height: 100vh; position: relative; overflow: hidden; }
         .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; animation: slowZoom 26s infinite alternate; }
         @keyframes slowZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
@@ -315,11 +55,37 @@
         @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(40px);} 100% { opacity: 1; transform: translateY(0);} }
         .emotion-section { background: #030303; position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .dream-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: brightness(0.5) blur(1px); }
+        
+        /* Gallery Modal Styles */
+        .gallery-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); z-index: 2000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: visibility 0.2s, opacity 0.3s ease; }
+        .gallery-modal.active { visibility: visible; opacity: 1; }
+        .gallery-container { width: 90%; max-width: 1400px; height: 90vh; background: rgba(10, 10, 10, 0.9); border-radius: 28px; padding: 1.5rem; position: relative; overflow-y: auto; }
+        .close-gallery { position: sticky; top: 0; float: right; font-size: 2rem; cursor: pointer; color: #c7a05b; background: rgba(0,0,0,0.6); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .close-gallery:hover { background: #c7a05b; color: #0a0a0a; }
+        .gallery-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: #c7a05b; clear: both; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        .gallery-item { background: #161616; border-radius: 20px; overflow: hidden; border: 1px solid rgba(199, 160, 91, 0.2); transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: translateY(-5px); border-color: #c7a05b; }
+        .gallery-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+        .gallery-actions { display: flex; justify-content: space-around; padding: 1rem; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(199,160,91,0.2); }
+        .action-btn { background: transparent; border: none; color: #bcb7ab; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 30px; transition: all 0.2s ease; font-family: 'Inter', sans-serif; }
+        .action-btn:hover { background: rgba(199,160,91,0.2); color: #c7a05b; }
+        .like-btn.liked { color: #ff4d4d; }
+        .like-btn.liked i { animation: heartBeat 0.3s ease; }
+        @keyframes heartBeat { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .comment-section { padding: 0.8rem 1rem; border-top: 1px solid rgba(199,160,91,0.15); background: rgba(0,0,0,0.3); }
+        .comment-list { max-height: 120px; overflow-y: auto; margin-bottom: 0.8rem; font-size: 0.75rem; }
+        .comment-item { padding: 0.3rem 0; color: #bcb7ab; border-bottom: 1px dashed rgba(255,255,255,0.05); }
+        .comment-username { color: #c7a05b; font-weight: 600; margin-right: 0.5rem; }
+        .comment-input-group { display: flex; gap: 0.5rem; }
+        .comment-input { flex: 1; background: #1e1c18; border: 1px solid #3a3630; padding: 0.5rem; border-radius: 20px; color: white; font-size: 0.75rem; }
+        .comment-submit { background: #c7a05b; border: none; padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; }
+        .share-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #c7a05b; color: #0a0a0a; padding: 0.5rem 1.5rem; border-radius: 30px; font-size: 0.8rem; z-index: 2100; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        .share-toast.show { opacity: 1; }
         .order-notification { position: fixed; bottom: 30px; right: 30px; background: rgba(20, 18, 16, 0.96); backdrop-filter: blur(16px); border: 1px solid rgba(199, 160, 91, 0.6); border-radius: 16px; padding: 1rem; z-index: 2001; transform: translateX(120%); transition: transform 0.4s; }
         .order-notification.show { transform: translateX(0); }
         .top-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120%); background: rgba(20, 18, 16, 0.96); backdrop-filter: blur(16px); border: 1px solid rgba(199, 160, 91, 0.5); border-radius: 12px; padding: 1rem 2rem; z-index: 2000; transition: transform 0.4s; text-align: center; }
         .top-notification.show { transform: translateX(-50%) translateY(0); }
-        .notification-title { font-weight: 600; color: #c7a05b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
         .cta-section { background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%); }
         footer { background: #020202; text-align: center; padding: 2rem; font-size: 0.8rem; border-top: 1px solid rgba(199,160,91,0.2); }
         .kid-friendly-badge { display: inline-block; background: rgba(199, 160, 91, 0.2); border: 1px solid #c7a05b; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.7rem; margin-top: 0.5rem; }
@@ -333,7 +99,7 @@
         .reserve-submit { background: #c7a05b; color: #0a0a0a; border: none; width: 100%; padding: 12px; font-weight: 600; border-radius: 40px; margin-top: 10px; cursor: pointer; }
         .cursor-trail { position: fixed; width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
         .cursor-trail-dot { position: fixed; width: 5px; height: 5px; background: #c7a05b; border-radius: 50%; pointer-events: none; z-index: 9998; filter: blur(1px); transform: translate(-50%, -50%); }
-        @media (max-width: 700px) { .section-inner { padding: 3rem 5%; } .gallery-grid { grid-template-columns: 1fr; } .gallery-actions { flex-wrap: wrap; } }
+        @media (max-width: 700px) { .section-inner { padding: 3rem 5%; } .gallery-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -349,7 +115,6 @@
     </div>
 </nav>
 
-<!-- Gallery Modal -->
 <div id="galleryModal" class="gallery-modal">
     <div class="gallery-container">
         <div class="close-gallery" id="closeGalleryBtn">×</div>
@@ -369,14 +134,15 @@
 </section>
 
 <section class="intro-section">
-    <div class="section-inner" style="text-align: center;">
+    <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.8rem;">“You arrive.”</p>
+            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
             <div style="height: 4rem;"></div>
             <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
             <div style="height: 4rem;"></div>
             <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
-            <p style="max-width: 500px; margin: 1rem auto; font-weight: 300;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
+            <div style="height: 3rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
 </section>
@@ -384,65 +150,94 @@
 <section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px;">Signature sanctuaries</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem);">Rooms & Suites</h2>
+            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
+            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
         </div>
     </div>
     <div class="horizontal-scroll">
-        <div class="room-card"><img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Signature Suite</h3><p>Spacious retreat, natural light, lounge area.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Signature Suite</h3><p>Spacious retreat, natural light, lounge area, plush bedding.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
         <div class="room-card"><img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Deluxe Room</h3><p>Soft bedding, modern amenities, calming atmosphere.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
-        <div class="room-card"><img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Wellness Retreat</h3><p>Private balcony, meditative views.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
-        <div class="room-card"><img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Kiddy Suite</h3><p>Whimsical family haven.</p><div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Wellness Retreat</h3><p>Private balcony, meditative views, handcrafted interiors.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Kiddy Suite</h3><p>Whimsical family haven with playful decor & child-safe amenities.</p><div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+    </div>
+    
+    <!-- CELEBRITY REVIEWS - RESTORED -->
+    <div class="section-inner">
+        <div class="reveal-block">
+            <div class="reviews-grid">
+                <div class="review-card"><div class="review-text">"This place is pure peace. The stillness here healed something in me. An-Inn-Sa is the vibe."</div><div class="review-author"><div class="review-avatar">ASAP</div><div class="review-info"><div class="review-name">ASAP Rocky</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 weeks ago</div></div></div></div>
+                <div class="review-card"><div class="review-text">"I found my escape. The Wellness Retreat changed my whole perspective. Coming back every season."</div><div class="review-author"><div class="review-avatar">SZA</div><div class="review-info"><div class="review-name">SZA</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 1 month ago</div></div></div></div>
+                <div class="review-card"><div class="review-text">"The architecture and energy... it's a masterpiece. Quiet luxury at its finest. Yeezy approved."</div><div class="review-author"><div class="review-avatar">YE</div><div class="review-info"><div class="review-name">Kanye West</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 weeks ago</div></div></div></div>
+            </div>
+        </div>
     </div>
 </section>
 
 <section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
-            <p class="quote-line">InnSa Lounge & Grill</p>
+            <p class="quote-line" style="letter-spacing: 2px;">InnSa Lounge & Grill</p>
             <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
         </div>
         <div class="menu-grid reveal-block">
             <div class="menu-category"><h3>Appetizers</h3><div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22"><span>Chicken or Vegetable Soup</span><span class="menu-item-price">$22</span></div><div class="menu-item" data-item="Crispy Samosas" data-price="$24"><span>Crispy Samosas</span><span class="menu-item-price">$24</span></div><div class="menu-item" data-item="French Fries" data-price="$19"><span>French Fries</span><span class="menu-item-price">$19</span></div><div class="menu-item" data-item="Chicken Wings" data-price="$20"><span>Chicken Wings</span><span class="menu-item-price">$20</span></div></div>
-            <div class="menu-category"><h3>Mains</h3><div class="menu-item" data-item="Nyama Choma" data-price="$58"><span>Nyama Choma</span><span class="menu-item-price">$58</span></div><div class="menu-item" data-item="Ugali with Beef Stew" data-price="$42"><span>Ugali with Beef/Chicken Stew</span><span class="menu-item-price">$42</span></div><div class="menu-item" data-item="Stir-Fried Rice" data-price="$48"><span>Stir-Fried Rice or Noodles</span><span class="menu-item-price">$48</span></div><div class="menu-item" data-item="Creamy Pasta" data-price="$38"><span>Creamy Pasta</span><span class="menu-item-price">$38</span></div></div>
-            <div class="menu-category"><h3>Desserts</h3><div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18"><span>Vanilla Ice Cream</span><span class="menu-item-price">$18</span></div><div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17"><span>Brownies with Ice Cream</span><span class="menu-item-price">$17 slice</span></div><div class="menu-item" data-item="Tiramisu" data-price="$18"><span>Tiramisu</span><span class="menu-item-price">$18 slice</span></div><div class="menu-item" data-item="Chocolate Cake" data-price="$20"><span>Chocolate Cake</span><span class="menu-item-price">$20</span></div></div>
-            <div class="menu-category"><h3>Drinks</h3><div class="menu-item" data-item="Orange Juice" data-price="$10"><span>Orange Juice</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Coffee" data-price="$10"><span>Coffee (Hot or Iced)</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Mojitos" data-price="$15"><span>Mojitos</span><span class="menu-item-price">$15</span></div><div class="menu-item" data-item="Soda" data-price="$8"><span>Soda</span><span class="menu-item-price">$8</span></div></div>
+            <div class="menu-category"><h3>Mains</h3><div class="menu-item" data-item="Nyama Choma" data-price="$58"><span>Nyama Choma</span><span class="menu-item-price">$58</span></div><div class="menu-item" data-item="Ugali with Beef/Chicken Stew" data-price="$42"><span>Ugali with Beef/Chicken Stew</span><span class="menu-item-price">$42</span></div><div class="menu-item" data-item="Stir-Fried Rice or Noodles" data-price="$48"><span>Stir-Fried Rice or Noodles</span><span class="menu-item-price">$48</span></div><div class="menu-item" data-item="Creamy Pasta" data-price="$38"><span>Creamy Pasta</span><span class="menu-item-price">$38</span></div></div>
+            <div class="menu-category"><h3>Desserts</h3><div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18"><span>Vanilla Ice Cream</span><span class="menu-item-price">$18</span></div><div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17 slice"><span>Brownies with Ice Cream</span><span class="menu-item-price">$17 slice</span></div><div class="menu-item" data-item="Tiramisu" data-price="$18 slice"><span>Tiramisu</span><span class="menu-item-price">$18 slice</span></div><div class="menu-item" data-item="Chocolate Cake" data-price="$20"><span>Chocolate Cake</span><span class="menu-item-price">$20</span></div></div>
+            <div class="menu-category"><h3>Drinks</h3><div class="menu-item" data-item="Orange Juice" data-price="$10"><span>Orange Juice</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Coffee (Hot or Iced)" data-price="$10"><span>Coffee (Hot or Iced)</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Mojitos" data-price="$15"><span>Mojitos</span><span class="menu-item-price">$15</span></div><div class="menu-item" data-item="Soda" data-price="$8"><span>Soda</span><span class="menu-item-price">$8</span></div></div>
         </div>
-        <div class="reveal-block" style="margin-top: 2rem; text-align: center;"><p>✦ Tap any item to order ✦</p></div>
+        
+        <!-- MORE CELEBRITY REVIEWS - DINING SECTION -->
+        <div class="reviews-grid reveal-block" style="margin-top: 3rem;">
+            <div class="review-card"><div class="review-text">"The Nyama Choma is fire. Best meal I've had touring. The vibes? Immaculate."</div><div class="review-author"><div class="review-avatar">DRAKE</div><div class="review-info"><div class="review-name">Drake</div><div class="review-stars">★★★★★</div><div class="review-verified">verified diner · 1 week ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"Kid-friendly AND delicious? My whole family loved it. The Kiddy Suite is a blessing."</div><div class="review-author"><div class="review-avatar">RIH</div><div class="review-info"><div class="review-name">Rihanna</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 days ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"The Tiramisu changed my life. No cap. An-Inn-Sa is the only place I'm staying now."</div><div class="review-author"><div class="review-avatar">ESD</div><div class="review-info"><div class="review-name">Essdeekid</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 5 days ago</div></div></div></div>
+            <div class="review-card"><div class="review-text">"OKURRR! This place is luxury realness. The staff, the food, the energy — 10s across the board!"</div><div class="review-author"><div class="review-avatar">CARDI</div><div class="review-info"><div class="review-name">Cardi B</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 days ago</div></div></div></div>
+        </div>
+        
+        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
+            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; color: #c7a05b;">✦ Tap any item to order ✦</p>
+        </div>
     </div>
 </section>
 
 <section class="emotion-section">
     <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg">
-    <div class="section-inner" style="text-align: center;">
+    <div class="section-inner" style="text-align: center; max-width: 800px;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
-            <p class="quote-line" style="font-size: 2rem; margin-top: 1rem;">Dine under the stars.</p>
-            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); margin-top: 1rem;">Your home away from home</p>
+            <div style="height: 2rem;"></div>
+            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
+            <div style="height: 2rem;"></div>
+            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
+            <div style="height: 2rem;"></div>
+            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
         </div>
     </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" id="booking-anchor">
     <div class="section-inner" style="text-align: center;">
         <div class="reveal-block">
             <h2 class="giant-text" style="font-size: 3rem;">Secure your arrival</h2>
+            <p style="margin: 1rem auto; max-width: 500px;">Join the stars who've found their stillness here.</p>
             <button id="reserveButton" class="booking-button">BEGIN THE JOURNEY</button>
+            <p style="font-size: 0.8rem; margin-top: 2rem;">#ANINNSA • Get social • Quiet luxury</p>
         </div>
     </div>
 </section>
-<footer><p>An-Inn-Sa — where every soul finds silence. © 2025</p></footer>
+<footer><p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p></footer>
 
 <div id="orderNotification" class="order-notification"><div class="order-notification-title">✨ ORDER PLACED ✨</div><div id="orderMessage">Your item has been added</div></div>
-<div id="reservationModal" class="modal-overlay"><div class="reservation-modal"><span class="close-modal" id="closeModalBtn">&times;</span><h3>reserve your stay</h3><form id="bookingForm"><div class="form-group"><label>Full name</label><input type="text" id="guestName" required></div><div class="form-group"><label>Email</label><input type="email" id="guestEmail" required></div><div class="form-group"><label>Arrival date</label><input type="date" id="arrivalDate" required></div><div class="form-group"><label>Preferred suite</label><select id="roomType"><option>Signature Suite</option><option>Deluxe Room</option><option>Wellness Retreat</option><option>Kiddy Suite</option></select></div><button type="submit" class="reserve-submit">CONFIRM</button><div id="formSuccessMsg"></div></form></div></div>
-<div id="formalNotification" class="top-notification"><div class="notification-title">RESERVATION CONFIRMED</div><div>Your escape has been secured.</div></div>
-<div id="shareToast" class="share-toast">🔗 Link copied to clipboard!</div>
+<div id="reservationModal" class="modal-overlay"><div class="reservation-modal"><span class="close-modal" id="closeModalBtn">&times;</span><h3>reserve your stay</h3><p style="margin-bottom: 1rem; font-size: 0.8rem;">Fill in your details to secure a moment of stillness.</p><form id="bookingForm"><div class="form-group"><label>Full name</label><input type="text" id="guestName" required></div><div class="form-group"><label>Email address</label><input type="email" id="guestEmail" required></div><div class="form-group"><label>Phone number</label><input type="tel" id="guestPhone"></div><div class="form-group"><label>Arrival date</label><input type="date" id="arrivalDate" required></div><div class="form-group"><label>Preferred suite</label><select id="roomType"><option>Signature Suite</option><option>Deluxe Room</option><option>Wellness Retreat</option><option>Kiddy Suite</option></select></div><button type="submit" class="reserve-submit">CONFIRM RESERVATION</button><div id="formSuccessMsg" class="form-success"></div></form></div></div>
+<div id="formalNotification" class="top-notification"><div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div><div class="notification-message">Your escape to serenity has been secured.</div></div>
+<div id="shareToast" class="share-toast">🔗 Image link copied to clipboard!</div>
 
 <script>
-    // Gallery Data - 12 stunning hotel images with comments
+    // Gallery Data - 12 stunning hotel-relevant images
     const galleryData = [
-        { src: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 124, comments: ["✨ Stunning!", "Dream destination"] },
-        { src: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 89, comments: ["So luxurious", "I need this"] },
+        { src: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 124, comments: ["✨ Stunning entrance!", "Dream destination"] },
+        { src: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 89, comments: ["So luxurious", "I need this suite"] },
         { src: "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 67, comments: ["Perfect lighting", "Cozy vibes"] },
         { src: "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 156, comments: ["Heaven on earth", "Meditation goals"] },
         { src: "https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 203, comments: ["My kids would love this!", "So colorful"] },
@@ -457,6 +252,7 @@
 
     function buildGallery() {
         const grid = document.getElementById('galleryGrid');
+        if (!grid) return;
         grid.innerHTML = '';
         galleryData.forEach((item, idx) => {
             const card = document.createElement('div');
@@ -480,8 +276,10 @@
             `;
             grid.appendChild(card);
         });
+        attachGalleryEvents();
+    }
 
-        // Attach event listeners
+    function attachGalleryEvents() {
         document.querySelectorAll('.like-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -491,16 +289,12 @@
                 likes++;
                 likeSpan.innerText = likes;
                 btn.classList.add('liked');
-                btn.style.animation = 'none';
-                btn.offsetHeight;
-                btn.style.animation = null;
                 const icon = btn.querySelector('i');
                 icon.style.animation = 'heartBeat 0.3s ease';
                 setTimeout(() => { icon.style.animation = ''; }, 300);
                 galleryData[idx].likes = likes;
             });
         });
-
         document.querySelectorAll('.comment-toggle').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -510,7 +304,6 @@
                 else section.style.display = 'none';
             });
         });
-
         document.querySelectorAll('.comment-submit').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -530,7 +323,6 @@
                 }
             });
         });
-
         document.querySelectorAll('.share-btn').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
@@ -541,14 +333,12 @@
                     const toast = document.getElementById('shareToast');
                     toast.classList.add('show');
                     setTimeout(() => toast.classList.remove('show'), 2000);
-                } catch (err) {
-                    alert('Press Ctrl+C to copy image URL');
-                }
+                } catch (err) { alert('Press Ctrl+C to copy image URL'); }
             });
         });
     }
 
-    // Modal logic
+    // Gallery Modal
     const galleryModal = document.getElementById('galleryModal');
     const galleryBtn = document.getElementById('galleryBtn');
     const closeGalleryBtn = document.getElementById('closeGalleryBtn');
@@ -556,7 +346,7 @@
     function closeGallery() { galleryModal.classList.remove('active'); document.body.style.overflow = ''; }
     if(galleryBtn) galleryBtn.addEventListener('click', openGallery);
     if(closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
-    galleryModal.addEventListener('click', (e) => { if(e.target === galleryModal) closeGallery(); });
+    if(galleryModal) galleryModal.addEventListener('click', (e) => { if(e.target === galleryModal) closeGallery(); });
 
     // Order notification
     const orderNotif = document.getElementById('orderNotification');
@@ -565,9 +355,7 @@
         item.addEventListener('click', () => {
             const name = item.querySelector('span:first-child')?.innerText;
             const price = item.querySelector('.menu-item-price')?.innerText;
-            orderMsg.innerText = `${name} (${price}) added!`;
-            orderNotif.classList.add('show');
-            setTimeout(() => orderNotif.classList.remove('show'), 2500);
+            if(name) { orderMsg.innerText = `${name} (${price}) added to order!`; orderNotif.classList.add('show'); setTimeout(() => orderNotif.classList.remove('show'), 2500); }
         });
     });
 
@@ -579,44 +367,37 @@
     const bookingForm = document.getElementById('bookingForm');
     const topNotif = document.getElementById('formalNotification');
     function openResModal() { modal.classList.add('active'); }
-    function closeResModal() { modal.classList.remove('active'); bookingForm.reset(); document.getElementById('formSuccessMsg').innerText = ''; }
+    function closeResModal() { modal.classList.remove('active'); const successDiv = document.getElementById('formSuccessMsg'); if(successDiv) successDiv.innerText = ''; if(bookingForm) bookingForm.reset(); }
     function showTopNotif() { topNotif.classList.add('show'); setTimeout(() => topNotif.classList.remove('show'), 4000); }
     if(reserveBtn) reserveBtn.addEventListener('click', openResModal);
     if(navReserve) navReserve.addEventListener('click', openResModal);
     if(closeModal) closeModal.addEventListener('click', closeResModal);
-    modal.addEventListener('click', (e) => { if(e.target === modal) closeResModal(); });
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('guestName')?.value.trim();
-        const email = document.getElementById('guestEmail')?.value.trim();
-        const arrival = document.getElementById('arrivalDate')?.value;
-        if(!name || !email || !arrival) { alert("Please fill all fields"); return; }
-        document.getElementById('formSuccessMsg').innerText = "✓ Reservation received!";
-        setTimeout(() => { closeResModal(); showTopNotif(); }, 1000);
-    });
+    if(modal) modal.addEventListener('click', (e) => { if(e.target === modal) closeResModal(); });
+    if(bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('guestName')?.value.trim();
+            const email = document.getElementById('guestEmail')?.value.trim();
+            const arrival = document.getElementById('arrivalDate')?.value;
+            if(!name || !email || !arrival) { alert("Please fill in name, email, and arrival date."); return; }
+            const successDiv = document.getElementById('formSuccessMsg');
+            if(successDiv) successDiv.innerText = "✓ Reservation request received. We'll contact you shortly.";
+            setTimeout(() => { closeResModal(); showTopNotif(); }, 1200);
+        });
+    }
 
     // Cursor effects
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
     let mx=0, my=0, tx=0, ty=0;
-    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
-    function animate() {
-        tx += (mx - tx) * 0.12;
-        ty += (my - ty) * 0.12;
-        trail.style.left = tx+'px';
-        trail.style.top = ty+'px';
-        let dist = Math.hypot(mx - tx, my - ty);
-        let size = Math.min(46, 26 + dist * 0.4);
-        trail.style.width = size+'px';
-        trail.style.height = size+'px';
-        requestAnimationFrame(animate);
-    }
-    animate();
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; if(dot) { dot.style.left = mx+'px'; dot.style.top = my+'px'; } });
+    function animateCursor() { tx += (mx - tx) * 0.12; ty += (my - ty) * 0.12; if(trail) { trail.style.left = tx+'px'; trail.style.top = ty+'px'; let dist = Math.hypot(mx - tx, my - ty); let size = Math.min(46, 26 + dist * 0.4); trail.style.width = size+'px'; trail.style.height = size+'px'; } requestAnimationFrame(animateCursor); }
+    animateCursor();
 
-    // Reveal on scroll
+    // Reveal animations
     const reveals = document.querySelectorAll('.reveal-block');
-    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }); }, { threshold: 0.2 });
-    reveals.forEach(r => obs.observe(r));
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } }); }, { threshold: 0.2 });
+    reveals.forEach(r => observer.observe(r));
 
     // Horizontal scroll drag
     const scrollCont = document.querySelector('.horizontal-scroll');
