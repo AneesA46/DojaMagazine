@@ -6,6 +6,7 @@
     <title>An-Inn-Sa — Arrive in Stillness</title>
     <!-- Google Fonts: Serif + Sans (Luxury & Modern) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -60,29 +61,6 @@
             letter-spacing: -0.01em;
         }
 
-        .btn-gold {
-            display: inline-block;
-            background: transparent;
-            border: 1.5px solid #c7a05b;
-            color: #c7a05b;
-            padding: 1rem 2.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(4px);
-            border-radius: 2px;
-        }
-
-        .btn-gold:hover {
-            background: rgba(199, 160, 91, 0.12);
-            border-color: #e0b87a;
-            color: #e0b87a;
-            transform: scale(1.02);
-        }
-
         .booking-button {
             background: #c7a05b;
             color: #0a0a0a;
@@ -122,17 +100,6 @@
             scrollbar-width: thin;
         }
 
-        .horizontal-scroll::-webkit-scrollbar {
-            height: 4px;
-        }
-        .horizontal-scroll::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        .horizontal-scroll::-webkit-scrollbar-thumb {
-            background: #c7a05b;
-            border-radius: 8px;
-        }
-
         .room-card {
             flex: 0 0 85%;
             scroll-snap-align: start;
@@ -142,23 +109,9 @@
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             background: #1a1a2e;
         }
-
-        @media (min-width: 900px) {
-            .room-card { flex: 0 0 70%; }
-        }
-
-        .room-card img {
-            width: 100%;
-            height: 85vh;
-            object-fit: cover;
-            transition: transform 0.8s ease-out;
-            display: block;
-        }
-
-        .room-card:hover img {
-            transform: scale(1.03);
-        }
-
+        @media (min-width: 900px) { .room-card { flex: 0 0 70%; } }
+        .room-card img { width: 100%; height: 85vh; object-fit: cover; transition: transform 0.8s ease-out; }
+        .room-card:hover img { transform: scale(1.03); }
         .room-caption {
             position: absolute;
             bottom: 2rem;
@@ -170,127 +123,21 @@
             border-left: 3px solid #c7a05b;
         }
 
-        .reveal-block {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
+        .reveal-block { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+        .reveal-block.revealed { opacity: 1; transform: translateY(0); }
 
-        .reveal-block.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-top: 3rem; }
+        .review-card { background: rgba(20, 18, 22, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(199, 160, 91, 0.3); border-radius: 20px; padding: 1.5rem; transition: all 0.3s ease; }
+        .review-card:hover { border-color: #c7a05b; transform: translateY(-5px); }
+        .review-text { font-size: 0.95rem; line-height: 1.5; font-style: italic; margin-bottom: 1rem; color: #e0dcd3; }
+        .review-author { display: flex; align-items: center; gap: 0.8rem; }
+        .review-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #c7a05b, #8b6b3c); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #0a0a0a; }
 
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin-top: 3rem;
-        }
-        
-        .review-card {
-            background: rgba(20, 18, 22, 0.7);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(199, 160, 91, 0.3);
-            border-radius: 20px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .review-card:hover {
-            border-color: #c7a05b;
-            transform: translateY(-5px);
-        }
-        
-        .review-text {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #e0dcd3;
-        }
-        
-        .review-author {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .review-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #c7a05b, #8b6b3c);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1rem;
-            color: #0a0a0a;
-        }
-        
-        .review-info {
-            flex: 1;
-        }
-        
-        .review-name {
-            font-weight: 600;
-            color: #c7a05b;
-            font-size: 1rem;
-        }
-        
-        .review-stars {
-            color: #c7a05b;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }
-        
-        .review-verified {
-            font-size: 0.7rem;
-            color: #8a8578;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2.5rem;
-        }
-
-        .menu-category h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            border-bottom: 1px solid rgba(199, 160, 91, 0.4);
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px dashed rgba(255,255,240,0.2);
-            padding: 0.8rem 0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-        }
-        
-        .menu-item:hover {
-            background: rgba(199, 160, 91, 0.1);
-            padding-left: 0.5rem;
-            border-bottom-color: rgba(199, 160, 91, 0.5);
-        }
-        
-        .menu-item-name {
-            font-weight: 400;
-        }
-        
-        .menu-item-price {
-            font-weight: 500;
-            color: #c7a05b;
-        }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+        .menu-category h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; border-bottom: 1px solid rgba(199, 160, 91, 0.4); display: inline-block; margin-bottom: 1.5rem; }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,240,0.2); padding: 0.8rem 0; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; }
+        .menu-item:hover { background: rgba(199, 160, 91, 0.1); padding-left: 0.5rem; }
+        .menu-item-price { font-weight: 500; color: #c7a05b; }
 
         nav {
             position: fixed;
@@ -304,40 +151,15 @@
             z-index: 100;
             backdrop-filter: blur(12px);
             background: rgba(0,0,0,0.5);
-            transition: all 0.3s;
             gap: 1rem;
             flex-wrap: wrap;
         }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; }
+        .nav-buttons { display: flex; gap: 1rem; }
+        .nav-book, .nav-gallery { background: transparent; border: 1px solid #c7a05b; padding: 0.5rem 1.8rem; color: #e8e6e1; font-size: 0.8rem; cursor: pointer; border-radius: 2px; transition: 0.2s; }
+        .nav-book:hover, .nav-gallery:hover { background: rgba(199,160,91,0.2); }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .nav-book, .nav-gallery {
-            background: transparent;
-            border: 1px solid #c7a05b;
-            padding: 0.5rem 1.8rem;
-            color: #e8e6e1;
-            font-size: 0.8rem;
-            text-decoration: none;
-            transition: 0.2s;
-            border-radius: 2px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
-        .nav-book:hover, .nav-gallery:hover {
-            background: rgba(199,160,91,0.2);
-        }
-
-        /* Gallery Modal */
+        /* Enhanced Gallery Modal */
         .gallery-modal {
             position: fixed;
             top: 0;
@@ -354,64 +176,26 @@
             opacity: 0;
             transition: visibility 0.2s, opacity 0.3s ease;
         }
-        .gallery-modal.active {
-            visibility: visible;
-            opacity: 1;
-        }
+        .gallery-modal.active { visibility: visible; opacity: 1; }
         .gallery-container {
             width: 90%;
-            max-width: 1300px;
-            height: 85vh;
-            background: rgba(10, 10, 10, 0.8);
+            max-width: 1400px;
+            height: 90vh;
+            background: rgba(10, 10, 10, 0.9);
             border-radius: 28px;
             padding: 1.5rem;
             position: relative;
             overflow-y: auto;
         }
-        .gallery-container::-webkit-scrollbar {
-            width: 4px;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            aspect-ratio: 4/3;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            padding: 1rem;
-            font-size: 0.8rem;
-            color: #c7a05b;
-        }
         .close-gallery {
-            position: absolute;
-            top: 1rem;
-            right: 2rem;
+            position: sticky;
+            top: 0;
+            float: right;
             font-size: 2rem;
             cursor: pointer;
             color: #c7a05b;
             z-index: 10;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -420,297 +204,136 @@
             justify-content: center;
             transition: 0.2s;
         }
-        .close-gallery:hover {
-            background: #c7a05b;
-            color: #0a0a0a;
-        }
-        .gallery-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #c7a05b;
-        }
-
-        .hero {
-            height: 100vh;
-            position: relative;
+        .close-gallery:hover { background: #c7a05b; color: #0a0a0a; }
+        .gallery-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: #c7a05b; clear: both; padding-top: 0.5rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        .gallery-item {
+            background: #161616;
+            border-radius: 20px;
             overflow: hidden;
+            border: 1px solid rgba(199, 160, 91, 0.2);
+            transition: transform 0.3s ease;
         }
-
-        .hero-video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .gallery-item:hover { transform: translateY(-5px); border-color: #c7a05b; }
+        .gallery-img {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 16/10;
             object-fit: cover;
-            transform: scale(1);
-            animation: slowZoom 26s infinite alternate ease-in-out;
+            display: block;
         }
-
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
-        }
-
-        .hero-text {
-            position: absolute;
-            bottom: 20%;
-            left: 5%;
-            z-index: 2;
-            animation: fadeSlideUp 1.8s ease-out;
-        }
-
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(40px);}
-            100% { opacity: 1; transform: translateY(0);}
-        }
-
-        .emotion-section {
-            background: #030303;
-            position: relative;
-            min-height: 80vh;
+        .gallery-actions {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .dream-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.3;
-            filter: brightness(0.5) blur(1px);
-            transform: scale(1.02);
-            z-index: 0;
-        }
-        .emotion-section .section-inner {
-            z-index: 3;
-            position: relative;
-        }
-
-        .order-notification {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(20, 18, 16, 0.96);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(199, 160, 91, 0.6);
-            border-radius: 16px;
-            padding: 1rem 1.8rem;
-            min-width: 260px;
-            max-width: 360px;
-            z-index: 2001;
-            transform: translateX(120%);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            font-family: 'Inter', sans-serif;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: left;
-        }
-        .order-notification.show {
-            transform: translateX(0);
-        }
-        .order-notification-title {
-            font-weight: 600;
-            color: #c7a05b;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 5px;
-        }
-        .order-notification-message {
-            font-size: 0.9rem;
-            color: #f0ede8;
-        }
-
-        .top-notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-120%);
-            background: rgba(20, 18, 16, 0.96);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(199, 160, 91, 0.5);
-            border-radius: 12px;
-            padding: 1rem 2rem;
-            min-width: 280px;
-            max-width: 480px;
-            width: max-content;
-            z-index: 2000;
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-        .top-notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        .notification-title {
-            font-weight: 600;
-            color: #c7a05b;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-        }
-        .notification-message {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #f0ede8;
-        }
-
-        .cta-section {
-            background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%);
-        }
-        footer {
-            background: #020202;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.8rem;
+            justify-content: space-around;
+            padding: 1rem;
+            background: rgba(0,0,0,0.5);
             border-top: 1px solid rgba(199,160,91,0.2);
         }
-        @media (max-width: 700px) {
-            .section-inner { padding: 3rem 5%; }
-            .room-caption { left: 1rem; bottom: 1rem; padding: 1rem; }
-            .top-notification, .order-notification { width: 90%; max-width: none; right: 5%; left: 5%; bottom: 20px; }
-            .nav-buttons { gap: 0.5rem; }
-            .nav-book, .nav-gallery { padding: 0.4rem 1rem; font-size: 0.7rem; }
-        }
-
-        .cursor-trail {
-            position: fixed;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s, opacity 0.3s;
-        }
-        .cursor-trail-dot {
-            position: fixed;
-            width: 5px;
-            height: 5px;
-            background: #c7a05b;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            filter: blur(1px);
-            opacity: 0.5;
-            transform: translate(-50%, -50%);
-        }
-        
-        .kid-friendly-badge {
-            display: inline-block;
-            background: rgba(199, 160, 91, 0.2);
-            border: 1px solid #c7a05b;
-            border-radius: 20px;
-            padding: 0.2rem 0.8rem;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: #bcb7ab;
+            cursor: pointer;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0.2s, opacity 0.3s ease;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
+        .action-btn i { font-size: 1.2rem; }
+        .action-btn:hover { background: rgba(199,160,91,0.2); color: #c7a05b; }
+        .like-btn.liked { color: #ff4d4d; }
+        .like-btn.liked i { animation: heartBeat 0.3s ease; }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
-        .reservation-modal {
-            background: #12100e;
-            border: 1px solid rgba(199, 160, 91, 0.5);
-            border-radius: 24px;
-            max-width: 520px;
-            width: 90%;
-            padding: 2rem;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.6);
-            position: relative;
-            transform: scale(0.96);
-            transition: transform 0.25s ease;
+        .like-count, .comment-count { font-size: 0.85rem; }
+        .comment-section {
+            padding: 0.8rem 1rem;
+            border-top: 1px solid rgba(199,160,91,0.15);
+            background: rgba(0,0,0,0.3);
         }
-        .modal-overlay.active .reservation-modal {
-            transform: scale(1);
+        .comment-list {
+            max-height: 120px;
+            overflow-y: auto;
+            margin-bottom: 0.8rem;
+            font-size: 0.75rem;
         }
-        .reservation-modal h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: #c7a05b;
-            margin-bottom: 0.3rem;
-        }
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
+        .comment-item {
+            padding: 0.3rem 0;
             color: #bcb7ab;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
         }
-        .form-group input, .form-group select {
-            width: 100%;
+        .comment-username { color: #c7a05b; font-weight: 600; margin-right: 0.5rem; }
+        .comment-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .comment-input {
+            flex: 1;
             background: #1e1c18;
             border: 1px solid #3a3630;
-            padding: 12px 14px;
-            color: #ece8df;
-            border-radius: 12px;
-            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.75rem;
         }
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #c7a05b;
+        .comment-submit {
+            background: #c7a05b;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
         }
-        .reserve-submit {
+        .share-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             background: #c7a05b;
             color: #0a0a0a;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 1.5px;
-            border-radius: 40px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .close-modal {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #c7a05b;
-        }
-        .form-success {
-            text-align: center;
-            color: #a8d08d;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
             font-size: 0.8rem;
-            margin-top: 12px;
+            z-index: 2100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
+        .share-toast.show { opacity: 1; }
+
+        .hero { height: 100vh; position: relative; overflow: hidden; }
+        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; animation: slowZoom 26s infinite alternate; }
+        @keyframes slowZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+        .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%); }
+        .hero-text { position: absolute; bottom: 20%; left: 5%; z-index: 2; animation: fadeSlideUp 1.8s ease-out; }
+        @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(40px);} 100% { opacity: 1; transform: translateY(0);} }
+        .emotion-section { background: #030303; position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .dream-bg { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; filter: brightness(0.5) blur(1px); }
+        .order-notification { position: fixed; bottom: 30px; right: 30px; background: rgba(20, 18, 16, 0.96); backdrop-filter: blur(16px); border: 1px solid rgba(199, 160, 91, 0.6); border-radius: 16px; padding: 1rem; z-index: 2001; transform: translateX(120%); transition: transform 0.4s; }
+        .order-notification.show { transform: translateX(0); }
+        .top-notification { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120%); background: rgba(20, 18, 16, 0.96); backdrop-filter: blur(16px); border: 1px solid rgba(199, 160, 91, 0.5); border-radius: 12px; padding: 1rem 2rem; z-index: 2000; transition: transform 0.4s; text-align: center; }
+        .top-notification.show { transform: translateX(-50%) translateY(0); }
+        .notification-title { font-weight: 600; color: #c7a05b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
+        .cta-section { background: linear-gradient(145deg, #0b0a0a 0%, #16120c 100%); }
+        footer { background: #020202; text-align: center; padding: 2rem; font-size: 0.8rem; border-top: 1px solid rgba(199,160,91,0.2); }
+        .kid-friendly-badge { display: inline-block; background: rgba(199, 160, 91, 0.2); border: 1px solid #c7a05b; border-radius: 20px; padding: 0.2rem 0.8rem; font-size: 0.7rem; margin-top: 0.5rem; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: visibility 0.2s, opacity 0.3s ease; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .reservation-modal { background: #12100e; border: 1px solid rgba(199, 160, 91, 0.5); border-radius: 24px; max-width: 520px; width: 90%; padding: 2rem; position: relative; transform: scale(0.96); transition: transform 0.25s ease; }
+        .modal-overlay.active .reservation-modal { transform: scale(1); }
+        .close-modal { position: absolute; top: 16px; right: 20px; font-size: 1.8rem; cursor: pointer; color: #c7a05b; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group input, .form-group select { width: 100%; background: #1e1c18; border: 1px solid #3a3630; padding: 12px; color: #ece8df; border-radius: 12px; }
+        .reserve-submit { background: #c7a05b; color: #0a0a0a; border: none; width: 100%; padding: 12px; font-weight: 600; border-radius: 40px; margin-top: 10px; cursor: pointer; }
+        .cursor-trail { position: fixed; width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle, rgba(199,160,91,0.25) 0%, rgba(199,160,91,0) 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .cursor-trail-dot { position: fixed; width: 5px; height: 5px; background: #c7a05b; border-radius: 50%; pointer-events: none; z-index: 9998; filter: blur(1px); transform: translate(-50%, -50%); }
+        @media (max-width: 700px) { .section-inner { padding: 3rem 5%; } .gallery-grid { grid-template-columns: 1fr; } .gallery-actions { flex-wrap: wrap; } }
     </style>
 </head>
 <body>
@@ -721,15 +344,15 @@
 <nav>
     <div class="logo">AN-INN-SA</div>
     <div class="nav-buttons">
-        <a href="#" class="nav-gallery" id="galleryBtn">GALLERY</a>
-        <a href="#" class="nav-book" id="navReserveBtn">RESERVE</a>
+        <div class="nav-gallery" id="galleryBtn">GALLERY</div>
+        <div class="nav-book" id="navReserveBtn">RESERVE</div>
     </div>
 </nav>
 
 <!-- Gallery Modal -->
 <div id="galleryModal" class="gallery-modal">
     <div class="gallery-container">
-        <div class="close-gallery" id="closeGalleryBtn">&times;</div>
+        <div class="close-gallery" id="closeGalleryBtn">×</div>
         <div class="gallery-title">✦ An-Inn-Sa · Visual Journey ✦</div>
         <div class="gallery-grid" id="galleryGrid"></div>
     </div>
@@ -746,15 +369,14 @@
 </section>
 
 <section class="intro-section">
-    <div class="section-inner" style="text-align: center; max-width: 1000px; margin: 0 auto;">
+    <div class="section-inner" style="text-align: center;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1.8rem; font-weight: 300;">“You arrive.”</p>
+            <p class="quote-line" style="font-size: 1.8rem;">“You arrive.”</p>
             <div style="height: 4rem;"></div>
             <p class="quote-line" style="font-size: 1.8rem;">The world fades.</p>
             <div style="height: 4rem;"></div>
             <p class="giant-text" style="font-size: clamp(2rem, 7vw, 4rem);">Only stillness remains.</p>
-            <div style="height: 3rem;"></div>
-            <p style="max-width: 500px; margin: 0 auto; font-weight: 300; color: #bcb7ab;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
+            <p style="max-width: 500px; margin: 1rem auto; font-weight: 300;">Comfort, culture, calmness — a modern sanctuary where every detail breathes peace.</p>
         </div>
     </div>
 </section>
@@ -762,282 +384,248 @@
 <section style="background: #0a0908;">
     <div class="section-inner" style="padding-bottom: 0;">
         <div class="reveal-block">
-            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;">Signature sanctuaries</p>
-            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem); margin: 0.5rem 0 1rem 0;">Rooms & Suites</h2>
+            <p class="quote-line" style="font-size: 1rem; letter-spacing: 3px;">Signature sanctuaries</p>
+            <h2 class="giant-text" style="font-size: clamp(2.5rem, 6vw, 4rem);">Rooms & Suites</h2>
         </div>
     </div>
     <div class="horizontal-scroll">
-        <div class="room-card">
-            <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Signature Suite</h3>
-                <p>Spacious retreat, natural light, lounge area, plush bedding – seamless blend of luxury & tranquility.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Deluxe Room</h3>
-                <p>Soft bedding, modern amenities, calming atmosphere — perfect harmony of rest and productivity.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Wellness Retreat</h3>
-                <p>Private balcony, meditative views, and handcrafted interiors designed for rejuvenation.</p>
-                <a href="#" style="color:#c7a05b; text-decoration: none;">INQUIRE →</a>
-            </div>
-        </div>
-        <div class="room-card">
-            <img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite">
-            <div class="room-caption">
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Kiddy Suite</h3>
-                <p>Whimsical family haven with playful decor, bunk beds, story nook & child-safe amenities. Joyful comfort for little wanderers.</p>
-                <div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div>
-                <a href="#" style="color:#c7a05b; text-decoration: none; font-weight: 500; margin-top: 0.8rem; display: inline-block;">INQUIRE →</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section-inner">
-        <div class="reveal-block">
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-text">"This place is pure peace. The stillness here healed something in me. An-Inn-Sa is the vibe."</div>
-                    <div class="review-author"><div class="review-avatar">ASAP</div><div class="review-info"><div class="review-name">ASAP Rocky</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 weeks ago</div></div></div>
-                </div>
-                <div class="review-card">
-                    <div class="review-text">"I found my escape. The Wellness Retreat changed my whole perspective. Coming back every season."</div>
-                    <div class="review-author"><div class="review-avatar">SZA</div><div class="review-info"><div class="review-name">SZA</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 1 month ago</div></div></div>
-                </div>
-                <div class="review-card">
-                    <div class="review-text">"The architecture and energy... it's a masterpiece. Quiet luxury at its finest. Yeezy approved."</div>
-                    <div class="review-author"><div class="review-avatar">YE</div><div class="review-info"><div class="review-name">Kanye West</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 weeks ago</div></div></div>
-                </div>
-            </div>
-        </div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Signature Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Signature Suite</h3><p>Spacious retreat, natural light, lounge area.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Deluxe Room"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Deluxe Room</h3><p>Soft bedding, modern amenities, calming atmosphere.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Wellness Retreat"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Wellness Retreat</h3><p>Private balcony, meditative views.</p><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
+        <div class="room-card"><img src="https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Kiddy Suite"><div class="room-caption"><h3 style="font-family: 'Cormorant Garamond';">Kiddy Suite</h3><p>Whimsical family haven.</p><div class="kid-friendly-badge">✦ FAMILY FRIENDLY ✦</div><a href="#" style="color:#c7a05b;">INQUIRE →</a></div></div>
     </div>
 </section>
 
 <section class="dining-section">
     <div class="section-inner">
         <div class="reveal-block">
-            <p class="quote-line" style="letter-spacing: 2px;">InnSa Lounge & Grill</p>
+            <p class="quote-line">InnSa Lounge & Grill</p>
             <h2 class="giant-text" style="font-size: 3rem;">Where Great Taste Meets Great Moments</h2>
         </div>
         <div class="menu-grid reveal-block">
-            <div class="menu-category"><h3>Appetizers</h3>
-                <div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22"><span class="menu-item-name">Chicken or Vegetable Soup</span><span class="menu-item-price">$22</span></div>
-                <div class="menu-item" data-item="Crispy Samosas" data-price="$24"><span class="menu-item-name">Crispy Samosas</span><span class="menu-item-price">$24</span></div>
-                <div class="menu-item" data-item="French Fries" data-price="$19"><span class="menu-item-name">French Fries</span><span class="menu-item-price">$19</span></div>
-                <div class="menu-item" data-item="Chicken Wings" data-price="$20"><span class="menu-item-name">Chicken Wings</span><span class="menu-item-price">$20</span></div>
-            </div>
-            <div class="menu-category"><h3>Mains</h3>
-                <div class="menu-item" data-item="Nyama Choma" data-price="$58"><span class="menu-item-name">Nyama Choma</span><span class="menu-item-price">$58</span></div>
-                <div class="menu-item" data-item="Ugali with Beef/Chicken Stew" data-price="$42"><span class="menu-item-name">Ugali with Beef/Chicken Stew</span><span class="menu-item-price">$42</span></div>
-                <div class="menu-item" data-item="Stir-Fried Rice or Noodles" data-price="$48"><span class="menu-item-name">Stir-Fried Rice or Noodles</span><span class="menu-item-price">$48</span></div>
-                <div class="menu-item" data-item="Creamy Pasta" data-price="$38"><span class="menu-item-name">Creamy Pasta</span><span class="menu-item-price">$38</span></div>
-            </div>
-            <div class="menu-category"><h3>Desserts</h3>
-                <div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18"><span class="menu-item-name">Vanilla Ice Cream</span><span class="menu-item-price">$18</span></div>
-                <div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17 slice"><span class="menu-item-name">Brownies with Ice Cream</span><span class="menu-item-price">$17 slice</span></div>
-                <div class="menu-item" data-item="Tiramisu" data-price="$18 slice"><span class="menu-item-name">Tiramisu</span><span class="menu-item-price">$18 slice</span></div>
-                <div class="menu-item" data-item="Chocolate Cake" data-price="$20"><span class="menu-item-name">Chocolate Cake</span><span class="menu-item-price">$20</span></div>
-            </div>
-            <div class="menu-category"><h3>Drinks</h3>
-                <div class="menu-item" data-item="Orange Juice" data-price="$10"><span class="menu-item-name">Orange Juice</span><span class="menu-item-price">$10</span></div>
-                <div class="menu-item" data-item="Coffee" data-price="$10"><span class="menu-item-name">Coffee (Hot or Iced)</span><span class="menu-item-price">$10</span></div>
-                <div class="menu-item" data-item="Mojitos" data-price="$15"><span class="menu-item-name">Mojitos</span><span class="menu-item-price">$15</span></div>
-                <div class="menu-item" data-item="Soda" data-price="$8"><span class="menu-item-name">Soda</span><span class="menu-item-price">$8</span></div>
-            </div>
+            <div class="menu-category"><h3>Appetizers</h3><div class="menu-item" data-item="Chicken or Vegetable Soup" data-price="$22"><span>Chicken or Vegetable Soup</span><span class="menu-item-price">$22</span></div><div class="menu-item" data-item="Crispy Samosas" data-price="$24"><span>Crispy Samosas</span><span class="menu-item-price">$24</span></div><div class="menu-item" data-item="French Fries" data-price="$19"><span>French Fries</span><span class="menu-item-price">$19</span></div><div class="menu-item" data-item="Chicken Wings" data-price="$20"><span>Chicken Wings</span><span class="menu-item-price">$20</span></div></div>
+            <div class="menu-category"><h3>Mains</h3><div class="menu-item" data-item="Nyama Choma" data-price="$58"><span>Nyama Choma</span><span class="menu-item-price">$58</span></div><div class="menu-item" data-item="Ugali with Beef Stew" data-price="$42"><span>Ugali with Beef/Chicken Stew</span><span class="menu-item-price">$42</span></div><div class="menu-item" data-item="Stir-Fried Rice" data-price="$48"><span>Stir-Fried Rice or Noodles</span><span class="menu-item-price">$48</span></div><div class="menu-item" data-item="Creamy Pasta" data-price="$38"><span>Creamy Pasta</span><span class="menu-item-price">$38</span></div></div>
+            <div class="menu-category"><h3>Desserts</h3><div class="menu-item" data-item="Vanilla Ice Cream" data-price="$18"><span>Vanilla Ice Cream</span><span class="menu-item-price">$18</span></div><div class="menu-item" data-item="Brownies with Ice Cream" data-price="$17"><span>Brownies with Ice Cream</span><span class="menu-item-price">$17 slice</span></div><div class="menu-item" data-item="Tiramisu" data-price="$18"><span>Tiramisu</span><span class="menu-item-price">$18 slice</span></div><div class="menu-item" data-item="Chocolate Cake" data-price="$20"><span>Chocolate Cake</span><span class="menu-item-price">$20</span></div></div>
+            <div class="menu-category"><h3>Drinks</h3><div class="menu-item" data-item="Orange Juice" data-price="$10"><span>Orange Juice</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Coffee" data-price="$10"><span>Coffee (Hot or Iced)</span><span class="menu-item-price">$10</span></div><div class="menu-item" data-item="Mojitos" data-price="$15"><span>Mojitos</span><span class="menu-item-price">$15</span></div><div class="menu-item" data-item="Soda" data-price="$8"><span>Soda</span><span class="menu-item-price">$8</span></div></div>
         </div>
-        
-        <div class="reviews-grid reveal-block" style="margin-top: 3rem;">
-            <div class="review-card"><div class="review-text">"The Nyama Choma is fire. Best meal I've had touring. The vibes? Immaculate."</div><div class="review-author"><div class="review-avatar">DRAKE</div><div class="review-info"><div class="review-name">Drake</div><div class="review-stars">★★★★★</div><div class="review-verified">verified diner · 1 week ago</div></div></div></div>
-            <div class="review-card"><div class="review-text">"Kid-friendly AND delicious? My whole family loved it. The Kiddy Suite is a blessing."</div><div class="review-author"><div class="review-avatar">RIH</div><div class="review-info"><div class="review-name">Rihanna</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 3 days ago</div></div></div></div>
-            <div class="review-card"><div class="review-text">"The Tiramisu changed my life. No cap. An-Inn-Sa is the only place I'm staying now."</div><div class="review-author"><div class="review-avatar">ESD</div><div class="review-info"><div class="review-name">Essdeekid</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 5 days ago</div></div></div></div>
-            <div class="review-card"><div class="review-text">"OKURRR! This place is luxury realness. The staff, the food, the energy — 10s across the board!"</div><div class="review-author"><div class="review-avatar">CARDI</div><div class="review-info"><div class="review-name">Cardi B</div><div class="review-stars">★★★★★</div><div class="review-verified">verified guest · 2 days ago</div></div></div></div>
-        </div>
-        
-        <div class="reveal-block" style="margin-top: 3rem; text-align: center;">
-            <p class="quote-line" style="font-size: 1.2rem;">Freshly prepared • Local & international • From dawn to moonlit hours</p>
-            <p style="font-size: 0.8rem; margin-top: 1rem; color: #c7a05b;">✦ Tap any item to order ✦</p>
-        </div>
+        <div class="reveal-block" style="margin-top: 2rem; text-align: center;"><p>✦ Tap any item to order ✦</p></div>
     </div>
 </section>
 
 <section class="emotion-section">
-    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg" alt="peaceful landscape">
-    <div class="section-inner" style="text-align: center; max-width: 800px;">
+    <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&w=1600" class="dream-bg">
+    <div class="section-inner" style="text-align: center;">
         <div class="reveal-block">
             <p class="quote-line" style="font-size: 2rem;">Wake up to silence.</p>
-            <div style="height: 2rem;"></div>
-            <p class="quote-line" style="font-size: 2rem;">Dine under the stars.</p>
-            <div style="height: 2rem;"></div>
-            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 300;">Your home away from home</p>
-            <div style="height: 2rem;"></div>
-            <p style="max-width: 500px; margin: 0 auto;">Relax and stay the An-Inn-Sa way — peaceful, warm, and effortlessly memorable.</p>
+            <p class="quote-line" style="font-size: 2rem; margin-top: 1rem;">Dine under the stars.</p>
+            <p class="giant-text" style="font-size: clamp(1.8rem, 5vw, 2.8rem); margin-top: 1rem;">Your home away from home</p>
         </div>
     </div>
 </section>
 
-<section class="cta-section" id="booking-anchor">
+<section class="cta-section">
     <div class="section-inner" style="text-align: center;">
         <div class="reveal-block">
             <h2 class="giant-text" style="font-size: 3rem;">Secure your arrival</h2>
-            <p style="margin: 1rem auto; max-width: 500px;">Join the stars who've found their stillness here.</p>
             <button id="reserveButton" class="booking-button">BEGIN THE JOURNEY</button>
-            <p style="font-size: 0.8rem; margin-top: 2rem;">#ANINNSA • Get social • Quiet luxury</p>
         </div>
     </div>
 </section>
-    
-<footer>
-    <p>An-Inn-Sa — where every soul finds silence. © 2025 — Arrive in Stillness</p>
-</footer>
+<footer><p>An-Inn-Sa — where every soul finds silence. © 2025</p></footer>
 
-<div id="orderNotification" class="order-notification">
-    <div class="order-notification-title">✨ ORDER PLACED ✨</div>
-    <div class="order-notification-message" id="orderMessage">Your item has been added</div>
-</div>
-
-<div id="reservationModal" class="modal-overlay">
-    <div class="reservation-modal">
-        <span class="close-modal" id="closeModalBtn">&times;</span>
-        <h3>reserve your stay</h3>
-        <p style="margin-bottom: 1rem; font-size: 0.8rem;">Fill in your details to secure a moment of stillness.</p>
-        <form id="bookingForm"><div class="form-group"><label>Full name</label><input type="text" id="guestName" placeholder="Luna Serene" required></div><div class="form-group"><label>Email address</label><input type="email" id="guestEmail" placeholder="hello@stillness.com" required></div><div class="form-group"><label>Phone number</label><input type="tel" id="guestPhone" placeholder="+1 (555) 123-4567"></div><div class="form-group"><label>Arrival date</label><input type="date" id="arrivalDate" required></div><div class="form-group"><label>Preferred suite</label><select id="roomType"><option value="Signature Suite">Signature Suite</option><option value="Deluxe Room">Deluxe Room</option><option value="Wellness Retreat">Wellness Retreat</option><option value="Kiddy Suite">Kiddy Suite</option></select></div><div class="form-group"><label>Special requests</label><input type="text" id="specialNotes" placeholder="Anniversary, dietary needs..."></div><button type="submit" class="reserve-submit">CONFIRM RESERVATION</button><div id="formSuccessMsg" class="form-success"></div></form>
-    </div>
-</div>
-
-<div id="formalNotification" class="top-notification">
-    <div class="notification-title">AN-INN-SA · RESERVATION CONFIRMED</div>
-    <div class="notification-message">Your escape to serenity has been secured.</div>
-</div>
+<div id="orderNotification" class="order-notification"><div class="order-notification-title">✨ ORDER PLACED ✨</div><div id="orderMessage">Your item has been added</div></div>
+<div id="reservationModal" class="modal-overlay"><div class="reservation-modal"><span class="close-modal" id="closeModalBtn">&times;</span><h3>reserve your stay</h3><form id="bookingForm"><div class="form-group"><label>Full name</label><input type="text" id="guestName" required></div><div class="form-group"><label>Email</label><input type="email" id="guestEmail" required></div><div class="form-group"><label>Arrival date</label><input type="date" id="arrivalDate" required></div><div class="form-group"><label>Preferred suite</label><select id="roomType"><option>Signature Suite</option><option>Deluxe Room</option><option>Wellness Retreat</option><option>Kiddy Suite</option></select></div><button type="submit" class="reserve-submit">CONFIRM</button><div id="formSuccessMsg"></div></form></div></div>
+<div id="formalNotification" class="top-notification"><div class="notification-title">RESERVATION CONFIRMED</div><div>Your escape has been secured.</div></div>
+<div id="shareToast" class="share-toast">🔗 Link copied to clipboard!</div>
 
 <script>
-    // Gallery Images
-    const galleryImages = [
-        { src: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Lobby · Where stillness welcomes you" },
-        { src: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Signature Suite · Pure elegance" },
-        { src: "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Deluxe Room · Contemporary comfort" },
-        { src: "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Wellness Retreat · Inner peace" },
-        { src: "https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Kiddy Suite · Joyful family moments" },
-        { src: "https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Infinity Pool · Serene waters" },
-        { src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Spa & Meditation · Rejuvenation" },
-        { src: "https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Rooftop Lounge · Sunset views" },
-        { src: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "InnSa Grill · Dining experience" },
-        { src: "https://images.pexels.com/photos/704097/pexels-photo-704097.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Garden Terrace · Nature's embrace" },
-        { src: "https://images.pexels.com/photos/706081/pexels-photo-706081.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Library Lounge · Quiet reading" },
-        { src: "https://images.pexels.com/photos/2581921/pexels-photo-2581921.jpeg?auto=compress&cs=tinysrgb&w=1200", caption: "Night Ambiance · Starlit serenity" }
+    // Gallery Data - 12 stunning hotel images with comments
+    const galleryData = [
+        { src: "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 124, comments: ["✨ Stunning!", "Dream destination"] },
+        { src: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 89, comments: ["So luxurious", "I need this"] },
+        { src: "https://images.pexels.com/photos/261169/pexels-photo-261169.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 67, comments: ["Perfect lighting", "Cozy vibes"] },
+        { src: "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 156, comments: ["Heaven on earth", "Meditation goals"] },
+        { src: "https://images.pexels.com/photos/2387881/pexels-photo-2387881.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 203, comments: ["My kids would love this!", "So colorful"] },
+        { src: "https://images.pexels.com/photos/1579253/pexels-photo-1579253.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 98, comments: ["Infinity pool 🔥", "Taking me there"] },
+        { src: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 145, comments: ["Spa day anyone?", "Pure relaxation"] },
+        { src: "https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 77, comments: ["Sunset views unmatched", "Romantic"] },
+        { src: "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 112, comments: ["Food looks amazing", "Gourmet paradise"] },
+        { src: "https://images.pexels.com/photos/704097/pexels-photo-704097.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 54, comments: ["Garden oasis", "Peaceful"] },
+        { src: "https://images.pexels.com/photos/706081/pexels-photo-706081.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 88, comments: ["Book lover's dream", "So cozy"] },
+        { src: "https://images.pexels.com/photos/2581921/pexels-photo-2581921.jpeg?auto=compress&cs=tinysrgb&w=1200", likes: 134, comments: ["Magical nights", "Stargazing ✨"] }
     ];
-    
+
+    function buildGallery() {
+        const grid = document.getElementById('galleryGrid');
+        grid.innerHTML = '';
+        galleryData.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'gallery-item';
+            card.innerHTML = `
+                <img class="gallery-img" src="${item.src}" alt="Hotel view">
+                <div class="gallery-actions">
+                    <button class="action-btn like-btn" data-idx="${idx}"><i class="fas fa-heart"></i> <span class="like-count">${item.likes}</span></button>
+                    <button class="action-btn comment-toggle" data-idx="${idx}"><i class="fas fa-comment"></i> <span class="comment-count">${item.comments.length}</span></button>
+                    <button class="action-btn share-btn" data-idx="${idx}"><i class="fas fa-share-alt"></i> Share</button>
+                </div>
+                <div class="comment-section" style="display: none;" id="commentSection-${idx}">
+                    <div class="comment-list" id="commentList-${idx}">
+                        ${item.comments.map(c => `<div class="comment-item"><span class="comment-username">guest_${Math.floor(Math.random()*1000)}</span> ${c}</div>`).join('')}
+                    </div>
+                    <div class="comment-input-group">
+                        <input type="text" class="comment-input" id="commentInput-${idx}" placeholder="Write a comment...">
+                        <button class="comment-submit" data-idx="${idx}">Post</button>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Attach event listeners
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = btn.dataset.idx;
+                const likeSpan = btn.querySelector('.like-count');
+                let likes = parseInt(likeSpan.innerText);
+                likes++;
+                likeSpan.innerText = likes;
+                btn.classList.add('liked');
+                btn.style.animation = 'none';
+                btn.offsetHeight;
+                btn.style.animation = null;
+                const icon = btn.querySelector('i');
+                icon.style.animation = 'heartBeat 0.3s ease';
+                setTimeout(() => { icon.style.animation = ''; }, 300);
+                galleryData[idx].likes = likes;
+            });
+        });
+
+        document.querySelectorAll('.comment-toggle').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = btn.dataset.idx;
+                const section = document.getElementById(`commentSection-${idx}`);
+                if (section.style.display === 'none') section.style.display = 'block';
+                else section.style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('.comment-submit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = btn.dataset.idx;
+                const input = document.getElementById(`commentInput-${idx}`);
+                const text = input.value.trim();
+                if (text) {
+                    const commentList = document.getElementById(`commentList-${idx}`);
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment-item';
+                    newComment.innerHTML = `<span class="comment-username">you_${Math.floor(Math.random()*100)}</span> ${text}`;
+                    commentList.appendChild(newComment);
+                    galleryData[idx].comments.push(text);
+                    const commentCountSpan = document.querySelector(`.comment-toggle[data-idx="${idx}"] .comment-count`);
+                    commentCountSpan.innerText = galleryData[idx].comments.length;
+                    input.value = '';
+                }
+            });
+        });
+
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const idx = btn.dataset.idx;
+                const imageUrl = galleryData[idx].src;
+                try {
+                    await navigator.clipboard.writeText(imageUrl);
+                    const toast = document.getElementById('shareToast');
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                } catch (err) {
+                    alert('Press Ctrl+C to copy image URL');
+                }
+            });
+        });
+    }
+
+    // Modal logic
     const galleryModal = document.getElementById('galleryModal');
     const galleryBtn = document.getElementById('galleryBtn');
     const closeGalleryBtn = document.getElementById('closeGalleryBtn');
-    const galleryGrid = document.getElementById('galleryGrid');
-    
-    function buildGallery() {
-        galleryGrid.innerHTML = '';
-        galleryImages.forEach(img => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `<img src="${img.src}" alt="${img.caption}"><div class="gallery-caption">${img.caption}</div>`;
-            galleryGrid.appendChild(item);
-        });
-    }
-    
-    function openGallery() { galleryModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function openGallery() { buildGallery(); galleryModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
     function closeGallery() { galleryModal.classList.remove('active'); document.body.style.overflow = ''; }
-    
-    if(galleryBtn) galleryBtn.addEventListener('click', (e) => { e.preventDefault(); buildGallery(); openGallery(); });
+    if(galleryBtn) galleryBtn.addEventListener('click', openGallery);
     if(closeGalleryBtn) closeGalleryBtn.addEventListener('click', closeGallery);
     galleryModal.addEventListener('click', (e) => { if(e.target === galleryModal) closeGallery(); });
-    
+
     // Order notification
-    const orderNotification = document.getElementById('orderNotification');
-    const orderMessageSpan = document.getElementById('orderMessage');
-    function showOrderNotification(itemName, itemPrice) {
-        orderMessageSpan.innerText = `${itemName} (${itemPrice}) added to your order`;
-        orderNotification.classList.add('show');
-        setTimeout(() => orderNotification.classList.remove('show'), 3500);
-    }
-    
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const itemName = item.getAttribute('data-item');
-            const itemPrice = item.getAttribute('data-price');
-            if (itemName) showOrderNotification(itemName, itemPrice);
+    const orderNotif = document.getElementById('orderNotification');
+    const orderMsg = document.getElementById('orderMessage');
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const name = item.querySelector('span:first-child')?.innerText;
+            const price = item.querySelector('.menu-item-price')?.innerText;
+            orderMsg.innerText = `${name} (${price}) added!`;
+            orderNotif.classList.add('show');
+            setTimeout(() => orderNotif.classList.remove('show'), 2500);
         });
     });
-    
-    // Modal logic
+
+    // Reservation modal
     const modal = document.getElementById('reservationModal');
     const reserveBtn = document.getElementById('reserveButton');
     const navReserve = document.getElementById('navReserveBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeModal = document.getElementById('closeModalBtn');
     const bookingForm = document.getElementById('bookingForm');
-    const notification = document.getElementById('formalNotification');
-    function openModal() { modal.classList.add('active'); }
-    function closeModal() { modal.classList.remove('active'); const successDiv = document.getElementById('formSuccessMsg'); if(successDiv) successDiv.innerText = ''; bookingForm.reset(); }
-    function showNotification() { notification.classList.add('show'); setTimeout(() => notification.classList.remove('show'), 5000); }
-    if(reserveBtn) reserveBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-    if(navReserve) navReserve.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
-    if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    const topNotif = document.getElementById('formalNotification');
+    function openResModal() { modal.classList.add('active'); }
+    function closeResModal() { modal.classList.remove('active'); bookingForm.reset(); document.getElementById('formSuccessMsg').innerText = ''; }
+    function showTopNotif() { topNotif.classList.add('show'); setTimeout(() => topNotif.classList.remove('show'), 4000); }
+    if(reserveBtn) reserveBtn.addEventListener('click', openResModal);
+    if(navReserve) navReserve.addEventListener('click', openResModal);
+    if(closeModal) closeModal.addEventListener('click', closeResModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeResModal(); });
     bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('guestName')?.value.trim();
         const email = document.getElementById('guestEmail')?.value.trim();
         const arrival = document.getElementById('arrivalDate')?.value;
-        if(!name || !email || !arrival) { alert("Please fill in name, email, and arrival date."); return; }
-        const successDiv = document.getElementById('formSuccessMsg');
-        successDiv.innerText = "✓ Reservation request received. We'll contact you shortly.";
-        setTimeout(() => { closeModal(); showNotification(); }, 1200);
+        if(!name || !email || !arrival) { alert("Please fill all fields"); return; }
+        document.getElementById('formSuccessMsg').innerText = "✓ Reservation received!";
+        setTimeout(() => { closeResModal(); showTopNotif(); }, 1000);
     });
-    
+
     // Cursor effects
     const trail = document.getElementById('cursorTrail');
     const dot = document.getElementById('cursorDot');
-    let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
-    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
-    function animateTrail() {
-        trailX += (mouseX - trailX) * 0.12;
-        trailY += (mouseY - trailY) * 0.12;
-        trail.style.left = trailX + 'px';
-        trail.style.top = trailY + 'px';
-        let dist = Math.sqrt(Math.pow(mouseX - trailX, 2) + Math.pow(mouseY - trailY, 2));
+    let mx=0, my=0, tx=0, ty=0;
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; dot.style.left = mx+'px'; dot.style.top = my+'px'; });
+    function animate() {
+        tx += (mx - tx) * 0.12;
+        ty += (my - ty) * 0.12;
+        trail.style.left = tx+'px';
+        trail.style.top = ty+'px';
+        let dist = Math.hypot(mx - tx, my - ty);
         let size = Math.min(46, 26 + dist * 0.4);
-        trail.style.width = size + 'px';
-        trail.style.height = size + 'px';
-        trail.style.opacity = 0.45 + Math.min(0.25, dist * 0.01);
-        requestAnimationFrame(animateTrail);
+        trail.style.width = size+'px';
+        trail.style.height = size+'px';
+        requestAnimationFrame(animate);
     }
-    animateTrail();
-    
-    const revealElements = document.querySelectorAll('.reveal-block');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.2 });
-    revealElements.forEach(el => observer.observe(el));
-    
-    window.addEventListener('scroll', () => {
-        const heroBg = document.querySelector('.hero-video-bg');
-        if (heroBg) heroBg.style.transform = `scale(${1 + window.scrollY * 0.0003}) translateY(${window.scrollY * 0.05}px)`;
-    });
-    
-    const scrollContainer = document.querySelector('.horizontal-scroll');
-    if(scrollContainer) {
-        let isDown = false, startX, scrollLeft;
-        scrollContainer.addEventListener('mousedown', (e) => { isDown = true; scrollContainer.style.cursor = 'grabbing'; startX = e.pageX - scrollContainer.offsetLeft; scrollLeft = scrollContainer.scrollLeft; });
-        window.addEventListener('mouseup', () => { isDown = false; scrollContainer.style.cursor = 'grab'; });
-        scrollContainer.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - scrollContainer.offsetLeft; const walk = (x - startX) * 1.2; scrollContainer.scrollLeft = scrollLeft - walk; });
-        scrollContainer.style.cursor = 'grab';
+    animate();
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal-block');
+    const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }); }, { threshold: 0.2 });
+    reveals.forEach(r => obs.observe(r));
+
+    // Horizontal scroll drag
+    const scrollCont = document.querySelector('.horizontal-scroll');
+    if(scrollCont) {
+        let down=false, startX, scrollL;
+        scrollCont.addEventListener('mousedown', (e) => { down=true; scrollCont.style.cursor='grabbing'; startX=e.pageX-scrollCont.offsetLeft; scrollL=scrollCont.scrollLeft; });
+        window.addEventListener('mouseup', () => { down=false; scrollCont.style.cursor='grab'; });
+        scrollCont.addEventListener('mousemove', (e) => { if(!down) return; e.preventDefault(); const x=e.pageX-scrollCont.offsetLeft; const walk=(x-startX)*1.2; scrollCont.scrollLeft=scrollL-walk; });
+        scrollCont.style.cursor='grab';
     }
 </script>
 </body>
